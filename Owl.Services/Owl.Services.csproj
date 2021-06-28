@@ -55,10 +55,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudentService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Owl.Data\Owl.Data.csproj">
+      <Project>{5e9f7bd0-6b23-4d3f-bdf9-7d2274ec3d5e}</Project>
+      <Name>Owl.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Owl.Models\Owl.Models.csproj">
+      <Project>{54a63b9c-d2a0-4b65-a37d-22192c02d5e8}</Project>
+      <Name>Owl.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
