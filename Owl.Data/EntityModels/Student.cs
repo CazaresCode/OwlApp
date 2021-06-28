@@ -11,11 +11,9 @@ namespace Owl.Data.EntityModels
     public class Student : Person
     {
         [Required]
-        [Display(Name = "Program Enrolled")]
         public ProgramType TypeOfProgram { get; set; }
 
         [Required]
-        [Display(Name = "Has Paid Tuition")]
         public bool HasPaidTuition { get; set; }
 
         public virtual ICollection<Participation> Participations { get; set; }

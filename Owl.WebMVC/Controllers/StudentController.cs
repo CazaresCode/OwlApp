@@ -1,4 +1,5 @@
-﻿using Owl.Models.StudentModels;
+﻿using Microsoft.AspNet.Identity;
+using Owl.Models.StudentModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,41 @@ namespace Owl.WebMVC.Controllers
         {
             var model = new StudentListItem[0];
             return View(model);
+        }
+
+        // GET: Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(StudentCreate model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var service = CreateStudentService();
+
+            if (service.CreateStudent(model))
+            {
+                TempData["SaveResult"] = "Your Student was created.";
+                return RedirectToAction("Index");
+            };
+
+            ModelState.AddModelError("", "Student could not be created.");
+
+            return View(model);
+        }
+
+        // Helper Method
+        private StudentService CreateStudentService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new StudentService(userId);
+            return service;
         }
     }
 }
