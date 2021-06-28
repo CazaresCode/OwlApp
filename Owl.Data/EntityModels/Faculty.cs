@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Owl.Data.EntityModels
 {
-    public class Faculty
+    public class Faculty : Person
     {
         [Required]
         [Display(Name = "Is Staff")]

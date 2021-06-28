@@ -60,6 +60,10 @@
     <Compile Include="EntityModels\Person.cs" />
     <Compile Include="EntityModels\Student.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Migrations\202106281741017_InitialMigration.cs" />
+    <Compile Include="Migrations\202106281741017_InitialMigration.Designer.cs">
+      <DependentUpon>202106281741017_InitialMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,6 +76,11 @@
       <Project>{068CB6CE-B8A6-47C9-BA85-8DB3CA0A8451}</Project>
       <Name>EnumCommonLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202106281741017_InitialMigration.resx">
+      <DependentUpon>202106281741017_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
