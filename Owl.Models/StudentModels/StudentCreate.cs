@@ -24,6 +24,7 @@ namespace Owl.Models.StudentModels
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
