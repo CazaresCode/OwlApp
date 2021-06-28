@@ -34,6 +34,14 @@ namespace Owl.Data.EntityModels
         }
 
         [Required]
+        [DataType(DataType.EmailAddress)]
+        public string email { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         [Display(Name = "Type of Instrument")]
         public InstrumentType TypeOfInstrument { get; set; }
 
