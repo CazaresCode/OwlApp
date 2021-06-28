@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Owl.Models.StudentModels;
+using Owl.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,16 @@ using System.Web.Mvc;
 
 namespace Owl.WebMVC.Controllers
 {
-    [Authorize] 
+    [Authorize]
     public class StudentController : Controller
     {
         // GET: Student
         public ActionResult Index()
         {
-            var model = new StudentListItem[0];
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var service = new StudentService(userId);
+            var model = service.GetStudents();
+
             return View(model);
         }
 
@@ -35,7 +39,7 @@ namespace Owl.WebMVC.Controllers
             var service = CreateStudentService();
 
             if (service.CreateStudent(model))
-            {
+            { 
                 TempData["SaveResult"] = "Your Student was created.";
                 return RedirectToAction("Index");
             };
