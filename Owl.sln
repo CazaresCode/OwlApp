@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owl.Models", "Owl.Models\Ow
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owl.Services", "Owl.Services\Owl.Services.csproj", "{430B4998-0E78-4B2D-9B55-0E80E6E18D6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumCommonLayer", "EnumCommonLayer\EnumCommonLayer.csproj", "{068CB6CE-B8A6-47C9-BA85-8DB3CA0A8451}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{430B4998-0E78-4B2D-9B55-0E80E6E18D6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{430B4998-0E78-4B2D-9B55-0E80E6E18D6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{430B4998-0E78-4B2D-9B55-0E80E6E18D6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{068CB6CE-B8A6-47C9-BA85-8DB3CA0A8451}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{068CB6CE-B8A6-47C9-BA85-8DB3CA0A8451}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{068CB6CE-B8A6-47C9-BA85-8DB3CA0A8451}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{068CB6CE-B8A6-47C9-BA85-8DB3CA0A8451}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
