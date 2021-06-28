@@ -33,6 +33,8 @@ namespace Owl.Data
         }
 
         public DbSet<Person> Persons { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Faculty> Faculties { get; set; }
         public DbSet<Meeting> Meetings { get; set; }
         public DbSet<Participation> Participations { get; set; }
 
