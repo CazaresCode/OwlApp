@@ -60,6 +60,7 @@
     <Compile Include="EntityModels\Person.cs" />
     <Compile Include="EntityModels\Student.cs" />
     <Compile Include="IdentityModels.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
