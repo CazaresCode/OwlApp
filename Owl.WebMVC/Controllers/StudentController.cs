@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Owl.WebMVC.Controllers
 {
+    [Authorize] 
     public class StudentController : Controller
     {
         // GET: Student

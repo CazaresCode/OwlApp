@@ -11,9 +11,11 @@ namespace Owl.Models.StudentModels
     public class StudentListItem
     {
         public int Id { get; set; }
+
+        [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
-        [Display(Name = "Program Enrolled")]
+        [Display(Name = "Program Enrolled In")]
         public ProgramType TypeOfProgram { get; set; }
 
         [Display(Name = "First Day")]
@@ -25,6 +27,5 @@ namespace Owl.Models.StudentModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndTime { get; set; }
-
     }
 }
