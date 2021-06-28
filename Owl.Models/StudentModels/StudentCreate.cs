@@ -5,17 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static EnumCommonLayer.InstrumentTypeEnum;
+using static EnumCommonLayer.ProgramTypeEnum;
 
-namespace Owl.Data.EntityModels
+namespace Owl.Models.StudentModels
 {
-    public abstract class Person
+    public class StudentCreate
     {
-        [Key]
-        public int Id { get; set; }
-
-        [Required]
-        public Guid OwnerId { get; set; }
-
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
@@ -24,20 +19,12 @@ namespace Owl.Data.EntityModels
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Full Name")]
-        public string FullName
-        {
-            get
-            {
-                return FirstName + ' ' + LastName;
-            }
-        }
-
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
+        [Display(Name = "Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
@@ -62,7 +49,15 @@ namespace Owl.Data.EntityModels
         public bool HasFoodAllergy { get; set; }
 
         [Required]
-        [Display(Name = "Food Allergy List")]
+        [Display(Name = "Food Allergy")]
         public string FoodAllergy { get; set; }
+
+        [Required]
+        [Display(Name = "Program Enrolled In")]
+        public ProgramType TypeOfProgram { get; set; }
+
+        [Required]
+        [Display(Name = "Has Paid Tuition")]
+        public bool HasPaidTuition { get; set; }
     }
 }
