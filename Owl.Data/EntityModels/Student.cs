@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static EnumCommonLayer.ProgramTypeEnum;
 
 namespace Owl.Data.EntityModels
 {
