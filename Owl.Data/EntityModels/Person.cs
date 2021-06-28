@@ -35,7 +35,7 @@ namespace Owl.Data.EntityModels
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        public string email { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [DataType(DataType.PhoneNumber)]
@@ -46,13 +46,13 @@ namespace Owl.Data.EntityModels
         public InstrumentType TypeOfInstrument { get; set; }
 
         [Required]
-        [Display(Name = "Start Time")]
+        [Display(Name = "First Day")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; }
 
         [Required]
-        [Display(Name = "End Time")]
+        [Display(Name = "Last Day")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndTime { get; set; }

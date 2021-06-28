@@ -55,10 +55,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudentModels\StudentListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FacultyModels\" />
+    <Folder Include="MeetingModels\" />
+    <Folder Include="ParticipationModels\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EnumCommonLayer\EnumCommonLayer.csproj">
+      <Project>{068CB6CE-B8A6-47C9-BA85-8DB3CA0A8451}</Project>
+      <Name>EnumCommonLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
