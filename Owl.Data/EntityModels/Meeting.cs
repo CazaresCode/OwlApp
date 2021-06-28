@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static EnumCommonLayer.MeetingTypeEnum;
 
 namespace Owl.Data.EntityModels
 {
@@ -36,5 +37,7 @@ namespace Owl.Data.EntityModels
         [Display(Name = "Meeting Type")]
         [Required]
         public MeetingType TypeOfMeeting { get; set; }
+
+        public virtual ICollection<Participation> Participations { get; set; }
     }
 }
