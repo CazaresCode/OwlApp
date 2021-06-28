@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InstrumentTypeEnum.cs" />
+    <Compile Include="MeetingTypeEnum.cs" />
     <Compile Include="ProgramTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

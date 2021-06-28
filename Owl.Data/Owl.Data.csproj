@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EntityModels\Faculty.cs" />
+    <Compile Include="EntityModels\Meeting.cs" />
+    <Compile Include="EntityModels\Participation.cs" />
     <Compile Include="EntityModels\Person.cs" />
     <Compile Include="EntityModels\Student.cs" />
     <Compile Include="IdentityModels.cs" />
