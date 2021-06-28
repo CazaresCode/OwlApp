@@ -49,6 +49,14 @@ namespace Owl.WebMVC.Controllers
             return View(model);
         }
 
+        public ActionResult Details(int id)
+        {
+            var svc = CreateStudentService();
+            var model = svc.GetStudentById(id);
+
+            return View(model);
+        }
+
         // Helper Method
         private StudentService CreateStudentService()
         {

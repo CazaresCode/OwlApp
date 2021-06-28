@@ -62,6 +62,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EnumCommonLayer\EnumCommonLayer.csproj">
+      <Project>{068CB6CE-B8A6-47C9-BA85-8DB3CA0A8451}</Project>
+      <Name>EnumCommonLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Owl.Data\Owl.Data.csproj">
       <Project>{5e9f7bd0-6b23-4d3f-bdf9-7d2274ec3d5e}</Project>
       <Name>Owl.Data</Name>

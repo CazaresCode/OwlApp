@@ -66,5 +66,31 @@ namespace Owl.Services
             }
         }
 
+        public StudentDetail GetStudentById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Students
+                        .Single(e => e.Id == id && e.OwnerId == _userId);
+                return
+                    new StudentDetail
+                    {
+                        Id = entity.Id,
+                        FullName = entity.FullName,
+                        Email = entity.Email,
+                        PhoneNumber =entity.PhoneNumber,
+                        TypeOfInstrument = entity.TypeOfInstrument,
+                        StartTime = entity.StartTime,
+                        EndTime = entity.EndTime,
+                        HasFoodAllergy = entity.HasFoodAllergy,
+                        FoodAllergy = entity.FoodAllergy,
+                        TypeOfProgram = entity.TypeOfProgram,
+                        HasPaidTuition = entity.HasPaidTuition
+                    };
+            }
+        }
+
     }
 }
