@@ -1,6 +1,6 @@
 ﻿using Owl.Data;
 using Owl.Data.EntityModels;
-using Owl.Models.StudentModels;
+using Owl.Models.FacultyModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace Owl.Services
 {
-    public class StudentService
+    public class FacultyService
     {
         private readonly Guid _userId;
 
-        public StudentService(Guid userId)
+        public FacultyService(Guid userId)
         {
             _userId = userId;
         }
 
-        public bool CreateStudent(StudentCreate model)
+        public bool CreateFaculty(FacultyCreate model)
         {
             var entity =
-                new Student()
+                new Faculty()
                 {
                     OwnerId = _userId,
                     FirstName = model.FirstName,
@@ -33,34 +33,33 @@ namespace Owl.Services
                     EndTime = model.EndTime,
                     HasFoodAllergy = model.HasFoodAllergy,
                     FoodAllergy = model.FoodAllergy,
-                    TypeOfProgram = model.TypeOfProgram,
-                    HasPaidTuition = model.HasPaidTuition
+                    IsPerforming = model.IsPerforming,
+                    IsStaff = model.IsStaff
                 };
 
             using (var ctx = new ApplicationDbContext())
             {
-                ctx.Students.Add(entity);
+                ctx.Faculties.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
-
         }
 
-        public IEnumerable<StudentListItem> GetStudents()
+        public IEnumerable<FacultyListItem> GetFaculty()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                     ctx
-                        .Students
+                        .Faculties
                         .Where(e => e.OwnerId == _userId)
                         .Select(
                             e =>
-                                new StudentListItem
+                                new FacultyListItem
                                 {
                                     Id = e.Id,
                                     FirstName = e.FirstName,
                                     LastName = e.LastName,
-                                    TypeOfProgram = e.TypeOfProgram,
+                                    IsStaff = e.IsStaff,
                                     StartTime = e.StartTime,
                                     EndTime = e.EndTime
                                 });
@@ -69,16 +68,16 @@ namespace Owl.Services
             }
         }
 
-        public StudentDetail GetStudentById(int id)
+        public FacultyDetail GetFacultyById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                     ctx
-                        .Students
+                        .Faculties
                         .Single(e => e.Id == id && e.OwnerId == _userId);
                 return
-                    new StudentDetail
+                    new FacultyDetail
                     {
                         Id = entity.Id,
                         FirstName = entity.FirstName,
@@ -90,8 +89,8 @@ namespace Owl.Services
                         EndTime = entity.EndTime,
                         HasFoodAllergy = entity.HasFoodAllergy,
                         FoodAllergy = entity.FoodAllergy,
-                        TypeOfProgram = entity.TypeOfProgram,
-                        HasPaidTuition = entity.HasPaidTuition
+                        IsPerforming = entity.IsPerforming,
+                        IsStaff = entity.IsStaff
                     };
             }
         }
