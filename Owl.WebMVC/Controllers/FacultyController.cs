@@ -11,6 +11,7 @@ namespace Owl.WebMVC.Controllers
 {
     public class FacultyController : Controller
     {
+        [Authorize]
         // GET: Faculty
         public ActionResult Index()
         {
