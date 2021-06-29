@@ -12,18 +12,8 @@ namespace Owl.Models.StudentModels
     {
         public int Id { get; set; }
 
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
-
         [Display(Name = "Full Name")]
-        public string FullName
-        {
-            get
-            {
-             return LastName + ", " + FirstName;
-            }
-        }
+        public string FullName { get; set; }
 
         [Display(Name = "Program Enrolled In")]
         public ProgramType TypeOfProgram { get; set; }

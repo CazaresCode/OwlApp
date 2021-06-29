@@ -56,8 +56,7 @@ namespace Owl.Services
                                 new StudentListItem
                                 {
                                     Id = e.Id,
-                                    FirstName = e.FirstName,
-                                    LastName = e.LastName,
+                                    FullName = e.FullName,
                                     TypeOfProgram = e.TypeOfProgram,
                                     StartTime = e.StartTime,
                                     EndTime = e.EndTime
