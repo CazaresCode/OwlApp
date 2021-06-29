@@ -32,14 +32,37 @@ namespace Owl.Services
                     StartTime = model.StartTime,
                     EndTime = model.EndTime,
                     HasFoodAllergy = model.HasFoodAllergy,
+                    FoodAllergy = model.FoodAllergy,
                     TypeOfProgram = model.TypeOfProgram,
                     HasPaidTuition = model.HasPaidTuition
                 };
 
-            using (var ctx = new ApplicationDbContext())
+
+            try
             {
-                ctx.Students.Add(entity);
-                return ctx.SaveChanges() == 1;
+                using (var ctx = new ApplicationDbContext())
+                {
+                    ctx.Students.Add(entity);
+                    return ctx.SaveChanges() == 1;
+                }
+
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting
+                        // the current instance as InnerException
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
             }
         }
 
@@ -82,7 +105,7 @@ namespace Owl.Services
                         FirstName = entity.FirstName,
                         LastName = entity.LastName,
                         Email = entity.Email,
-                        PhoneNumber =entity.PhoneNumber,
+                        PhoneNumber = entity.PhoneNumber,
                         TypeOfInstrument = entity.TypeOfInstrument,
                         StartTime = entity.StartTime,
                         EndTime = entity.EndTime,

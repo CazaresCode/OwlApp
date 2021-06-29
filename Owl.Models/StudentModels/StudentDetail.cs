@@ -41,7 +41,7 @@ namespace Owl.Models.StudentModels
         [Display(Name = "Has Food Allergy")]
         public bool HasFoodAllergy { get; set; }
 
-        [Display(Name = "Food Allergy")]
+        [Display(Name = "Food Allergies")]
         public string FoodAllergy { get; set; }
 
         [Display(Name = "Program Enrolled In")]
