@@ -8,7 +8,7 @@ using static EnumCommonLayer.InstrumentTypeEnum;
 
 namespace Owl.Models.FacultyModels
 {
-    public class FacultyDetails
+    public class FacultyDetail
     {
         public int Id { get; set; }
 
@@ -48,6 +48,5 @@ namespace Owl.Models.FacultyModels
 
         [Display(Name = "Is Performing")]
         public bool IsPerforming { get; set; }
-
     }
 }
