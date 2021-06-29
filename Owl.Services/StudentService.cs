@@ -45,8 +45,6 @@ namespace Owl.Services
 
         }
 
-
-
         public IEnumerable<StudentListItem> GetStudents()
         {
             using (var ctx = new ApplicationDbContext())

@@ -18,7 +18,7 @@ namespace Owl.Services
             _userId = userId;
         }
 
-        public bool CreateStudent(FacultyCreate model)
+        public bool CreateFaculty(FacultyCreate model)
         {
             var entity =
                 new Faculty()
@@ -93,7 +93,7 @@ namespace Owl.Services
                         IsStaff = entity.IsStaff
                     };
             }
-
         }
+
     }
 }
