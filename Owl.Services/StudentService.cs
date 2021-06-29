@@ -42,7 +42,6 @@ namespace Owl.Services
                 ctx.Students.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
-
         }
 
         public IEnumerable<StudentListItem> GetStudents()
