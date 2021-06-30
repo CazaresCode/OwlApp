@@ -54,6 +54,7 @@ namespace Owl.Services
                                         Id = e.Id,
                                         FirstName = e.Person.FirstName,
                                         LastName = e.Person.LastName,
+                                        FullName = e.Person.FullName
                                     },
                                     MeetingId = e.MeetingId,
                                     Meeting = new Models.MeetingModels.MeetingListItem
@@ -86,6 +87,7 @@ namespace Owl.Services
                             Id = entity.Id,
                             FirstName = entity.Person.FirstName,
                             LastName = entity.Person.LastName,
+                            FullName = e.Person.FullName
                         },
                         MeetingId = entity.MeetingId,
                         Meeting = new Models.MeetingModels.MeetingListItem

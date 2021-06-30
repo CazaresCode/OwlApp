@@ -16,5 +16,7 @@ namespace Owl.Models.PersonModels
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        public string FullName { get; set; }
     }
 }
