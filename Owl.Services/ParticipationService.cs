@@ -69,8 +69,19 @@ namespace Owl.Services
                     {
                         Id = entity.Id,
                         PersonId = entity.PersonId,
-                        
-                        MeetingId = entity.MeetingId
+                        Person = new Models.PersonModels.PersonListItem
+                        {
+                            Id = entity.Id,
+                            FirstName =entity.Person.FirstName,
+                            LastName=entity.Person.LastName,
+                        },
+                        MeetingId = entity.MeetingId,
+                        Meeting = new Models.MeetingModels.MeetingListItem
+                        {
+                            Id = entity.Id,
+                            NameOfMeeting = entity.Meeting.NameOfMeeting,
+                            TypeOfMeeting = entity.Meeting.TypeOfMeeting
+                        }
                     };
             }
         }
