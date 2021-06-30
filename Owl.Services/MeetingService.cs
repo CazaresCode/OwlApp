@@ -23,12 +23,13 @@ namespace Owl.Services
             var entity =
                 new Meeting()
                 {
-                   NameOfMeeting = model.NameOfMeeting,
-                   Description = model.Description,
-                   Location = model.Location,
-                   StartTime= model.StartTime,
-                   EndTime=model.EndTime,
-                   TypeOfMeeting =model.TypeOfMeeting
+                    OwnerId = _userId,
+                    NameOfMeeting = model.NameOfMeeting,
+                    Description = model.Description,
+                    Location = model.Location,
+                    StartTime = model.StartTime,
+                    EndTime = model.EndTime,
+                    TypeOfMeeting = model.TypeOfMeeting
                 };
 
             using (var ctx = new ApplicationDbContext())
@@ -51,8 +52,6 @@ namespace Owl.Services
                                 new MeetingListItem
                                 {
                                     NameOfMeeting = e.NameOfMeeting,
-                                    StartTime = e.StartTime,
-                                    EndTime = e.EndTime,
                                     TypeOfMeeting = e.TypeOfMeeting
                                 });
 
