@@ -32,7 +32,6 @@ namespace Owl.Services
                     StartTime = model.StartTime,
                     EndTime = model.EndTime,
                     HasFoodAllergy = model.HasFoodAllergy,
-                    FoodAllergy = model.FoodAllergy,
                     TypeOfProgram = model.TypeOfProgram,
                     HasPaidTuition = model.HasPaidTuition
                 };
@@ -42,7 +41,6 @@ namespace Owl.Services
                 ctx.Students.Add(entity);
                 return ctx.SaveChanges() == 1;
             }
-
         }
 
         public IEnumerable<StudentListItem> GetStudents()
@@ -81,10 +79,9 @@ namespace Owl.Services
                     new StudentDetail
                     {
                         Id = entity.Id,
-                        FirstName = entity.FirstName,
-                        LastName = entity.LastName,
+                        FullName = entity.FullName,
                         Email = entity.Email,
-                        PhoneNumber = entity.PhoneNumber,
+                        PhoneNumber =entity.PhoneNumber,
                         TypeOfInstrument = entity.TypeOfInstrument,
                         StartTime = entity.StartTime,
                         EndTime = entity.EndTime,

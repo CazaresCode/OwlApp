@@ -49,7 +49,7 @@ namespace Owl.Models.StudentModels
         public bool HasFoodAllergy { get; set; }
 
         [Required]
-        [Display(Name = "Food Allergies")]
+        [Display(Name = "Food Allergy")]
         public string FoodAllergy { get; set; }
 
         [Required]
