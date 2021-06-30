@@ -49,7 +49,19 @@ namespace Owl.Services
                                 {
                                     Id = e.Id,
                                     PersonId = e.PersonId,
-                                    MeetingId = e.MeetingId
+                                    Person = new Models.PersonModels.PersonListItem
+                                    {
+                                        Id = e.Id,
+                                        FirstName = e.Person.FirstName,
+                                        LastName = e.Person.LastName,
+                                    },
+                                    MeetingId = e.MeetingId,
+                                    Meeting = new Models.MeetingModels.MeetingListItem
+                                    {
+                                        Id = e.Id,
+                                        NameOfMeeting = e.Meeting.NameOfMeeting,
+                                        TypeOfMeeting = e.Meeting.TypeOfMeeting
+                                    }
                                 });
 
                 return query.ToArray();
@@ -72,8 +84,8 @@ namespace Owl.Services
                         Person = new Models.PersonModels.PersonListItem
                         {
                             Id = entity.Id,
-                            FirstName =entity.Person.FirstName,
-                            LastName=entity.Person.LastName,
+                            FirstName = entity.Person.FirstName,
+                            LastName = entity.Person.LastName,
                         },
                         MeetingId = entity.MeetingId,
                         Meeting = new Models.MeetingModels.MeetingListItem
