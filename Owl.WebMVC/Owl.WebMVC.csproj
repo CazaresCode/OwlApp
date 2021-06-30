@@ -243,9 +243,9 @@
     <Content Include="Views\Faculty\Index.cshtml" />
     <Content Include="Views\Faculty\Create.cshtml" />
     <Content Include="Views\Faculty\Details.cshtml" />
-    <Content Include="Views\Meeting\Index.cshtml" />
     <Content Include="Views\Meeting\Create.cshtml" />
     <Content Include="Views\Meeting\Details.cshtml" />
+    <Content Include="Views\Meeting\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

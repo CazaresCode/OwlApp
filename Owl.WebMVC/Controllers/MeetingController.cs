@@ -12,7 +12,6 @@ namespace Owl.WebMVC.Controllers
     [Authorize]
     public class MeetingController : Controller
     {
-
         // GET: Meeting
         public ActionResult Index()
         {
