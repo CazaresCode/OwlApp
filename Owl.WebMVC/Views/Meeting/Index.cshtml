@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Owl.Models.StudentModels.StudentListItem>
+﻿@model IEnumerable<Owl.Models.MeetingModels.MeetingListItem>
 
 @{
     ViewBag.Title = "Index";
@@ -24,19 +24,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.NameOfMeeting)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TypeOfProgram)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndTime)
+            @Html.DisplayNameFor(model => model.TypeOfMeeting)
         </th>
         <th></th>
     </tr>
@@ -45,19 +36,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+                @Html.DisplayFor(modelItem => item.NameOfMeeting)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeOfProgram)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndTime)
+                @Html.DisplayFor(modelItem => item.TypeOfMeeting)
             </td>
             <td>
                 @Html.ActionLink("Change", "Edit", new { id = item.Id }) |

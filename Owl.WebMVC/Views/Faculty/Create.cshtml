@@ -1,4 +1,4 @@
-﻿@model Owl.Models.StudentModels.StudentCreate
+﻿@model Owl.Models.FacultyModels.FacultyCreate
 
 @{
     ViewBag.Title = "Create";
@@ -7,15 +7,14 @@
 <h2>Create</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-
+    
 <div class="form-horizontal">
-    <h4>StudentCreate</h4>
+    <h4>FacultyCreate</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
     <div class="form-group">
         @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -51,7 +50,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.TypeOfInstrument, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EnumDropDownListFor(x => x.TypeOfInstrument, "Select Instrument", new { @class = "form-control" })
+            @Html.EnumDropDownListFor(x => x.TypeOfInstrument, "Select Instrumentp", new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.TypeOfInstrument, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -91,19 +90,21 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.TypeOfProgram, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.IsStaff, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EnumDropDownListFor(x => x.TypeOfProgram, "Select Instrument", new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.TypeOfProgram, "", new { @class = "text-danger" })
+            <div class="checkbox">
+                @Html.EditorFor(model => model.IsStaff)
+                @Html.ValidationMessageFor(model => model.IsStaff, "", new { @class = "text-danger" })
+            </div>
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.HasPaidTuition, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.IsPerforming, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
-                @Html.EditorFor(model => model.HasPaidTuition)
-                @Html.ValidationMessageFor(model => model.HasPaidTuition, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.IsPerforming)
+                @Html.ValidationMessageFor(model => model.IsPerforming, "", new { @class = "text-danger" })
             </div>
         </div>
     </div>

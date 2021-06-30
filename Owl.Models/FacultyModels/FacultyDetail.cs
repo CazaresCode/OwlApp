@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static EnumCommonLayer.InstrumentTypeEnum;
-using static EnumCommonLayer.ProgramTypeEnum;
 
-namespace Owl.Models.StudentModels
+namespace Owl.Models.FacultyModels
 {
-    public class StudentDetail
+    public class FacultyDetail
     {
         public int Id { get; set; }
 
@@ -44,10 +43,10 @@ namespace Owl.Models.StudentModels
         [Display(Name = "Food Allergies")]
         public string FoodAllergy { get; set; }
 
-        [Display(Name = "Program Enrolled In")]
-        public ProgramType TypeOfProgram { get; set; }
+        [Display(Name = "Is Staff")]
+        public bool IsStaff { get; set; }
 
-        [Display(Name = "Has Paid Tuition")]
-        public bool HasPaidTuition { get; set; }
+        [Display(Name = "Is Performing")]
+        public bool IsPerforming { get; set; }
     }
 }

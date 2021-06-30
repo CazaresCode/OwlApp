@@ -4,31 +4,32 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static EnumCommonLayer.ProgramTypeEnum;
+using static EnumCommonLayer.MeetingTypeEnum;
 
-namespace Owl.Models.StudentModels
+namespace Owl.Models.MeetingModels
 {
-    public class StudentListItem
+    public class MeetingDetail
     {
         public int Id { get; set; }
 
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
+        [Display(Name = "Name of Meeting")]
+        public string NameOfMeeting { get; set; }
 
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
+        public string Description { get; set; }
 
-        [Display(Name = "Program Enrolled In")]
-        public ProgramType TypeOfProgram { get; set; }
+        public string Location { get; set; }
 
-        [Display(Name = "First Day")]
+        [Display(Name = "Start Time")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; }
 
-        [Display(Name = "Last Day")]
+        [Display(Name = "End Time")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndTime { get; set; }
+
+        [Display(Name = "Meeting Type")]
+        public MeetingType TypeOfMeeting { get; set; }
     }
 }

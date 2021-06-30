@@ -13,7 +13,7 @@ namespace Owl.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202106281741017_InitialMigration"; }
+            get { return "202106291551161_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

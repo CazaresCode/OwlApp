@@ -15,7 +15,7 @@ namespace Owl.Data.Migrations
                         OwnerId = c.Guid(nullable: false),
                         FirstName = c.String(nullable: false),
                         LastName = c.String(nullable: false),
-                        email = c.String(nullable: false),
+                        Email = c.String(nullable: false),
                         PhoneNumber = c.String(nullable: false),
                         TypeOfInstrument = c.Int(nullable: false),
                         StartTime = c.DateTime(nullable: false),

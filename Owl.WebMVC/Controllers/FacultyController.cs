@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
-using Owl.Models.StudentModels;
+using Owl.Models.FacultyModels;
 using Owl.Services;
 using System;
 using System.Collections.Generic;
@@ -9,15 +9,15 @@ using System.Web.Mvc;
 
 namespace Owl.WebMVC.Controllers
 {
-    [Authorize]
-    public class StudentController : Controller
+    public class FacultyController : Controller
     {
-        // GET: Student
+        [Authorize]
+        // GET: Faculty
         public ActionResult Index()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new StudentService(userId);
-            var model = service.GetStudents();
+            var service = new FacultyService(userId);
+            var model = service.GetFaculty();
 
             return View(model);
         }
@@ -31,36 +31,35 @@ namespace Owl.WebMVC.Controllers
         // POST: Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(StudentCreate model)
+        public ActionResult Create(FacultyCreate model)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            var service = CreateStudentService();
+            var service = CreateFacultyService();
 
-            if (service.CreateStudent(model))
-            { 
-                TempData["SaveResult"] = "Your Student was created.";
+            if (service.CreateFaculty(model))
+            {
+                TempData["SaveResult"] = "Your Faculty was created.";
                 return RedirectToAction("Index");
             };
 
-            ModelState.AddModelError("", "Student could not be created.");
+            ModelState.AddModelError("", "Faculty could not be created.");
 
             return View(model);
         }
 
         public ActionResult Details(int id)
         {
-            var svc = CreateStudentService();
-            var model = svc.GetStudentById(id);
+            var svc = CreateFacultyService();
+            var model = svc.GetFacultyById(id);
             return View(model);
         }
 
-        // Helper Method
-        private StudentService CreateStudentService()
+        private FacultyService CreateFacultyService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new StudentService(userId);
+            var service = new FacultyService(userId);
             return service;
         }
     }

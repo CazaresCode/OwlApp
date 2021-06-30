@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static EnumCommonLayer.ProgramTypeEnum;
 
-namespace Owl.Models.StudentModels
+namespace Owl.Models.FacultyModels
 {
-    public class StudentListItem
+    public class FacultyListItem
     {
         public int Id { get; set; }
 
@@ -18,8 +17,8 @@ namespace Owl.Models.StudentModels
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Program Enrolled In")]
-        public ProgramType TypeOfProgram { get; set; }
+        [Display(Name = "Is Staff")]
+        public bool IsStaff { get; set; }
 
         [Display(Name = "First Day")]
         [DataType(DataType.Date)]

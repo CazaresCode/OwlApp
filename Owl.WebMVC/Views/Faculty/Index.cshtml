@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Owl.Models.StudentModels.StudentListItem>
+﻿@model IEnumerable<Owl.Models.FacultyModels.FacultyListItem>
 
 @{
     ViewBag.Title = "Index";
@@ -30,7 +30,7 @@
             @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeOfProgram)
+            @Html.DisplayNameFor(model => model.IsStaff)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.StartTime)
@@ -51,7 +51,7 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TypeOfProgram)
+                @Html.DisplayFor(modelItem => item.IsStaff)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartTime)

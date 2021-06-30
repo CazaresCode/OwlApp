@@ -1,4 +1,4 @@
-﻿@model Owl.Models.StudentModels.StudentDetail
+﻿@model Owl.Models.FacultyModels.FacultyDetail
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>StudentDetail</h4>
+    <h4>Faculty Details</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -83,19 +83,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TypeOfProgram)
+            @Html.DisplayNameFor(model => model.IsStaff)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TypeOfProgram)
+            @Html.DisplayFor(model => model.IsStaff)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HasPaidTuition)
+            @Html.DisplayNameFor(model => model.IsPerforming)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HasPaidTuition)
+            @Html.DisplayFor(model => model.IsPerforming)
         </dd>
 
     </dl>
