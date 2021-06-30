@@ -1,6 +1,8 @@
 ﻿using Owl.Data;
 using Owl.Data.EntityModels;
+using Owl.Models.MeetingModels;
 using Owl.Models.ParticipationModels;
+using Owl.Models.PersonModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,15 +51,14 @@ namespace Owl.Services
                                 {
                                     Id = e.Id,
                                     PersonId = e.PersonId,
-                                    Person = new Models.PersonModels.PersonListItem
+                                    Person = new PersonListItem
                                     {
                                         Id = e.Id,
                                         FirstName = e.Person.FirstName,
-                                        LastName = e.Person.LastName,
-                                        FullName = e.Person.FullName
+                                        LastName = e.Person.LastName
                                     },
                                     MeetingId = e.MeetingId,
-                                    Meeting = new Models.MeetingModels.MeetingListItem
+                                    Meeting = new MeetingListItem
                                     {
                                         Id = e.Id,
                                         NameOfMeeting = e.Meeting.NameOfMeeting,
@@ -82,15 +83,14 @@ namespace Owl.Services
                     {
                         Id = entity.Id,
                         PersonId = entity.PersonId,
-                        Person = new Models.PersonModels.PersonListItem
+                        Person = new PersonListItem
                         {
                             Id = entity.Id,
                             FirstName = entity.Person.FirstName,
-                            LastName = entity.Person.LastName,
-                            FullName = e.Person.FullName
+                            LastName = entity.Person.LastName
                         },
                         MeetingId = entity.MeetingId,
-                        Meeting = new Models.MeetingModels.MeetingListItem
+                        Meeting = new MeetingListItem
                         {
                             Id = entity.Id,
                             NameOfMeeting = entity.Meeting.NameOfMeeting,

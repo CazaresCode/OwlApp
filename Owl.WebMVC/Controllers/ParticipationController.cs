@@ -15,8 +15,8 @@ namespace Owl.WebMVC.Controllers
         public ActionResult Index()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new StudentService(userId);
-            var model = service.GetStudents();
+            var service = new ParticipationService(userId);
+            var model = service.GetParticipations();
 
             return View(model);
         }
