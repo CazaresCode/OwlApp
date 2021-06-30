@@ -51,6 +51,7 @@ namespace Owl.Services
                             e =>
                                 new MeetingListItem
                                 {
+                                    Id = e.Id,
                                     NameOfMeeting = e.NameOfMeeting,
                                     TypeOfMeeting = e.TypeOfMeeting
                                 });
