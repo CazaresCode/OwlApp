@@ -8,5 +8,8 @@ namespace Owl.Models.ParticipationModels
 {
     public class ParticipationListItem
     {
+        public int Id { get; set; }
+        public int PersonId { get; set; }
+        public int MeetingId { get; set; }
     }
 }
