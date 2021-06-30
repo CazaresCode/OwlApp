@@ -63,6 +63,9 @@
     <Compile Include="ParticipationModels\ParticipationCreate.cs" />
     <Compile Include="ParticipationModels\ParticipationDetail.cs" />
     <Compile Include="ParticipationModels\ParticipationListItem.cs" />
+    <Compile Include="PersonModels\PersonCreate.cs" />
+    <Compile Include="PersonModels\PersonDetail.cs" />
+    <Compile Include="PersonModels\PersonListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentModels\StudentCreate.cs" />
     <Compile Include="StudentModels\StudentDetail.cs" />
