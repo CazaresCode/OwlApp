@@ -17,11 +17,14 @@ namespace Owl.Data.EntityModels
         public Guid OwnerId { get; set; }
 
         [Required]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Display(Name = "Full Name")]
         public string FullName
         {
             get
@@ -39,22 +42,27 @@ namespace Owl.Data.EntityModels
         public string PhoneNumber { get; set; }
 
         [Required]
+        [Display(Name = "Type of Instrument")]
         public InstrumentType TypeOfInstrument { get; set; }
 
         [Required]
+        [Display(Name = "First Day")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; }
 
         [Required]
+        [Display(Name = "Last Day")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndTime { get; set; }
 
         [Required]
+        [Display(Name = "Has Food Allergy")]
         public bool HasFoodAllergy { get; set; }
 
         [Required]
+        [Display(Name = "Food Allergy List")]
         public string FoodAllergy { get; set; }
     }
 }

@@ -54,12 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FacultyModels\FacultyCreate.cs" />
-    <Compile Include="FacultyModels\FacultyDetail.cs" />
-    <Compile Include="FacultyModels\FacultyListItem.cs" />
-    <Compile Include="MeetingModels\MeetingCreate.cs" />
-    <Compile Include="MeetingModels\MeetingDetail.cs" />
-    <Compile Include="MeetingModels\MeetingListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentModels\StudentCreate.cs" />
     <Compile Include="StudentModels\StudentDetail.cs" />
@@ -70,6 +64,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="FacultyModels\" />
+    <Folder Include="MeetingModels\" />
     <Folder Include="ParticipationModels\" />
   </ItemGroup>
   <ItemGroup>

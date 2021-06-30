@@ -53,6 +53,7 @@ namespace Owl.WebMVC.Controllers
         {
             var svc = CreateStudentService();
             var model = svc.GetStudentById(id);
+
             return View(model);
         }
 
