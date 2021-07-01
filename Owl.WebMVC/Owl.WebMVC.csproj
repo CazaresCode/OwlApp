@@ -250,6 +250,7 @@
     <Content Include="Views\Participation\Index.cshtml" />
     <Content Include="Views\Participation\Details.cshtml" />
     <Content Include="Views\Participation\Create.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -268,6 +269,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EnumCommonLayer\EnumCommonLayer.csproj">
+      <Project>{068CB6CE-B8A6-47C9-BA85-8DB3CA0A8451}</Project>
+      <Name>EnumCommonLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Owl.Data\Owl.Data.csproj">
       <Project>{5e9f7bd0-6b23-4d3f-bdf9-7d2274ec3d5e}</Project>
       <Name>Owl.Data</Name>

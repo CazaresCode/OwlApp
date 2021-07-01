@@ -16,6 +16,10 @@ namespace Owl.Models.StudentModels
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
