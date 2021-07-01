@@ -60,7 +60,6 @@ namespace Owl.WebMVC.Controllers
         {
             var service = CreateStudentService();
             var detail = service.GetStudentById(id);
-
             var model =
                 new StudentEdit
                 {
@@ -77,6 +76,7 @@ namespace Owl.WebMVC.Controllers
                     TypeOfProgram = detail.TypeOfProgram,
                     HasPaidTuition = detail.HasPaidTuition
                 };
+
             return View(model);
         }
 
@@ -102,7 +102,7 @@ namespace Owl.WebMVC.Controllers
             }
 
             ModelState.AddModelError("", "Your Student could not be updated.");
-                return View();
+                return View(model);
         }
 
         // Helper Method

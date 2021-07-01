@@ -80,6 +80,8 @@ namespace Owl.Services
                     {
                         Id = entity.Id,
                         FullName = entity.FullName,
+                        FirstName = entity.FirstName,
+                        LastName = entity.LastName,
                         Email = entity.Email,
                         PhoneNumber = entity.PhoneNumber,
                         TypeOfInstrument = entity.TypeOfInstrument,
@@ -113,6 +115,7 @@ namespace Owl.Services
                 entity.FoodAllergy = model.FoodAllergy;
                 entity.TypeOfProgram = model.TypeOfProgram;
                 entity.HasFoodAllergy = model.HasFoodAllergy;
+                entity.HasPaidTuition = model.HasPaidTuition;
 
                 return ctx.SaveChanges() == 1;
             }
