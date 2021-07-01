@@ -80,6 +80,8 @@ namespace Owl.Services
                     {
                         Id = entity.Id,
                         FullName = entity.FullName,
+                        FirstName = entity.FirstName,
+                        LastName = entity.LastName,
                         Email = entity.Email,
                         PhoneNumber = entity.PhoneNumber,
                         TypeOfInstrument = entity.TypeOfInstrument,
@@ -90,6 +92,32 @@ namespace Owl.Services
                         IsPerforming = entity.IsPerforming,
                         IsStaff = entity.IsStaff
                     };
+            }
+        }
+
+        public bool UpdateFaculty(FacultyEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Faculties
+                        .Single(e => e.Id == model.Id && e.OwnerId == _userId);
+
+                entity.FirstName = model.FirstName;
+                entity.LastName = model.LastName;
+                entity.Email = model.Email;
+                entity.PhoneNumber = model.PhoneNumber;
+                entity.TypeOfInstrument = model.TypeOfInstrument;
+                entity.StartTime = model.StartTime;
+                entity.EndTime = model.EndTime;
+                entity.HasFoodAllergy = model.HasFoodAllergy;
+                entity.FoodAllergy = model.FoodAllergy;
+                entity.HasFoodAllergy = model.HasFoodAllergy;
+                entity.IsPerforming = model.IsPerforming;
+                entity.IsStaff = model.IsStaff;
+
+                return ctx.SaveChanges() == 1;
             }
         }
 
