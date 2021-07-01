@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
+using Owl.Data.EntityModels;
+using Owl.Models.MeetingModels;
 using Owl.Models.ParticipationModels;
 using Owl.Services;
 using System;
@@ -24,6 +26,23 @@ namespace Owl.WebMVC.Controllers
         // GET: Create
         public ActionResult Create()
         {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+
+            List<Person> people = new PersonService().GetPeople().ToList();
+            ViewBag.PersonId = people.Select(p => new SelectListItem()
+            {
+                Value = p.Id.ToString(),
+                Text = p.LastName,
+            });
+
+
+            List<MeetingListItem> meetings = new MeetingService(userId).GetMeetings().ToList();
+            ViewBag.MeetingId = meetings.Select(m=> new SelectListItem()
+            {
+                Value = m.Id.ToString(),
+                Text = m.NameOfMeeting,
+            });
+
             return View();
         }
 
