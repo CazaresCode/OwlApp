@@ -32,7 +32,7 @@ namespace Owl.WebMVC.Controllers
             ViewBag.PersonId = people.Select(p => new SelectListItem()
             {
                 Value = p.Id.ToString(),
-                Text = p.LastName,
+                Text = p.FullName,
             });
 
 

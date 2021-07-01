@@ -22,6 +22,15 @@ namespace Owl.Data.EntityModels
         [Required]
         public string LastName { get; set; }
 
+        public string FullName
+        {
+            get
+            {
+                return FirstName + ' ' + LastName;
+            }
+            set { }
+        }
+
         [Required]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }

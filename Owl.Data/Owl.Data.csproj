@@ -68,6 +68,10 @@
     <Compile Include="Migrations\202106301717235_AddOwnerIdToParticipation.Designer.cs">
       <DependentUpon>202106301717235_AddOwnerIdToParticipation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107010233453_AddFullName.cs" />
+    <Compile Include="Migrations\202107010233453_AddFullName.Designer.cs">
+      <DependentUpon>202107010233453_AddFullName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106301717235_AddOwnerIdToParticipation.resx">
       <DependentUpon>202106301717235_AddOwnerIdToParticipation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107010233453_AddFullName.resx">
+      <DependentUpon>202107010233453_AddFullName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
