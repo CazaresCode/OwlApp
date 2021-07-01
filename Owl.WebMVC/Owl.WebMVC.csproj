@@ -252,6 +252,7 @@
     <Content Include="Views\Participation\Create.cshtml" />
     <Content Include="Views\Student\Edit.cshtml" />
     <Content Include="Views\Faculty\Edit.cshtml" />
+    <Content Include="Views\Meeting\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
