@@ -93,5 +93,30 @@ namespace Owl.Services
             }
         }
 
+        public bool UpdateStudent(StudentEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Students
+                        .Single(e => e.Id == model.Id && e.OwnerId == _userId);
+
+                entity.FirstName = model.FirstName;
+                entity.LastName = model.LastName;
+                entity.Email = model.Email;
+                entity.PhoneNumber = model.PhoneNumber;
+                entity.TypeOfInstrument = model.TypeOfInstrument;
+                entity.StartTime = model.StartTime;
+                entity.EndTime = model.EndTime;
+                entity.HasFoodAllergy = model.HasFoodAllergy;
+                entity.FoodAllergy = model.FoodAllergy;
+                entity.TypeOfProgram = model.TypeOfProgram;
+                entity.HasFoodAllergy = model.HasFoodAllergy;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
     }
 }
