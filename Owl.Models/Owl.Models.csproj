@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="FacultyModels\FacultyCreate.cs" />
     <Compile Include="FacultyModels\FacultyDetail.cs" />
+    <Compile Include="FacultyModels\FacultyEdit.cs" />
     <Compile Include="FacultyModels\FacultyListItem.cs" />
     <Compile Include="MeetingModels\MeetingCreate.cs" />
     <Compile Include="MeetingModels\MeetingDetail.cs" />
