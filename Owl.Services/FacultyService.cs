@@ -57,8 +57,7 @@ namespace Owl.Services
                                 new FacultyListItem
                                 {
                                     Id = e.Id,
-                                    FirstName = e.FirstName,
-                                    LastName = e.LastName,
+                                    FullName = e.FullName,
                                     IsStaff = e.IsStaff,
                                     StartTime = e.StartTime,
                                     EndTime = e.EndTime
@@ -80,8 +79,7 @@ namespace Owl.Services
                     new FacultyDetail
                     {
                         Id = entity.Id,
-                        FirstName = entity.FirstName,
-                        LastName = entity.LastName,
+                        FullName = entity.FullName,
                         Email = entity.Email,
                         PhoneNumber = entity.PhoneNumber,
                         TypeOfInstrument = entity.TypeOfInstrument,

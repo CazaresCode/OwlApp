@@ -28,6 +28,7 @@ namespace Owl.Data.EntityModels
             {
                 return FirstName + ' ' + LastName;
             }
+            set { }
         }
 
         [Required]

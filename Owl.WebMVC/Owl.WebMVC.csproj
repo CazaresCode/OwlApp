@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeetingController.cs" />
+    <Compile Include="Controllers\ParticipationController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -246,6 +247,9 @@
     <Content Include="Views\Meeting\Create.cshtml" />
     <Content Include="Views\Meeting\Details.cshtml" />
     <Content Include="Views\Meeting\Index.cshtml" />
+    <Content Include="Views\Participation\Index.cshtml" />
+    <Content Include="Views\Participation\Details.cshtml" />
+    <Content Include="Views\Participation\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
