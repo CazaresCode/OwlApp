@@ -56,6 +56,51 @@ namespace Owl.WebMVC.Controllers
             return View(model);
         }
 
+        public ActionResult Edit(int id)
+        {
+            var service = CreateMeetingService();
+            var detail = service.GetMeetingById(id);
+            var model =
+                new MeetingEdit
+                {
+                    Id = detail.Id,
+                    NameOfMeeting = detail.NameOfMeeting,
+                    Description = detail.Description,
+                    Location = detail.Location,
+                    StartTime = detail.StartTime,
+                    EndTime = detail.EndTime,
+                   TypeOfMeeting = detail.TypeOfMeeting
+                };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, MeetingEdit model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.Id != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch.");
+                return View(model);
+            }
+
+            var service = CreateMeetingService();
+
+            if (service.UpdateMeeting(model))
+            {
+                TempData["Save Result"] = "Your Meeting was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your Meeting could not be updated.");
+            return View(model);
+        }
+
+        // Help Methods
         private MeetingService CreateMeetingService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
