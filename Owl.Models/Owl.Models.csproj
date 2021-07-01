@@ -64,6 +64,7 @@
     <Compile Include="MeetingModels\MeetingListItem.cs" />
     <Compile Include="ParticipationModels\ParticipationCreate.cs" />
     <Compile Include="ParticipationModels\ParticipationDetail.cs" />
+    <Compile Include="ParticipationModels\ParticipationEdit.cs" />
     <Compile Include="ParticipationModels\ParticipationListItem.cs" />
     <Compile Include="PersonModels\PersonDetail.cs" />
     <Compile Include="PersonModels\PersonListItem.cs" />

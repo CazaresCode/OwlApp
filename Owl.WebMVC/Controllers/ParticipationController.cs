@@ -74,6 +74,47 @@ namespace Owl.WebMVC.Controllers
             return View(model);
         }
 
+        public ActionResult Edit(int id)
+        {
+            var service = CreateParticipationService();
+            var detail = service.GetParticipationById(id);
+            var model =
+                new ParticipationEdit
+                {
+                    Id = detail.Id,
+                    PersonId = detail.PersonId,
+                    MeetingId = detail.MeetingId
+                };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, ParticipationEdit model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.Id != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch.");
+                return View(model);
+            }
+
+            var service = CreateParticipationService();
+
+            if (service.UpdateParticipation(model))
+            {
+                TempData["Save Result"] = "Your Participation was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your Participation could not be updated.");
+            return View(model);
+        }
+
+        // Helper Method
         private ParticipationService CreateParticipationService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
