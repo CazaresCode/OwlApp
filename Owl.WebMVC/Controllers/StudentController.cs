@@ -17,7 +17,7 @@ namespace Owl.WebMVC.Controllers
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new StudentService(userId);
-            var model = service.GetStudents();
+            var model = service.GetStudents().OrderBy(s=>s.FullName).ToList();
 
             return View(model);
         }
