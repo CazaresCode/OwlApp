@@ -60,6 +60,7 @@
     <Compile Include="FacultyModels\FacultyListItem.cs" />
     <Compile Include="MeetingModels\MeetingCreate.cs" />
     <Compile Include="MeetingModels\MeetingDetail.cs" />
+    <Compile Include="MeetingModels\MeetingEdit.cs" />
     <Compile Include="MeetingModels\MeetingListItem.cs" />
     <Compile Include="ParticipationModels\ParticipationCreate.cs" />
     <Compile Include="ParticipationModels\ParticipationDetail.cs" />

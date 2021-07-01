@@ -82,8 +82,24 @@ namespace Owl.Services
             }
         }
 
+        public bool UpdateMeeting(MeetingEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Meetings
+                        .Single(e => e.Id == model.Id && e.OwnerId == _userId);
+                entity.NameOfMeeting = model.NameOfMeeting;
+                entity.Description = model.Description;
+                entity.Location = model.Location;
+                entity.StartTime = model.StartTime;
+                entity.EndTime = model.EndTime;
+                entity.TypeOfMeeting = model.TypeOfMeeting;
 
+                return ctx.SaveChanges() == 1;
+            }
+        }
 
-        //EDIT
     }
 }
