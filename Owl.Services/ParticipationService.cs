@@ -97,5 +97,21 @@ namespace Owl.Services
                     };
             }
         }
+
+        public bool UpdateParticipation(ParticipationEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Participations
+                        .Single(e => e.Id == model.Id && e.OwnerId == _userId);
+
+                entity.PersonId = model.PersonId;
+                entity.MeetingId = model.MeetingId;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
