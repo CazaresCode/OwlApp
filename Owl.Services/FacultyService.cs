@@ -121,5 +121,19 @@ namespace Owl.Services
             }
         }
 
+        public bool DeleteFaculty(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Faculties
+                        .Single(e => e.Id == id && e.OwnerId == _userId);
+
+                ctx.Faculties.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
