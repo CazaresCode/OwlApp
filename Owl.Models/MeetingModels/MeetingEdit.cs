@@ -8,7 +8,7 @@ using static EnumCommonLayer.MeetingTypeEnum;
 
 namespace Owl.Models.MeetingModels
 {
-    public class MeetingDetail
+    public class MeetingEdit
     {
         public int Id { get; set; }
 
@@ -31,5 +31,6 @@ namespace Owl.Models.MeetingModels
 
         [Display(Name = "Meeting Type")]
         public MeetingType TypeOfMeeting { get; set; }
+
     }
 }

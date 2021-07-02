@@ -1,0 +1,19 @@
+﻿using Owl.Models.MeetingModels;
+using Owl.Models.PersonModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Owl.Models.ParticipationModels
+{
+    public class ParticipationListItem
+    {
+        public int Id { get; set; }
+        public int PersonId { get; set; }
+        public virtual PersonListItem Person { get; set; }
+        public int MeetingId { get; set; }
+        public virtual MeetingListItem Meeting { get; set; }
+    }
+}

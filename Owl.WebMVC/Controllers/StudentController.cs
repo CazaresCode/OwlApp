@@ -17,7 +17,7 @@ namespace Owl.WebMVC.Controllers
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
             var service = new StudentService(userId);
-            var model = service.GetStudents();
+            var model = service.GetStudents().OrderBy(s=>s.FullName).ToList();
 
             return View(model);
         }
@@ -39,7 +39,7 @@ namespace Owl.WebMVC.Controllers
             var service = CreateStudentService();
 
             if (service.CreateStudent(model))
-            { 
+            {
                 TempData["SaveResult"] = "Your Student was created.";
                 return RedirectToAction("Index");
             };
@@ -55,6 +55,80 @@ namespace Owl.WebMVC.Controllers
             var model = svc.GetStudentById(id);
             return View(model);
         }
+
+        public ActionResult Edit(int id)
+        {
+            var service = CreateStudentService();
+            var detail = service.GetStudentById(id);
+            var model =
+                new StudentEdit
+                {
+                    Id = detail.Id,
+                    FirstName = detail.FirstName,
+                    LastName = detail.LastName,
+                    Email = detail.Email,
+                    PhoneNumber = detail.PhoneNumber,
+                    TypeOfInstrument = detail.TypeOfInstrument,
+                    StartTime = detail.StartTime,
+                    EndTime = detail.EndTime,
+                    HasFoodAllergy = detail.HasFoodAllergy,
+                    FoodAllergy = detail.FoodAllergy,
+                    TypeOfProgram = detail.TypeOfProgram,
+                    HasPaidTuition = detail.HasPaidTuition
+                };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, StudentEdit model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.Id != id)
+            {
+                ModelState.AddModelError("", "Id Mismatch.");
+                return View(model);
+            }
+
+            var service = CreateStudentService();
+
+            if (service.UpdateStudent(model))
+            {
+                TempData["Save Result"] = "Your Student was updated.";
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "Your Student could not be updated.");
+                return View(model);
+        }
+
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var service
+                = CreateStudentService();
+            var model = service.GetStudentById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var service = CreateStudentService();
+
+            service.DeleteStudent(id);
+
+            TempData["SaveResult"] = "Your student was deleted";
+
+            return RedirectToAction("Index");
+        }
+
 
         // Helper Method
         private StudentService CreateStudentService()

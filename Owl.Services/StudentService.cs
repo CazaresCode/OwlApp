@@ -57,8 +57,7 @@ namespace Owl.Services
                                 new StudentListItem
                                 {
                                     Id = e.Id,
-                                    FirstName = e.FirstName,
-                                    LastName = e.LastName,
+                                    FullName = e.FullName,
                                     TypeOfProgram = e.TypeOfProgram,
                                     StartTime = e.StartTime,
                                     EndTime = e.EndTime
@@ -80,6 +79,7 @@ namespace Owl.Services
                     new StudentDetail
                     {
                         Id = entity.Id,
+                        FullName = entity.FullName,
                         FirstName = entity.FirstName,
                         LastName = entity.LastName,
                         Email = entity.Email,
@@ -92,6 +92,47 @@ namespace Owl.Services
                         TypeOfProgram = entity.TypeOfProgram,
                         HasPaidTuition = entity.HasPaidTuition
                     };
+            }
+        }
+
+        public bool UpdateStudent(StudentEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Students
+                        .Single(e => e.Id == model.Id && e.OwnerId == _userId);
+
+                entity.FirstName = model.FirstName;
+                entity.LastName = model.LastName;
+                entity.Email = model.Email;
+                entity.PhoneNumber = model.PhoneNumber;
+                entity.TypeOfInstrument = model.TypeOfInstrument;
+                entity.StartTime = model.StartTime;
+                entity.EndTime = model.EndTime;
+                entity.HasFoodAllergy = model.HasFoodAllergy;
+                entity.FoodAllergy = model.FoodAllergy;
+                entity.TypeOfProgram = model.TypeOfProgram;
+                entity.HasFoodAllergy = model.HasFoodAllergy;
+                entity.HasPaidTuition = model.HasPaidTuition;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+        public bool DeleteStudent(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Students
+                        .Single(e => e.Id == id && e.OwnerId == _userId);
+
+                ctx.Students.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
             }
         }
 

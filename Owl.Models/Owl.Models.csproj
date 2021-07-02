@@ -56,22 +56,29 @@
   <ItemGroup>
     <Compile Include="FacultyModels\FacultyCreate.cs" />
     <Compile Include="FacultyModels\FacultyDetail.cs" />
+    <Compile Include="FacultyModels\FacultyEdit.cs" />
     <Compile Include="FacultyModels\FacultyListItem.cs" />
     <Compile Include="MeetingModels\MeetingCreate.cs" />
     <Compile Include="MeetingModels\MeetingDetail.cs" />
+    <Compile Include="MeetingModels\MeetingEdit.cs" />
     <Compile Include="MeetingModels\MeetingListItem.cs" />
+    <Compile Include="ParticipationModels\ParticipationCreate.cs" />
+    <Compile Include="ParticipationModels\ParticipationDetail.cs" />
+    <Compile Include="ParticipationModels\ParticipationEdit.cs" />
+    <Compile Include="ParticipationModels\ParticipationListItem.cs" />
+    <Compile Include="PersonModels\PersonDetail.cs" />
+    <Compile Include="PersonModels\PersonListItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StudentModels\StudentCreate.cs" />
     <Compile Include="StudentModels\StudentDetail.cs" />
+    <Compile Include="StudentModels\StudentEdit.cs" />
     <Compile Include="StudentModels\StudentListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ParticipationModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\EnumCommonLayer\EnumCommonLayer.csproj">
       <Project>{068CB6CE-B8A6-47C9-BA85-8DB3CA0A8451}</Project>

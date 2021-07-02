@@ -1,13 +1,14 @@
-﻿@model Owl.Models.FacultyModels.FacultyDetail
+﻿@model Owl.Models.StudentModels.StudentDetail
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Delete";
 }
 
-<h2>Details</h2>
+<h2>Delete</h2>
 
+<h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Faculty Details</h4>
+    <h4>StudentDetail</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -16,6 +17,22 @@
 
         <dd>
             @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
         </dd>
 
         <dt>
@@ -75,24 +92,29 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IsStaff)
+            @Html.DisplayNameFor(model => model.TypeOfProgram)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsStaff)
+            @Html.DisplayFor(model => model.TypeOfProgram)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.IsPerforming)
+            @Html.DisplayNameFor(model => model.HasPaidTuition)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.IsPerforming)
+            @Html.DisplayFor(model => model.HasPaidTuition)
         </dd>
 
     </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
