@@ -101,5 +101,19 @@ namespace Owl.Services
             }
         }
 
+        public bool DeleteMeeting(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Meetings
+                        .Single(e => e.Id == id && e.OwnerId == _userId);
+
+                ctx.Meetings.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }
