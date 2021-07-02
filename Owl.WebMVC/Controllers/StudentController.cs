@@ -129,7 +129,6 @@ namespace Owl.WebMVC.Controllers
             return RedirectToAction("Index");
         }
 
-
         // Helper Method
         private StudentService CreateStudentService()
         {
