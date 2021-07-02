@@ -257,6 +257,7 @@
     <Content Include="Views\Student\Delete.cshtml" />
     <Content Include="Views\Meeting\Delete.cshtml" />
     <Content Include="Views\Faculty\Delete.cshtml" />
+    <Content Include="Views\Participation\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
