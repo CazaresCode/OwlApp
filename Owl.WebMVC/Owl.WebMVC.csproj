@@ -255,11 +255,8 @@
     <Content Include="Views\Meeting\Edit.cshtml" />
     <Content Include="Views\Participation\Edit.cshtml" />
     <Content Include="Views\Student\Delete.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Meeting\Delete.cshtml" />
-=======
     <Content Include="Views\Faculty\Delete.cshtml" />
->>>>>>> d18993dcdce755e194b31ab6d1e910a85db693cc
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
