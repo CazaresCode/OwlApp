@@ -26,8 +26,6 @@ namespace Owl.WebMVC.Controllers
         // GET: Create
         public ActionResult Create()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-
             List<Person> people = new PersonService().GetPeople().ToList();
             ViewBag.PersonId = people.Select(p => new SelectListItem()
             {
@@ -35,6 +33,7 @@ namespace Owl.WebMVC.Controllers
                 Text = p.FullName,
             });
 
+            var userId = Guid.Parse(User.Identity.GetUserId());
 
             List<MeetingListItem> meetings = new MeetingService(userId).GetMeetings().ToList();
             ViewBag.MeetingId = meetings.Select(m=> new SelectListItem()
@@ -78,6 +77,23 @@ namespace Owl.WebMVC.Controllers
         {
             var service = CreateParticipationService();
             var detail = service.GetParticipationById(id);
+
+            var userId = Guid.Parse(User.Identity.GetUserId());
+
+            List<MeetingListItem> meetings = new MeetingService(userId).GetMeetings().ToList();
+            ViewBag.MeetingId = meetings.Select(m => new SelectListItem()
+            {
+                Value = m.Id.ToString(),
+                Text = m.NameOfMeeting,
+            });
+
+            List<Person> people = new PersonService().GetPeople().ToList();
+            ViewBag.PersonId = people.Select(p => new SelectListItem()
+            {
+                Value = p.Id.ToString(),
+                Text = p.FullName,
+            });
+
             var model =
                 new ParticipationEdit
                 {
@@ -89,9 +105,9 @@ namespace Owl.WebMVC.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, ParticipationEdit model)
+        public ActionResult Edit(int id, [Bind(Include ="Id, MeetingId, PersonId")] ParticipationEdit model)
         {
             if (!ModelState.IsValid)
                 return View(model);
@@ -114,7 +130,21 @@ namespace Owl.WebMVC.Controllers
             return View(model);
         }
 
-        // Helper Method
+        // Helper Methods
+
+        // Future helper method for the viewbag stuff
+        //private void PopulateMeetingDropDownList(object selectedMeeting = null)
+        //{
+        //    var service = CreateParticipationService();
+        //    var meetingsQuery = from m in service.GetParticipations()
+        //                           orderby m.Meeting.NameOfMeeting
+        //                           select m;
+        //    ViewBag.MeetingId = new SelectList(meetingsQuery, "MeetingId", "NameOfMeeting", selectedMeeting);
+        //}
+
+
+
+
         private ParticipationService CreateParticipationService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
