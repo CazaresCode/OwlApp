@@ -105,6 +105,29 @@ namespace Owl.WebMVC.Controllers
             return View(model);
         }
 
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var service
+                = CreateFacultyService();
+            var model = service.GetFacultyById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var service = CreateFacultyService();
+
+            service.DeleteFaculty(id);
+
+            TempData["SaveResult"] = "Your faculty was deleted";
+
+            return RedirectToAction("Index");
+        }
 
         // Helper Method
         private FacultyService CreateFacultyService()
