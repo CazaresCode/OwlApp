@@ -113,5 +113,20 @@ namespace Owl.Services
                 return ctx.SaveChanges() == 1;
             }
         }
+
+        public bool DeleteParticipation(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Participations
+                        .Single(e => e.Id == id && e.OwnerId == _userId);
+
+                ctx.Participations.Remove(entity);
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
     }
 }

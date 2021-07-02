@@ -130,6 +130,33 @@ namespace Owl.WebMVC.Controllers
             return View(model);
         }
 
+
+        [ActionName("Delete")]
+        public ActionResult Delete(int id)
+        {
+            var service
+                = CreateParticipationService();
+            var model = service.GetParticipationById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeletePost(int id)
+        {
+            var service = CreateParticipationService();
+
+            service.DeleteParticipation(id);
+
+            TempData["SaveResult"] = "Your participation was deleted";
+
+            return RedirectToAction("Index");
+        }
+
+
+
         // Helper Methods
 
         // Future helper method for the viewbag stuff
