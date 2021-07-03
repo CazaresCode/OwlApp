@@ -27,5 +27,8 @@ namespace Owl.Models.StudentModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime EndTime { get; set; }
+
+        [Display(Name = "Has Paid Tuition")]
+        public bool HasPaidTuition { get; set; }
     }
 }

@@ -35,6 +35,9 @@
         <th>
             @Html.DisplayNameFor(model => model.EndTime)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasPaidTuition)
+        </th>
         <th></th>
     </tr>
 
@@ -52,6 +55,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasPaidTuition)
             </td>
             <td>
                 @Html.ActionLink("Change", "Edit", new { id = item.Id }) |

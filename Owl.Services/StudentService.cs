@@ -60,7 +60,8 @@ namespace Owl.Services
                                     FullName = e.FullName,
                                     TypeOfProgram = e.TypeOfProgram,
                                     StartTime = e.StartTime,
-                                    EndTime = e.EndTime
+                                    EndTime = e.EndTime,
+                                    HasPaidTuition = e.HasPaidTuition
                                 });
 
                 return query.ToArray();
