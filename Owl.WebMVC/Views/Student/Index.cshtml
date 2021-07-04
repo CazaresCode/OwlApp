@@ -10,13 +10,13 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using(Html.BeginForm())
-            {
-                <p>
-                    Find by Name: @Html.TextBox("SearchString")
-                    <input type="submit" value="Search" />
-                </p>
-            }
+@using (Html.BeginForm())
+{
+    <p>
+        Find by Name: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
 
 @if (TempData.ContainsKey("SaveResult"))
 {
@@ -32,7 +32,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam})
+            @Html.ActionLink("Last Name", "Index",
+           new
+                {
+                    sortOrder = ViewBag.NameSortParam,
+               selectedLastName = ViewBag.selectedLastName,
+                    selectedFirstName = ViewBag.selectedFirstName
+                })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
@@ -50,6 +56,16 @@
             @Html.ActionLink("Has Paid Tuition", "Index", new { sortOrder = ViewBag.HasPaidParam })
         </th>
         <th></th>
+    </tr>
+    <tr>
+        <th>
+            @Html.DropDownList("SelectedLastName", new SelectList(ViewBag.UniqueLastNames, "Value", "Test", "ViewBag.SelectedLastNames"),
+           "All", new { onchange = "form.sumbit();" })
+        </th>
+        <th>
+            @Html.DropDownList("SelectedStartName", new SelectList(ViewBag.UniqueFirstNames, "Value", "Test", "ViewBag.SelectedFirstNamse"),
+           "All", new { onchange = "form.sumbit();" })
+        </th>
     </tr>
 
     @foreach (var item in Model)

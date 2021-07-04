@@ -13,7 +13,7 @@ namespace Owl.WebMVC.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string searchString, string selectedFirstName, string selectedLastName)
         {
             var service = CreateStudentService();
 
@@ -22,13 +22,47 @@ namespace Owl.WebMVC.Controllers
             ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
             ViewBag.HasPaidParam = sortOrder == "HasPaidTuition" ? "HasNotPaidTuition" : "HasPaidTuition";
 
-            var students = from s in service.GetStudents()
+            var rawData = (from s in service.GetStudents()
+                           select s).ToList();
+
+            var students = from s in rawData
                            select s;
 
+            // Default order
             if (!String.IsNullOrEmpty(searchString))
             {
                 students = students.Where(s => s.FirstName.Contains(searchString) || s.LastName.Contains(searchString));
             }
+
+            // Sort Last Name
+            if (!String.IsNullOrEmpty(selectedLastName))
+            {
+                students = students.Where(s => s.LastName.Trim().Equals(selectedLastName.Trim()));
+            }
+
+            // Sort Last Name
+            if (!String.IsNullOrEmpty(selectedFirstName))
+            {
+                students = students.Where(s => s.FirstName.Trim().Equals(selectedFirstName.Trim()));
+            }
+
+            var UniqueLastNames = from s in students
+                                  group s by s.LastName into newGroup
+                                  where newGroup.Key != null
+                                  orderby newGroup.Key
+                                  select new { LastName = newGroup.Key };
+            ViewBag.UniqueLastNames = UniqueLastNames.Select(n => new SelectListItem { Value = n.LastName, Text = n.LastName }).ToList();
+
+            var UniqueFirstNames = from s in students
+                                   group s by s.FirstName into newGroup
+                                   where newGroup.Key != null
+                                   orderby newGroup.Key
+                                   select new { FirstName = newGroup.Key };
+            ViewBag.UniqueFirstNames = UniqueFirstNames.Select(n => new SelectListItem { Value = n.FirstName, Text = n.FirstName }).ToList();
+
+            ViewBag.selectedLastName = selectedLastName;
+            ViewBag.selectedFirstName = selectedFirstName;
+
 
             switch (sortOrder)
             {
@@ -59,7 +93,7 @@ namespace Owl.WebMVC.Controllers
                 case "HasNotPaidTuition":
                     students = students.OrderByDescending(s => s.HasPaidTuition);
                     break;
-                
+
                 default:
                     students = students.OrderBy(s => s.LastName);
                     break;
