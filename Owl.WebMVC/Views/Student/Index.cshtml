@@ -34,14 +34,20 @@
         <th>
             @Html.ActionLink("Last Name", "Index",
            new
-                {
-                    sortOrder = ViewBag.NameSortParam,
-               selectedLastName = ViewBag.selectedLastName,
-                    selectedFirstName = ViewBag.selectedFirstName
-                })
+           {
+               sortOrder = ViewBag.NameSortParam,
+               selectedLastName = ViewBag.SelectedLastName,
+               selectedFirstName = ViewBag.SelectedFirstName
+           })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.ActionLink("First Name", "Index",
+           new
+           {
+               sortOrder = ViewBag.FirstNameSortParam,
+               selectedLastName = ViewBag.SelectedLastName,
+               selectedFirstName = ViewBag.SelectedFirstName
+           })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TypeOfProgram)
@@ -57,13 +63,16 @@
         </th>
         <th></th>
     </tr>
+
     <tr>
         <th>
-            @Html.DropDownList("SelectedLastName", new SelectList(ViewBag.UniqueLastNames, "Value", "Test", "ViewBag.SelectedLastNames"),
+            @Html.DropDownList("SelectedLastName", 
+           new SelectList(ViewBag.UniqueLastNames, "Value", "Text", "ViewBag.SelectedLastName"),
            "All", new { onchange = "form.sumbit();" })
         </th>
         <th>
-            @Html.DropDownList("SelectedStartName", new SelectList(ViewBag.UniqueFirstNames, "Value", "Test", "ViewBag.SelectedFirstNamse"),
+            @Html.DropDownList("SelectedFirstName", 
+           new SelectList(ViewBag.UniqueFirstNames, "Value", "Text", "ViewBag.SelectedFirstName"),
            "All", new { onchange = "form.sumbit();" })
         </th>
     </tr>

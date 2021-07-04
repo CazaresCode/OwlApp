@@ -18,8 +18,11 @@ namespace Owl.WebMVC.Controllers
             var service = CreateStudentService();
 
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
+            ViewBag.FirstNameSortParam = String.IsNullOrEmpty(sortOrder) ? "FirstNameDesc" : "";
+            
             ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "DateDescStart" : "DateStart";
             ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
+           
             ViewBag.HasPaidParam = sortOrder == "HasPaidTuition" ? "HasNotPaidTuition" : "HasPaidTuition";
 
             var rawData = (from s in service.GetStudents()
@@ -28,46 +31,55 @@ namespace Owl.WebMVC.Controllers
             var students = from s in rawData
                            select s;
 
-            // Default order
+            // Search First or Last name
             if (!String.IsNullOrEmpty(searchString))
             {
                 students = students.Where(s => s.FirstName.Contains(searchString) || s.LastName.Contains(searchString));
             }
+            
 
-            // Sort Last Name
+            // Filter Last Name
             if (!String.IsNullOrEmpty(selectedLastName))
             {
                 students = students.Where(s => s.LastName.Trim().Equals(selectedLastName.Trim()));
             }
 
-            // Sort Last Name
+            // Filter First Name
             if (!String.IsNullOrEmpty(selectedFirstName))
             {
                 students = students.Where(s => s.FirstName.Trim().Equals(selectedFirstName.Trim()));
             }
 
-            var UniqueLastNames = from s in students
+            // Last Names
+            var uniqueLastNames = from s in students
                                   group s by s.LastName into newGroup
                                   where newGroup.Key != null
                                   orderby newGroup.Key
                                   select new { LastName = newGroup.Key };
-            ViewBag.UniqueLastNames = UniqueLastNames.Select(n => new SelectListItem { Value = n.LastName, Text = n.LastName }).ToList();
+            
+            ViewBag.UniqueLastNames = uniqueLastNames.Select(n => new SelectListItem { Value = n.LastName, Text = n.LastName }).ToList();
 
-            var UniqueFirstNames = from s in students
+            // First Names
+            var uniqueFirstNames = from s in students
                                    group s by s.FirstName into newGroup
                                    where newGroup.Key != null
                                    orderby newGroup.Key
                                    select new { FirstName = newGroup.Key };
-            ViewBag.UniqueFirstNames = UniqueFirstNames.Select(n => new SelectListItem { Value = n.FirstName, Text = n.FirstName }).ToList();
 
-            ViewBag.selectedLastName = selectedLastName;
-            ViewBag.selectedFirstName = selectedFirstName;
+            ViewBag.UniqueFirstNames = uniqueFirstNames.Select(n => new SelectListItem { Value = n.FirstName, Text = n.FirstName }).ToList();
+
+            ViewBag.SelectedLastName = selectedLastName;
+            ViewBag.SelectedFirstName = selectedFirstName;
 
 
             switch (sortOrder)
             {
                 case "NameDesc":
                     students = students.OrderByDescending(s => s.LastName);
+                    break;
+
+                case "FirstNameDesc":
+                    students = students.OrderByDescending(s => s.FirstName);
                     break;
 
                 case "DateStart":
