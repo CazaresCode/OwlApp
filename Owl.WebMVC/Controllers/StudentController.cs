@@ -26,7 +26,7 @@ namespace Owl.WebMVC.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                students = students.Where(s => s.FirstName.Contains(searchString) || s.FirstName.Contains(searchString));
+                students = students.Where(s => s.FirstName.Contains(searchString) || s.LastName.Contains(searchString));
             }
 
             switch (sortOrder)
