@@ -17,9 +17,10 @@ namespace Owl.WebMVC.Controllers
         {
             var service = CreateStudentService();
 
-            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "nameDesc" : "";
-            ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "dateDescStart" : "DateStart";
-            ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "dateDescEnd" : "DateEnd";
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
+            ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "DateDescStart" : "DateStart";
+            ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
+            ViewBag.HasPaidParam = sortOrder == "HasPaidTuition" ? "HasNotPaidTuition" : "HasPaidTuition";
 
             var students = from s in service.GetStudents()
                            select s;
@@ -31,15 +32,15 @@ namespace Owl.WebMVC.Controllers
 
             switch (sortOrder)
             {
-                case "nameDesc":
+                case "NameDesc":
                     students = students.OrderByDescending(s => s.LastName);
                     break;
 
-                case "Date":
+                case "DateStart":
                     students = students.OrderBy(s => s.StartTime);
                     break;
 
-                case "dateDescStart":
+                case "DateDescStart":
                     students = students.OrderByDescending(s => s.StartTime);
                     break;
 
@@ -47,10 +48,18 @@ namespace Owl.WebMVC.Controllers
                     students = students.OrderBy(s => s.EndTime);
                     break;
 
-                case "dateDescEnd":
+                case "DateDescEnd":
                     students = students.OrderByDescending(s => s.EndTime);
                     break;
 
+                case "HasPaidTuition":
+                    students = students.OrderBy(s => s.HasPaidTuition);
+                    break;
+
+                case "HasNotPaidTuition":
+                    students = students.OrderByDescending(s => s.HasPaidTuition);
+                    break;
+                
                 default:
                     students = students.OrderBy(s => s.LastName);
                     break;
