@@ -24,16 +24,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FullName)
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParam})
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TypeOfProgram)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartTime)
+            @Html.ActionLink("First Day", "Index", new { sortOrder = ViewBag.DateSortStartParam })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EndTime)
+            @Html.ActionLink("Last Day", "Index", new { sortOrder = ViewBag.DateSortEndParam })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.HasPaidTuition)
@@ -45,7 +48,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FullName)
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TypeOfProgram)

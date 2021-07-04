@@ -13,13 +13,50 @@ namespace Owl.WebMVC.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString)
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new StudentService(userId);
-            var model = service.GetStudents().OrderBy(s=>s.FullName).ToList();
+            var service = CreateStudentService();
 
-            return View(model);
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "nameDesc" : "";
+            ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "dateDescStart" : "DateStart";
+            ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "dateDescEnd" : "DateEnd";
+
+            var students = from s in service.GetStudents()
+                           select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.FirstName.Contains(searchString) || s.FirstName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "nameDesc":
+                    students = students.OrderByDescending(s => s.LastName);
+                    break;
+
+                case "Date":
+                    students = students.OrderBy(s => s.StartTime);
+                    break;
+
+                case "dateDescStart":
+                    students = students.OrderByDescending(s => s.StartTime);
+                    break;
+
+                case "DateEnd":
+                    students = students.OrderBy(s => s.EndTime);
+                    break;
+
+                case "dateDescEnd":
+                    students = students.OrderByDescending(s => s.EndTime);
+                    break;
+
+                default:
+                    students = students.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            return View(students.ToList());
         }
 
         // GET: Create
@@ -102,7 +139,7 @@ namespace Owl.WebMVC.Controllers
             }
 
             ModelState.AddModelError("", "Your Student could not be updated.");
-                return View(model);
+            return View(model);
         }
 
         [ActionName("Delete")]
