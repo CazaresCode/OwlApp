@@ -13,7 +13,7 @@
 @using (Html.BeginForm())
 {
     <p>
-        Find by Name: @Html.TextBox("SearchString")
+        Find by Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" /> |
         @Html.ActionLink("Back to Full List", "Index")
     </p>
@@ -37,23 +37,24 @@
            new
            {
                sortOrder = ViewBag.NameSortParam,
-               selectedLastName = ViewBag.SelectedLastName
+               selectedLastName = ViewBag.SelectedLastName,
+               currentFilter = ViewBag.CurrentFilter
            })
         </th>
         <th>
-            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParam, })
+            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TypeOfProgram)
         </th>
         <th>
-            @Html.ActionLink("First Day", "Index", new { sortOrder = ViewBag.DateSortStartParam })
+            @Html.ActionLink("First Day", "Index", new { sortOrder = ViewBag.DateSortStartParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Last Day", "Index", new { sortOrder = ViewBag.DateSortEndParam })
+            @Html.ActionLink("Last Day", "Index", new { sortOrder = ViewBag.DateSortEndParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Has Paid Tuition", "Index", new { sortOrder = ViewBag.HasPaidParam })
+            @Html.ActionLink("Has Paid Tuition", "Index", new { sortOrder = ViewBag.HasPaidParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th></th>
     </tr>
@@ -80,7 +81,8 @@
         <th>
             @Html.DropDownList("UniqueHasPaidTuitionValues",
            new SelectList(ViewBag.UniqueHasPaidTuitionValues, "Value", "Text", "ViewBag.UniqueHasPaidTuitionValues"),
-           "-select-", new { onchange = "form.sumbit();" })
+           "-- select --", new { onchange = "form.sumbit();" })
+
         </th>
     </tr>
 

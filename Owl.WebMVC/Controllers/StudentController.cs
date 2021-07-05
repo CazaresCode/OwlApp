@@ -13,7 +13,7 @@ namespace Owl.WebMVC.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult Index(string sortOrder, string searchString, string selectedFirstName, string selectedLastName)
+        public ActionResult Index(string sortOrder, string searchString, string selectedFirstName, string selectedLastName, string currentFilter)
         {
             var service = CreateStudentService();
 
@@ -29,6 +29,16 @@ namespace Owl.WebMVC.Controllers
             var students = from s in rawData
                            select s;
 
+            if (searchString != null)
+            {
+                currentFilter = null;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
 
             // Search First or Last name
             if (!String.IsNullOrEmpty(searchString))
@@ -80,8 +90,19 @@ namespace Owl.WebMVC.Controllers
                                                 new SelectListItem
                                                 {
                                                     Value = t.HasPaidTuition.ToString(),
-                                                    Text = t.HasPaidTuition.ToString()
+                                                    Text = t.HasPaidTuition.Equals(true) ? "Yes" : "No"
                                                 }).ToList();
+
+            //ViewBag.UniqueHasPaidTuitionValues = uniqueHasPaidTuitionValues
+            //                                   .SelectMany(t => t.HasPaidTuition,
+            //                                   new SelectList(
+            //                                       new[]
+            //                                       {
+            //                                           new { Value = "true", Text = "Yes"},
+            //                                           new { Value = "false", Text = "No"},
+            //                                       },
+            //                                       "Value",
+            //                                       "Text")).ToList();
 
 
             switch (sortOrder)
