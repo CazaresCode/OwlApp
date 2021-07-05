@@ -64,6 +64,24 @@
            new SelectList(ViewBag.UniqueLastNames, "Value", "Text", "ViewBag.SelectedLastName"),
            "All", new { onchange = "form.sumbit();" })
         </th>
+
+        <th>
+        </th>
+
+        <th>
+        </th>
+
+        <th>
+        </th>
+
+        <th>
+        </th>
+
+        <th>
+            @Html.DropDownList("UniqueHasPaidTuitionValues",
+           new SelectList(ViewBag.UniqueHasPaidTuitionValues, "Value", "Text", "ViewBag.UniqueHasPaidTuitionValues"),
+           "-select-", new { onchange = "form.sumbit();" })
+        </th>
     </tr>
 
     @foreach (var item in Model)

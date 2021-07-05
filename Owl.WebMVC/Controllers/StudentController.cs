@@ -61,10 +61,27 @@ namespace Owl.WebMVC.Controllers
                                   orderby newGroup.Key
                                   select new { LastName = newGroup.Key };
 
-            ViewBag.UniqueLastNames = uniqueLastNames.Select(n => new SelectListItem { Value = n.LastName, Text = n.LastName }).ToList();
+            ViewBag.UniqueLastNames = uniqueLastNames
+                                    .Select(n =>
+                                    new SelectListItem
+                                    {
+                                        Value = n.LastName,
+                                        Text = n.LastName
+                                    }).ToList();
 
             // Filter HasPaidTuition
-            
+            var uniqueHasPaidTuitionValues = from s in students
+                                             group s by s.HasPaidTuition into newGroup
+                                             orderby newGroup.Key
+                                             select new { HasPaidTuition = newGroup.Key };
+
+            ViewBag.UniqueHasPaidTuitionValues = uniqueHasPaidTuitionValues
+                                                .Select(t =>
+                                                new SelectListItem
+                                                {
+                                                    Value = t.HasPaidTuition.ToString(),
+                                                    Text = t.HasPaidTuition.ToString()
+                                                }).ToList();
 
 
             switch (sortOrder)
