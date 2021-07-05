@@ -14,7 +14,8 @@
 {
     <p>
         Find by Name: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" />
+        <input type="submit" value="Search" /> |
+        @Html.ActionLink("Back to Full List", "Index")
     </p>
 }
 
@@ -35,7 +36,7 @@
             @Html.ActionLink("Last Name", "Index",
            new
            {
-               sortOrder = ViewBag.NameSortParam,
+               sortOrder = ViewBag.NameSortParam,       
                selectedLastName = ViewBag.SelectedLastName,
                selectedFirstName = ViewBag.SelectedFirstName
            })
@@ -46,7 +47,7 @@
            {
                sortOrder = ViewBag.FirstNameSortParam,
                selectedLastName = ViewBag.SelectedLastName,
-               selectedFirstName = ViewBag.SelectedFirstName
+               selectedFirstName = ViewBag.SelectedFirstName,
            })
         </th>
         <th>
@@ -66,12 +67,12 @@
 
     <tr>
         <th>
-            @Html.DropDownList("SelectedLastName", 
+            @Html.DropDownList("SelectedLastName",
            new SelectList(ViewBag.UniqueLastNames, "Value", "Text", "ViewBag.SelectedLastName"),
            "All", new { onchange = "form.sumbit();" })
         </th>
         <th>
-            @Html.DropDownList("SelectedFirstName", 
+            @Html.DropDownList("SelectedFirstName",
            new SelectList(ViewBag.UniqueFirstNames, "Value", "Text", "ViewBag.SelectedFirstName"),
            "All", new { onchange = "form.sumbit();" })
         </th>

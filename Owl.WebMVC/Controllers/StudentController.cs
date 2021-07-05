@@ -18,11 +18,9 @@ namespace Owl.WebMVC.Controllers
             var service = CreateStudentService();
 
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
-            ViewBag.FirstNameSortParam = String.IsNullOrEmpty(sortOrder) ? "FirstNameDesc" : "";
-            
+            ViewBag.FirstNameSortParam = sortOrder == "FirstNameAscend" ? "FirstNameDesc" : "FirstNameAscend";
             ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "DateDescStart" : "DateStart";
             ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
-           
             ViewBag.HasPaidParam = sortOrder == "HasPaidTuition" ? "HasNotPaidTuition" : "HasPaidTuition";
 
             var rawData = (from s in service.GetStudents()
@@ -31,24 +29,30 @@ namespace Owl.WebMVC.Controllers
             var students = from s in rawData
                            select s;
 
+
             // Search First or Last name
             if (!String.IsNullOrEmpty(searchString))
             {
-                students = students.Where(s => s.FirstName.Contains(searchString) || s.LastName.Contains(searchString));
+                students = students.Where(s =>
+                                        s.FirstName.ToLower().Contains(searchString.ToLower()) ||
+                                        s.LastName.ToLower().Contains(searchString.ToLower()));
             }
-            
+            //IS THIS NEEDED?
+            ViewBag.SearchString = searchString;
 
             // Filter Last Name
             if (!String.IsNullOrEmpty(selectedLastName))
             {
                 students = students.Where(s => s.LastName.Trim().Equals(selectedLastName.Trim()));
             }
+            ViewBag.SelectedLastName = selectedLastName;
 
             // Filter First Name
             if (!String.IsNullOrEmpty(selectedFirstName))
             {
                 students = students.Where(s => s.FirstName.Trim().Equals(selectedFirstName.Trim()));
             }
+            ViewBag.SelectedFirstName = selectedFirstName;
 
             // Last Names
             var uniqueLastNames = from s in students
@@ -56,7 +60,7 @@ namespace Owl.WebMVC.Controllers
                                   where newGroup.Key != null
                                   orderby newGroup.Key
                                   select new { LastName = newGroup.Key };
-            
+
             ViewBag.UniqueLastNames = uniqueLastNames.Select(n => new SelectListItem { Value = n.LastName, Text = n.LastName }).ToList();
 
             // First Names
@@ -68,10 +72,6 @@ namespace Owl.WebMVC.Controllers
 
             ViewBag.UniqueFirstNames = uniqueFirstNames.Select(n => new SelectListItem { Value = n.FirstName, Text = n.FirstName }).ToList();
 
-            ViewBag.SelectedLastName = selectedLastName;
-            ViewBag.SelectedFirstName = selectedFirstName;
-
-
             switch (sortOrder)
             {
                 case "NameDesc":
@@ -80,6 +80,10 @@ namespace Owl.WebMVC.Controllers
 
                 case "FirstNameDesc":
                     students = students.OrderByDescending(s => s.FirstName);
+                    break;
+
+                case "FirstNameAscend":
+                    students = students.OrderBy(s => s.FirstName);
                     break;
 
                 case "DateStart":
