@@ -63,14 +63,9 @@ namespace Owl.WebMVC.Controllers
 
             ViewBag.UniqueLastNames = uniqueLastNames.Select(n => new SelectListItem { Value = n.LastName, Text = n.LastName }).ToList();
 
-            // First Names
-            var uniqueFirstNames = from s in students
-                                   group s by s.FirstName into newGroup
-                                   where newGroup.Key != null
-                                   orderby newGroup.Key
-                                   select new { FirstName = newGroup.Key };
+            // Filter HasPaidTuition
+            
 
-            ViewBag.UniqueFirstNames = uniqueFirstNames.Select(n => new SelectListItem { Value = n.FirstName, Text = n.FirstName }).ToList();
 
             switch (sortOrder)
             {

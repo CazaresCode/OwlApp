@@ -36,19 +36,12 @@
             @Html.ActionLink("Last Name", "Index",
            new
            {
-               sortOrder = ViewBag.NameSortParam,       
-               selectedLastName = ViewBag.SelectedLastName,
-               selectedFirstName = ViewBag.SelectedFirstName
+               sortOrder = ViewBag.NameSortParam,
+               selectedLastName = ViewBag.SelectedLastName
            })
         </th>
         <th>
-            @Html.ActionLink("First Name", "Index",
-           new
-           {
-               sortOrder = ViewBag.FirstNameSortParam,
-               selectedLastName = ViewBag.SelectedLastName,
-               selectedFirstName = ViewBag.SelectedFirstName,
-           })
+            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParam, })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TypeOfProgram)
@@ -69,11 +62,6 @@
         <th>
             @Html.DropDownList("SelectedLastName",
            new SelectList(ViewBag.UniqueLastNames, "Value", "Text", "ViewBag.SelectedLastName"),
-           "All", new { onchange = "form.sumbit();" })
-        </th>
-        <th>
-            @Html.DropDownList("SelectedFirstName",
-           new SelectList(ViewBag.UniqueFirstNames, "Value", "Text", "ViewBag.SelectedFirstName"),
            "All", new { onchange = "form.sumbit();" })
         </th>
     </tr>
