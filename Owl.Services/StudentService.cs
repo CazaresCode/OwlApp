@@ -62,7 +62,8 @@ namespace Owl.Services
                                     TypeOfProgram = e.TypeOfProgram,
                                     StartTime = e.StartTime,
                                     EndTime = e.EndTime,
-                                    HasPaidTuition = e.HasPaidTuition
+                                    HasPaidTuition = e.HasPaidTuition,
+                                    HasFoodAllergy = e.HasFoodAllergy
                                 });
 
                 return query.ToArray();

@@ -21,6 +21,9 @@ namespace Owl.Models.StudentModels
         [Display(Name = "Program Enrolled In")]
         public ProgramType TypeOfProgram { get; set; }
 
+        [Display(Name = "Has Food Allergy")]
+        public bool HasFoodAllergy { get; set; }
+
         [Display(Name = "First Day")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]

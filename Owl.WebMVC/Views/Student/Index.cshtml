@@ -51,6 +51,9 @@
             @Html.ActionLink("Has Paid Tuition", "Index", new { sortOrder = ViewBag.HasPaidParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
+            @Html.ActionLink("Has Food Allergy", "Index", new { sortOrder = ViewBag.HasFoodAllergyParam, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
             @Html.ActionLink("First Day", "Index", new { sortOrder = ViewBag.DateSortStartParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
@@ -73,6 +76,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HasPaidTuition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasFoodAllergy)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartTime)
