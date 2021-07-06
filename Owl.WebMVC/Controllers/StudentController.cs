@@ -64,47 +64,6 @@ namespace Owl.WebMVC.Controllers
             }
             ViewBag.SelectedFirstName = selectedFirstName;
 
-            // Last Names
-            var uniqueLastNames = from s in students
-                                  group s by s.LastName into newGroup
-                                  where newGroup.Key != null
-                                  orderby newGroup.Key
-                                  select new { LastName = newGroup.Key };
-
-            ViewBag.UniqueLastNames = uniqueLastNames
-                                    .Select(n =>
-                                    new SelectListItem
-                                    {
-                                        Value = n.LastName,
-                                        Text = n.LastName
-                                    }).ToList();
-
-            // Filter HasPaidTuition
-            var uniqueHasPaidTuitionValues = from s in students
-                                             group s by s.HasPaidTuition into newGroup
-                                             orderby newGroup.Key
-                                             select new { HasPaidTuition = newGroup.Key };
-
-            ViewBag.UniqueHasPaidTuitionValues = uniqueHasPaidTuitionValues
-                                                .Select(t =>
-                                                new SelectListItem
-                                                {
-                                                    Value = t.HasPaidTuition.ToString(),
-                                                    Text = t.HasPaidTuition.Equals(true) ? "Yes" : "No"
-                                                }).ToList();
-
-            //ViewBag.UniqueHasPaidTuitionValues = uniqueHasPaidTuitionValues
-            //                                   .SelectMany(t => t.HasPaidTuition,
-            //                                   new SelectList(
-            //                                       new[]
-            //                                       {
-            //                                           new { Value = "true", Text = "Yes"},
-            //                                           new { Value = "false", Text = "No"},
-            //                                       },
-            //                                       "Value",
-            //                                       "Text")).ToList();
-
-
             switch (sortOrder)
             {
                 case "NameDesc":
