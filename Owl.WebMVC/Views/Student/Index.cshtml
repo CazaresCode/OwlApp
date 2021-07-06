@@ -13,7 +13,11 @@
 @using (Html.BeginForm())
 {
     <p>
-        Find by Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <b>Search By:</b>
+        @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
+        @Html.RadioButton("searchBy", "TypeOfProgram") <text>Program</text>
+        <br />
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" /> |
         @Html.ActionLink("Back to Full List", "Index")
     </p>
@@ -60,6 +64,13 @@
         </th>
         <th></th>
     </tr>
+    @if (Model.Count()==0)
+    {
+        <tr>
+            <td colspan="4">No rows match search criteria </td>
+        </tr>
+    }
+
 
     @foreach (var item in Model)
     {
