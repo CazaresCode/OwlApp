@@ -11,11 +11,17 @@ namespace Owl.Models.FacultyModels
     {
         public int Id { get; set; }
 
-        [Display(Name = "Full Name")]
-        public string FullName { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
 
         [Display(Name = "Is Staff")]
         public bool IsStaff { get; set; }
+
+        [Display(Name = "Has Food Allergy")]
+        public bool HasFoodAllergy { get; set; }
 
         [Display(Name = "First Day")]
         [DataType(DataType.Date)]
@@ -26,5 +32,6 @@ namespace Owl.Models.FacultyModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndTime { get; set; }
+
     }
 }

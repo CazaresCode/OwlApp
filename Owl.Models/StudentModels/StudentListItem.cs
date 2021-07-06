@@ -33,20 +33,5 @@ namespace Owl.Models.StudentModels
 
         [Display(Name = "Has Paid Tuition")]
         public bool HasPaidTuition { get; set; }
-
-        //    public string HasPaidYesNo
-        //    {
-        //        get
-        //        {
-        //            if (HasPaidTuition)
-        //            {
-        //                return "Yes";
-        //            }
-        //            else
-        //            {
-        //                return "No";
-        //            }
-        //        }
-        //    }
     }
 }
