@@ -13,13 +13,101 @@ namespace Owl.WebMVC.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string selectedFirstName, string selectedLastName, string currentFilter)
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new StudentService(userId);
-            var model = service.GetStudents().OrderBy(s=>s.FullName).ToList();
+            var service = CreateStudentService();
 
-            return View(model);
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
+            ViewBag.FirstNameSortParam = sortOrder == "FirstNameAscend" ? "FirstNameDesc" : "FirstNameAscend";
+            ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "DateDescStart" : "DateStart";
+            ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
+            ViewBag.HasPaidParam = sortOrder == "HasPaidTuition" ? "HasNotPaidTuition" : "HasPaidTuition";
+
+            var rawData = (from s in service.GetStudents()
+                           select s).ToList();
+
+            var students = from s in rawData
+                           select s;
+
+            if (searchString != null)
+            {
+                currentFilter = null;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            // Search First or Last name
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s =>
+                                        s.FirstName.ToLower().Contains(searchString.ToLower()) ||
+                                        s.LastName.ToLower().Contains(searchString.ToLower()));
+            }
+            //IS THIS NEEDED?
+            ViewBag.SearchString = searchString;
+
+            // Filter Last Name
+            if (!String.IsNullOrEmpty(selectedLastName))
+            {
+                students = students.Where(s => s.LastName.Trim().Equals(selectedLastName.Trim()));
+            }
+            ViewBag.SelectedLastName = selectedLastName;
+
+            // Filter First Name
+            if (!String.IsNullOrEmpty(selectedFirstName))
+            {
+                students = students.Where(s => s.FirstName.Trim().Equals(selectedFirstName.Trim()));
+            }
+            ViewBag.SelectedFirstName = selectedFirstName;
+
+            switch (sortOrder)
+            {
+                case "NameDesc":
+                    students = students.OrderByDescending(s => s.LastName);
+                    break;
+
+                case "FirstNameDesc":
+                    students = students.OrderByDescending(s => s.FirstName);
+                    break;
+
+                case "FirstNameAscend":
+                    students = students.OrderBy(s => s.FirstName);
+                    break;
+
+                case "DateStart":
+                    students = students.OrderBy(s => s.StartTime);
+                    break;
+
+                case "DateDescStart":
+                    students = students.OrderByDescending(s => s.StartTime);
+                    break;
+
+                case "DateEnd":
+                    students = students.OrderBy(s => s.EndTime);
+                    break;
+
+                case "DateDescEnd":
+                    students = students.OrderByDescending(s => s.EndTime);
+                    break;
+
+                case "HasPaidTuition":
+                    students = students.OrderBy(s => s.HasPaidTuition);
+                    break;
+
+                case "HasNotPaidTuition":
+                    students = students.OrderByDescending(s => s.HasPaidTuition);
+                    break;
+
+                default:
+                    students = students.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            return View(students.ToList());
         }
 
         // GET: Create
@@ -102,7 +190,7 @@ namespace Owl.WebMVC.Controllers
             }
 
             ModelState.AddModelError("", "Your Student could not be updated.");
-                return View(model);
+            return View(model);
         }
 
         [ActionName("Delete")]
