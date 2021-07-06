@@ -13,7 +13,7 @@ namespace Owl.WebMVC.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult Index(string sortOrder, string searchString, string selectedFirstName, string selectedLastName, string currentFilter, string searchBy)
+        public ActionResult Index(string sortOrder, string searchString, string selectedFirstName, string selectedLastName, string currentFilter, string searchBy, DateTime? searchDate)
         {
             var service = CreateStudentService();
 
@@ -38,21 +38,23 @@ namespace Owl.WebMVC.Controllers
             {
                 searchString = currentFilter;
             }
-
             ViewBag.CurrentFilter = searchString;
 
             // Search Name or Program
             if (!String.IsNullOrEmpty(searchString))
             {
                 if (searchBy == "TypeOfProgram")
+                    students = students
+                            .Where(s => s.TypeOfProgram.ToString().ToLower().Contains(searchString.ToLower()) || searchString == null).ToList();
 
-                    students = students.Where(s =>
-                                         s.TypeOfProgram.ToString().ToLower().Contains(searchString) || searchString == null).ToList();
+                else if (searchBy == "SearchDate")
+                    students = students
+                        .Where(s => s.StartTime >= searchDate && s.EndTime <= searchDate).ToList();
+
                 else
-
-                    students = students.Where(s =>
-                                            s.FirstName.ToLower().Contains(searchString.ToLower()) ||
-                                            s.LastName.ToLower().Contains(searchString.ToLower()));
+                    students = students
+                        .Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) ||
+                                    s.LastName.ToLower().Contains(searchString.ToLower()));
             }
             ViewBag.SearchString = searchString;
 
