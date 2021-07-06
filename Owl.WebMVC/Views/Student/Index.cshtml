@@ -48,13 +48,13 @@
             @Html.DisplayNameFor(model => model.TypeOfProgram)
         </th>
         <th>
+            @Html.ActionLink("Has Paid Tuition", "Index", new { sortOrder = ViewBag.HasPaidParam, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
             @Html.ActionLink("First Day", "Index", new { sortOrder = ViewBag.DateSortStartParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             @Html.ActionLink("Last Day", "Index", new { sortOrder = ViewBag.DateSortEndParam, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            @Html.ActionLink("Has Paid Tuition", "Index", new { sortOrder = ViewBag.HasPaidParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th></th>
     </tr>
@@ -72,13 +72,13 @@
                 @Html.DisplayFor(modelItem => item.TypeOfProgram)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.HasPaidTuition)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.StartTime)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EndTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HasPaidTuition)
             </td>
             <td>
                 @Html.ActionLink("Change", "Edit", new { id = item.Id }) |
