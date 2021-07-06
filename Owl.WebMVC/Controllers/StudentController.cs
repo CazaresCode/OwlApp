@@ -48,22 +48,7 @@ namespace Owl.WebMVC.Controllers
                                         s.FirstName.ToLower().Contains(searchString.ToLower()) ||
                                         s.LastName.ToLower().Contains(searchString.ToLower()));
             }
-            //IS THIS NEEDED?
             ViewBag.SearchString = searchString;
-
-            // Filter Last Name
-            if (!String.IsNullOrEmpty(selectedLastName))
-            {
-                students = students.Where(s => s.LastName.Trim().Equals(selectedLastName.Trim()));
-            }
-            ViewBag.SelectedLastName = selectedLastName;
-
-            // Filter First Name
-            if (!String.IsNullOrEmpty(selectedFirstName))
-            {
-                students = students.Where(s => s.FirstName.Trim().Equals(selectedFirstName.Trim()));
-            }
-            ViewBag.SelectedFirstName = selectedFirstName;
 
             switch (sortOrder)
             {
