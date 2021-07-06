@@ -22,6 +22,7 @@ namespace Owl.WebMVC.Controllers
             ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "DateDescStart" : "DateStart";
             ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
             ViewBag.HasPaidParam = sortOrder == "HasPaidTuition" ? "HasNotPaidTuition" : "HasPaidTuition";
+            ViewBag.HasFoodAllergyParam = sortOrder == "HasFoodAllergySort" ? "HasNoFoodAllergySort" : "HasFoodAllergySort";
 
             var rawData = (from s in service.GetStudents()
                            select s).ToList();
@@ -100,6 +101,14 @@ namespace Owl.WebMVC.Controllers
 
                 case "HasNotPaidTuition":
                     students = students.OrderByDescending(s => s.HasPaidTuition);
+                    break;
+
+                case "HasFoodAllergySort":
+                    students = students.OrderBy(s => s.HasFoodAllergy);
+                    break;
+
+                case "HasNoFoodAllergySort":
+                    students = students.OrderByDescending(s => s.HasFoodAllergy);
                     break;
 
                 default:

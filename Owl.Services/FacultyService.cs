@@ -57,8 +57,10 @@ namespace Owl.Services
                                 new FacultyListItem
                                 {
                                     Id = e.Id,
-                                    FullName = e.FullName,
+                                    FirstName = e.FirstName,
+                                    LastName = e.LastName,
                                     IsStaff = e.IsStaff,
+                                    HasFoodAllergy = e.HasFoodAllergy,
                                     StartTime = e.StartTime,
                                     EndTime = e.EndTime
                                 });

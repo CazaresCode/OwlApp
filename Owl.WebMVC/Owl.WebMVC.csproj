@@ -241,7 +241,6 @@
     <Content Include="Views\Student\Index.cshtml" />
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\Student\Details.cshtml" />
-    <Content Include="Views\Faculty\Index.cshtml" />
     <Content Include="Views\Faculty\Create.cshtml" />
     <Content Include="Views\Faculty\Details.cshtml" />
     <Content Include="Views\Meeting\Create.cshtml" />
@@ -258,6 +257,7 @@
     <Content Include="Views\Meeting\Delete.cshtml" />
     <Content Include="Views\Faculty\Delete.cshtml" />
     <Content Include="Views\Participation\Delete.cshtml" />
+    <Content Include="Views\Faculty\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
