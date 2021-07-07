@@ -48,9 +48,10 @@ namespace Owl.WebMVC.Controllers
                     students = students
                             .Where(s => s.TypeOfProgram.ToString().ToLower().Contains(searchString.ToLower()) || searchString == null).ToList();
 
-                else if (searchBy == "SearchDate")
-                    students = students
-                             .Where(s => s.EndTime >= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture) || s.StartTime <= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture)).ToList();
+                //
+                //else if (searchBy == "SearchDate")
+                //    students = students
+                //             .Where(s => s.EndTime >= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture) || s.StartTime <= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture)).ToList();
 
                 //Name
                 else
