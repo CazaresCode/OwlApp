@@ -13,7 +13,7 @@ namespace Owl.WebMVC.Controllers
     {
         [Authorize]
         // GET: Faculty
-        public ActionResult Index(string sortOrder, string searchString, string selectedFirstName, string selectedLastName, string currentFilter)
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter)
         {
             var service = CreateFacultyService();
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";

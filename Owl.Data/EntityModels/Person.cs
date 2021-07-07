@@ -55,8 +55,6 @@ namespace Owl.Data.EntityModels
         [Required]
         public bool HasFoodAllergy { get; set; }
 
-        // string prop for the bool and make it readonly (get)
-
         [Required]
         public string FoodAllergy { get; set; }
     }
