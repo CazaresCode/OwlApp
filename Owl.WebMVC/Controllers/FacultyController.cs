@@ -13,7 +13,7 @@ namespace Owl.WebMVC.Controllers
     {
         [Authorize]
         // GET: Faculty
-        public ActionResult Index(string sortOrder, string searchString, string selectedFirstName, string selectedLastName, string currentFilter)
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter)
         {
             var service = CreateFacultyService();
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
@@ -48,22 +48,7 @@ namespace Owl.WebMVC.Controllers
                                         s.FirstName.ToLower().Contains(searchString.ToLower()) ||
                                         s.LastName.ToLower().Contains(searchString.ToLower()));
             }
-            //IS THIS NEEDED?
             ViewBag.SearchString = searchString;
-
-            // Filter Last Name
-            if (!String.IsNullOrEmpty(selectedLastName))
-            {
-                faculties = faculties.Where(s => s.LastName.Trim().Equals(selectedLastName.Trim()));
-            }
-            ViewBag.SelectedLastName = selectedLastName;
-
-            // Filter First Name
-            if (!String.IsNullOrEmpty(selectedFirstName))
-            {
-                faculties = faculties.Where(s => s.FirstName.Trim().Equals(selectedFirstName.Trim()));
-            }
-            ViewBag.SelectedFirstName = selectedFirstName;
 
             switch (sortOrder)
             {

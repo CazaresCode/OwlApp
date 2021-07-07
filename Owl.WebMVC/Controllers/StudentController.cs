@@ -3,6 +3,7 @@ using Owl.Models.StudentModels;
 using Owl.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +14,7 @@ namespace Owl.WebMVC.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult Index(string sortOrder, string searchString, string selectedFirstName, string selectedLastName, string currentFilter)
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, string searchBy)
         {
             var service = CreateStudentService();
 
@@ -38,32 +39,29 @@ namespace Owl.WebMVC.Controllers
             {
                 searchString = currentFilter;
             }
-
             ViewBag.CurrentFilter = searchString;
 
-            // Search First or Last name
+            // Search Name or Program
             if (!String.IsNullOrEmpty(searchString))
             {
-                students = students.Where(s =>
-                                        s.FirstName.ToLower().Contains(searchString.ToLower()) ||
-                                        s.LastName.ToLower().Contains(searchString.ToLower()));
+                if (searchBy == "TypeOfProgram")
+                    students = students
+                            .Where(s => s.TypeOfProgram.ToString().ToLower().Contains(searchString.ToLower()) || searchString == null).ToList();
+
+                //
+                //else if (searchBy == "SearchDate")
+                //    students = students
+                //             .Where(s => s.EndTime >= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture) || s.StartTime <= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture)).ToList();
+
+                //Name
+                else
+                    students = students
+                             .Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) ||
+                                         s.LastName.ToLower().Contains(searchString.ToLower()));
             }
-            //IS THIS NEEDED?
             ViewBag.SearchString = searchString;
 
-            // Filter Last Name
-            if (!String.IsNullOrEmpty(selectedLastName))
-            {
-                students = students.Where(s => s.LastName.Trim().Equals(selectedLastName.Trim()));
-            }
-            ViewBag.SelectedLastName = selectedLastName;
-
-            // Filter First Name
-            if (!String.IsNullOrEmpty(selectedFirstName))
-            {
-                students = students.Where(s => s.FirstName.Trim().Equals(selectedFirstName.Trim()));
-            }
-            ViewBag.SelectedFirstName = selectedFirstName;
+         
 
             switch (sortOrder)
             {

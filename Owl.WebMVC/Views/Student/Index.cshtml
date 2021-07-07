@@ -12,17 +12,21 @@
 
 @using (Html.BeginForm())
 {
-    <p>
-        Find by Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" /> |
-        @Html.ActionLink("Back to Full List", "Index")
-    </p>
+<p>
+    <b>Search By:</b>
+    @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
+    @Html.RadioButton("searchBy", "TypeOfProgram") <text>Program</text>
+    <!--@Html.RadioButton("searchBy", "SearchDate") <text>Date</text>-->
+    <br />
+    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <input type="submit" value="Search" /> |
+    @Html.ActionLink("Back to Full List", "Index")
+</p>
 }
 
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success fade in" role="alert">
-
         <button type="button" class="close" data-dismiss="alert">
             <span>&times;</span>
         </button>
@@ -37,30 +41,61 @@
            new
            {
                sortOrder = ViewBag.NameSortParam,
-               selectedLastName = ViewBag.SelectedLastName,
                currentFilter = ViewBag.CurrentFilter
            })
         </th>
         <th>
-            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParam, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("First Name", "Index",
+           new
+           {
+               sortOrder = ViewBag.FirstNameSortParam,
+               currentFilter = ViewBag.CurrentFilter
+           })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TypeOfProgram)
         </th>
         <th>
-            @Html.ActionLink("Has Paid Tuition", "Index", new { sortOrder = ViewBag.HasPaidParam, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Has Paid Tuition", "Index",
+           new
+           {
+               sortOrder = ViewBag.HasPaidParam,
+               currentFilter = ViewBag.CurrentFilter
+           })
         </th>
         <th>
-            @Html.ActionLink("Has Food Allergy", "Index", new { sortOrder = ViewBag.HasFoodAllergyParam, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Has Food Allergy", "Index",
+           new
+           {
+               sortOrder = ViewBag.HasFoodAllergyParam,
+               currentFilter = ViewBag.CurrentFilter
+           })
         </th>
         <th>
-            @Html.ActionLink("First Day", "Index", new { sortOrder = ViewBag.DateSortStartParam, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("First Day", "Index",
+           new
+           {
+               sortOrder = ViewBag.DateSortStartParam,
+               currentFilter = ViewBag.CurrentFilter
+           })
         </th>
         <th>
-            @Html.ActionLink("Last Day", "Index", new { sortOrder = ViewBag.DateSortEndParam, currentFilter = ViewBag.CurrentFilter })
+            @Html.ActionLink("Last Day", "Index",
+           new
+           {
+               sortOrder = ViewBag.DateSortEndParam,
+               currentFilter = ViewBag.CurrentFilter
+           })
         </th>
         <th></th>
     </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4">No rows match search criteria </td>
+        </tr>
+    }
+
 
     @foreach (var item in Model)
     {
