@@ -24,10 +24,10 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                    <li>@Html.ActionLink("Student", "Index", "Student")</li>
-                    <li>@Html.ActionLink("Faculty", "Index", "Faculty")</li>
-                    <li>@Html.ActionLink("Meeting", "Index", "Meeting")</li>
-                    <li>@Html.ActionLink("Participation", "Index", "Participation")</li>
+                        <li>@Html.ActionLink("Student", "Index", "Student")</li>
+                        <li>@Html.ActionLink("Faculty", "Index", "Faculty")</li>
+                        <li>@Html.ActionLink("Meeting", "Index", "Meeting")</li>
+                        <li>@Html.ActionLink("Participation", "Index", "Participation")</li>
                     }
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -46,6 +46,9 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/jqueryui")*@
+    <!--@Styles.Render("~/Content/cssjqryUi")-->
     @RenderSection("scripts", required: false)
 </body>
 </html>

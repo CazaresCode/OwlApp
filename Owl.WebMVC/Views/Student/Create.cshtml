@@ -6,7 +6,6 @@
 
 <h2>Create</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -59,7 +58,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control", @id = "txtFromDate" } })
+                @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control", @id = "from" } })
                 @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -67,7 +66,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control", @id = "txtToDate" } })
+                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control", @id = "to" } })
                 @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -122,54 +121,84 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Styles.Render("~/Content/cssjqryUi")
-}
+    }
+    
+@*<script >
 
+        $(function () {
 
-<script type="text/javascript">
-    /*$(document).ready(function () {
-        $('input[type=datetime]').datepicker({
-            dateFormat: "dd/M/yy",
-            clearBtn: true,
-            onSelect: function (date) {
-                var dt2 = $('#dt2');
-                var minDate = $(this).datepicker('getDate');
-                dt2.datepicker('option', 'minDate', minDate);
-            }
-        })
-            .on('clearDate', function (e) {
-                dt1.datepicker('option', 'maxDate', 0);
-                dt2.datepicker('option', 'minDate', 0);
+            $('#from, #to').datepicker({
+                showOn: "both",
+                beforeShow: customRange,
+                dateFormat: "dd M yy",
             });
 
-        $('input[type=datetime]').datepicker({
-            dateFormat: "dd/M/yy",
-            clearBtn: true,
-            onSelect: function (date) {
-                var dt1 = $('#dt1');
-                var maxDate = $(this).datepicker('getDate');
-                dt1.datepicker('option', 'maxDate', maxDate);
-            }
-        })
-            .on('clearDate', function (e) {
-                dt1.datepicker('option', 'maxDate');
-                dt2.datepicker('option', 'minDate');
-            })
-    })*/
+        });
 
-    $(document).ready(function () {
-        $("#txtFromDate").datepicker({
-            // numberOfMonths: 1,
-            onSelect: function (selected) {
-                $("#txtFromDate").datepicker("option", "minDate", selected)
+        $(function customRange(input) {
+
+            if (input.id == 'to') {
+                var minDate = new Date($('#from').val());
+                minDate.setDate(minDate.getDate() + 1)
+
+                return {
+                    minDate: minDate
+
+                };
             }
+
+            return {}
+
         });
-        $("#txtToDate").datepicker({
-            //numberOfMonths: 1,
-            onSelect: function (selected) {
-                $("#txtToDate").datepicker("option", "maxDate", selected)
-            }
-        });
-    });
-</script> 
+    </script>*@
+}
+@*<script>
+        //$(document).ready(function () {
+        //    $("#dt1").datepicker({
+        //        onSelect: function (selected) {
+        //            $("#dt1").datepicker("option", "minDate", selected)
+        //        }
+        //    });
+        //    $("#dt2").datepicker({
+        //        onSelect: function (selected) {
+        //            $("#dt2").datepicker("option", "maxDate", selected)
+        //        }
+        //    });
+        //});
+
+        $(document).ready(function () {
+            $("#dt1").datepicker({
+                //dateFormat: "dd-M-yy",
+                //clearBtn: true,
+                onSelect: function (selected) {
+                    console.log("Test");
+                    var dt2 = $("#dt1");
+                    var minDate = $(this).datepicker('getDate');
+                    dt2.datepicker('option', 'minDate', minDate);
+                }
+            })
+                .on('clearDate', function (e) {
+                    console.log("Test1");
+                    dt1.datepicker('option', 'maxDate', 0);
+                    dt2.datepicker('option', 'minDate', 0);
+                });
+
+            $("#dt2").datepicker({
+                //dateFormat: "dd-M-yy",
+                //clearBtn: true,
+                onSelect: function (selected) {
+                    var dt1 = $("#dt2");
+                    var maxDate = $(this).datepicker('getDate');
+                    dt1.datepicker('option', 'maxDate', maxDate);
+                }
+            })
+                .on('clearDate', function (e) {
+                    dt1.datepicker('option', 'maxDate');
+                    dt2.datepicker('option', 'minDate');
+                })
+        })
+
+    </script>*@
+
+
+

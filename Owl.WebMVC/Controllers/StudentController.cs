@@ -13,7 +13,7 @@ namespace Owl.WebMVC.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult Index(string sortOrder, string searchString, string currentFilter, string searchBy, DateTime? searchDate)
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, string searchBy)
         {
             var service = CreateStudentService();
 
