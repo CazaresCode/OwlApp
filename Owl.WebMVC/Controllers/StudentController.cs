@@ -3,6 +3,7 @@ using Owl.Models.StudentModels;
 using Owl.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -49,7 +50,8 @@ namespace Owl.WebMVC.Controllers
 
                 else if (searchBy == "SearchDate")
                     students = students
-                             .Where(s => s.EndTime >= Convert.ToDateTime(searchString) || s.StartTime <= Convert.ToDateTime(searchString)).ToList();
+                             .Where(s => s.EndTime >= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture) || s.StartTime <= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture)).ToList();
+
                 //Name
                 else
                     students = students

@@ -12,16 +12,17 @@
 
 @using (Html.BeginForm())
 {
-    <p>
-        <b>Search By:</b>
-        @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
-        @Html.RadioButton("searchBy", "TypeOfProgram") <text>Program</text>
-        @Html.RadioButton("searchBy", "SearchDate") <text>Date</text>
-        <br />
-        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" /> |
-        @Html.ActionLink("Back to Full List", "Index")
-    </p>
+<p>
+    <b>Search By:</b>
+    @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
+    @Html.RadioButton("searchBy", "TypeOfProgram") <text>Program</text>
+    <!--@Html.RadioButton("searchBy", "SearchDate") <text>Date</text>-->
+    @Html.RadioButton("searchBy", "SearchDate") <text>Date</text>
+    <br />
+    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+    <input type="submit" value="Search" /> |
+    @Html.ActionLink("Back to Full List", "Index")
+</p>
 }
 
 @if (TempData.ContainsKey("SaveResult"))
