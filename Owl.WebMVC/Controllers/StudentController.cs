@@ -58,10 +58,21 @@ namespace Owl.WebMVC.Controllers
                     students = students
                              .Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) ||
                                          s.LastName.ToLower().Contains(searchString.ToLower()));
-            }
-            ViewBag.SearchString = searchString;
 
-         
+
+                //var totalCount = searchString.Count();
+                //ViewBag.TotalCountSearch = totalCount;
+            }
+
+            var totalCount = students.Count();
+            ViewBag.TotalCountSearch = totalCount;
+
+            ViewBag.TotalNumToday = students.Where(s => s.StartTime >= DateTime.Now && s.EndTime <= DateTime.Now).ToList().Count();
+
+            ViewBag.TotalCountHasNotPaid = students.Where(s => s.HasPaidTuition == false).ToList().Count();
+          
+
+            ViewBag.SearchString = searchString;
 
             switch (sortOrder)
             {
