@@ -58,10 +58,6 @@ namespace Owl.WebMVC.Controllers
                     students = students
                              .Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) ||
                                          s.LastName.ToLower().Contains(searchString.ToLower()));
-
-
-                //var totalCount = searchString.Count();
-                //ViewBag.TotalCountSearch = totalCount;
             }
 
             var totalCount = students.Count();

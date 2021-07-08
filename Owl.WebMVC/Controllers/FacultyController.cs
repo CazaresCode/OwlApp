@@ -48,6 +48,12 @@ namespace Owl.WebMVC.Controllers
                                         s.FirstName.ToLower().Contains(searchString.ToLower()) ||
                                         s.LastName.ToLower().Contains(searchString.ToLower()));
             }
+
+            var totalCount = faculties.Count();
+            ViewBag.TotalCountSearch = totalCount;
+
+            ViewBag.TotalNumToday = faculties.Where(s => s.StartTime >= DateTime.Now && s.EndTime <= DateTime.Now).ToList().Count();
+
             ViewBag.SearchString = searchString;
 
             switch (sortOrder)
