@@ -38,6 +38,12 @@ namespace Owl.WebMVC.Controllers
 
             var service = CreateMeetingService();
 
+            if (model.StartTime > model.EndTime)
+            {
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!");
+                return View(model);
+            }
+
             if (service.CreateMeeting(model))
             {
                 TempData["SaveResult"] = "Your Meeting was created.";
