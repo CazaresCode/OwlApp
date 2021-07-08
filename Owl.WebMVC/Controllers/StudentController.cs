@@ -17,6 +17,10 @@ namespace Owl.WebMVC.Controllers
         public ActionResult Index(string sortOrder, string searchString, string currentFilter, string searchBy)
         {
             var service = CreateStudentService();
+            var rawData = (from s in service.GetStudents()
+                           select s).ToList();
+            var students = from s in rawData
+                           select s;
 
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
             ViewBag.FirstNameSortParam = sortOrder == "FirstNameAscend" ? "FirstNameDesc" : "FirstNameAscend";
@@ -24,12 +28,6 @@ namespace Owl.WebMVC.Controllers
             ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
             ViewBag.HasPaidParam = sortOrder == "HasPaidTuition" ? "HasNotPaidTuition" : "HasPaidTuition";
             ViewBag.HasFoodAllergyParam = sortOrder == "HasFoodAllergySort" ? "HasNoFoodAllergySort" : "HasFoodAllergySort";
-
-            var rawData = (from s in service.GetStudents()
-                           select s).ToList();
-
-            var students = from s in rawData
-                           select s;
 
             if (searchString != null)
             {
