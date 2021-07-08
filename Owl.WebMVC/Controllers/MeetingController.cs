@@ -52,7 +52,7 @@ namespace Owl.WebMVC.Controllers
             }
 
             // Num of Meetings Today
-            ViewBag.TotalNumToday = meetings.Where(s => s.StartTime >= DateTime.Today && s.EndTime <= DateTime.Today).ToList().Count();
+            ViewBag.TotalNumToday = meetings.Where(s => s.StartTime <= DateTime.Today && s.EndTime >= DateTime.Today).ToList().Count();
 
             ViewBag.SearchString = searchString;
             switch (sortOrder)
