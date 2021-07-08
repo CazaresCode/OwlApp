@@ -66,7 +66,7 @@ namespace Owl.WebMVC.Controllers
             ViewBag.TotalNumToday = students.Where(s => s.StartTime >= DateTime.Now && s.EndTime <= DateTime.Now).ToList().Count();
 
             ViewBag.TotalCountHasNotPaid = students.Where(s => s.HasPaidTuition == false).ToList().Count();
-          
+
 
             ViewBag.SearchString = searchString;
 
@@ -139,6 +139,12 @@ namespace Owl.WebMVC.Controllers
                 return View(model);
 
             var service = CreateStudentService();
+
+            if (model.StartTime > model.EndTime)
+            {
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!!!");
+                return View(model);
+            }
 
             if (service.CreateStudent(model))
             {
