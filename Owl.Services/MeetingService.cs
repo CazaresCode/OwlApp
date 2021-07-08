@@ -92,6 +92,7 @@ namespace Owl.Services
                     ctx
                         .Meetings
                         .Single(e => e.Id == model.Id && e.OwnerId == _userId);
+
                 entity.NameOfMeeting = model.NameOfMeeting;
                 entity.Description = model.Description;
                 entity.Location = model.Location;

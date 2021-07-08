@@ -199,8 +199,13 @@ namespace Owl.WebMVC.Controllers
                 return View(model);
             }
 
-            var service = CreateStudentService();
+            if (model.StartTime > model.EndTime)
+            {
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!");
+                return View(model);
+            }
 
+            var service = CreateStudentService();
             if (service.UpdateStudent(model))
             {
                 TempData["Save Result"] = "Your Student was updated.";

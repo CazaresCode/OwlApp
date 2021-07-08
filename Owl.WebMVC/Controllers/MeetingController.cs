@@ -41,7 +41,7 @@ namespace Owl.WebMVC.Controllers
                 if (searchBy == "TypeOfMeeting")
                     meetings = meetings
                             .Where(s => s.TypeOfMeeting.ToString().ToLower().Contains(searchString.ToLower()) || searchString == null).ToList();
-               
+
                 //else if (searchBy == "SearchDate")
                 //    students = students
                 //             .Where(s => s.EndTime >= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture) || s.StartTime <= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture)).ToList();
@@ -147,7 +147,7 @@ namespace Owl.WebMVC.Controllers
                     Location = detail.Location,
                     StartTime = detail.StartTime,
                     EndTime = detail.EndTime,
-                   TypeOfMeeting = detail.TypeOfMeeting
+                    TypeOfMeeting = detail.TypeOfMeeting
                 };
 
             return View(model);
@@ -166,8 +166,13 @@ namespace Owl.WebMVC.Controllers
                 return View(model);
             }
 
-            var service = CreateMeetingService();
+            if (model.StartTime > model.EndTime)
+            {
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!");
+                return View(model);
+            }
 
+            var service = CreateMeetingService();
             if (service.UpdateMeeting(model))
             {
                 TempData["Save Result"] = "Your Meeting was updated.";
