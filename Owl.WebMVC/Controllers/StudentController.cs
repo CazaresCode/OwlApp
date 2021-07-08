@@ -142,7 +142,7 @@ namespace Owl.WebMVC.Controllers
 
             if (model.StartTime > model.EndTime)
             {
-                ModelState.AddModelError("", "Start Date CANNOT be after End Date!!!");
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!");
                 return View(model);
             }
 
