@@ -186,8 +186,7 @@ namespace Owl.WebMVC.Controllers
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var service
-                = CreateMeetingService();
+            var service= CreateMeetingService();
             var model = service.GetMeetingById(id);
 
             return View(model);
