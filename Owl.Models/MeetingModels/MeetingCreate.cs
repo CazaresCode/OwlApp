@@ -23,7 +23,7 @@ namespace Owl.Models.MeetingModels
         [Required]
         [Display(Name = "Start Time")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:MM}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; }
 
         [Required]
