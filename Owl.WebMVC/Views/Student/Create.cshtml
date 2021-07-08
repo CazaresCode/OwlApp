@@ -121,37 +121,59 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    }
-    
-@*<script >
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+    <script type="text/javascript">
         $(function () {
-
-            $('#from, #to').datepicker({
-                showOn: "both",
-                beforeShow: customRange,
-                dateFormat: "dd M yy",
+            $("#from").datepicker({
+                numberOfMonths: 2,
+                onSelect: function (selected) {
+                    var dt = new Date(selected);
+                    dt.setDate(dt.getDate() + 1);
+                    $("#to").datepicker("option", "minDate", dt);
+                }
+            });
+            $("#to").datepicker({
+                numberOfMonths: 2,
+                onSelect: function (selected) {
+                    var dt = new Date(selected);
+                    dt.setDate(dt.getDate() - 1);
+                    $("#from").datepicker("option", "maxDate", dt);
+                }
+            });
+        });
+    </script>
+    @*<script>
+            //this._unselectableClass = "ui-datepicker-unselectable";
+            $(function () {
+                $('#from, #to').datepicker({
+                    showOn: "both",
+                    dateFormat: "dd M yy",
+                });
             });
 
-        });
+            $(function () {
+                $('#to').datepicker({
+                    beforeShow: customRange
+                });
 
-        $(function customRange(input) {
+            $(function customRange(input) {
+                if (input.id == 'to') {
+                    var minDate = new Date($('#from').val());
+                    minDate.setDate(minDate.getDate() + 1)
+                    $("#from>#to").addClass("ui-datepicker-unselectable");
 
-            if (input.id == 'to') {
-                var minDate = new Date($('#from').val());
-                minDate.setDate(minDate.getDate() + 1)
+                    return {
+                        minDate: minDate
+                    };
+                }
 
-                return {
-                    minDate: minDate
-
-                };
-            }
-
-            return {}
-
-        });
-    </script>*@
+                return {}
+            });
+        </script>*@
 }
+
 @*<script>
         //$(document).ready(function () {
         //    $("#dt1").datepicker({

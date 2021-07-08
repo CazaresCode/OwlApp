@@ -19,6 +19,27 @@
     </p>
 }
 
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success fade in" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    <p>
+        <b>Total Count: </b>
+        @Html.ViewBag.TotalCountSearch
+        |
+        <b>Total Present Today: </b>
+        @Html.ViewBag.TotalNumToday
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>

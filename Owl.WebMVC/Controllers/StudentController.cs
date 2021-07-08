@@ -59,9 +59,16 @@ namespace Owl.WebMVC.Controllers
                              .Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) ||
                                          s.LastName.ToLower().Contains(searchString.ToLower()));
             }
-            ViewBag.SearchString = searchString;
 
-         
+            var totalCount = students.Count();
+            ViewBag.TotalCountSearch = totalCount;
+
+            ViewBag.TotalNumToday = students.Where(s => s.StartTime >= DateTime.Now && s.EndTime <= DateTime.Now).ToList().Count();
+
+            ViewBag.TotalCountHasNotPaid = students.Where(s => s.HasPaidTuition == false).ToList().Count();
+
+
+            ViewBag.SearchString = searchString;
 
             switch (sortOrder)
             {
@@ -132,6 +139,12 @@ namespace Owl.WebMVC.Controllers
                 return View(model);
 
             var service = CreateStudentService();
+
+            if (model.StartTime > model.EndTime)
+            {
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!!!");
+                return View(model);
+            }
 
             if (service.CreateStudent(model))
             {
