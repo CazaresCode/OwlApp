@@ -53,7 +53,12 @@
               })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeOfMeeting)
+            @Html.ActionLink("Type of Meeting", "Index",
+              new
+              {
+                  sortOrder = ViewBag.MeetingTypeSortParam,
+                  currentFilter = ViewBag.CurrentFilter
+              })
         </th>
         <th>
             @Html.ActionLink("First Day", "Index",

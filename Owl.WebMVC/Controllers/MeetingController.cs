@@ -25,6 +25,7 @@ namespace Owl.WebMVC.Controllers
             ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "DateDescStart" : "DateStart";
             ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
             ViewBag.NameSortParam = sortOrder == "NameAscend" ? "NameDesc" : "NameAscend";
+            ViewBag.MeetingTypeSortParam = sortOrder == "MeetingTypeAscend" ? "MeetingTypeDesc" : "MeetingTypeAscend";
 
             //Cuurent Filter
             if (searchString != null)
@@ -75,6 +76,14 @@ namespace Owl.WebMVC.Controllers
 
                 case "NameAscend":
                     meetings = meetings.OrderBy(s => s.NameOfMeeting);
+                    break;
+
+                case "MeetingTypeAscend":
+                    meetings = meetings.OrderBy(s => s.TypeOfMeeting);
+                    break;
+
+                case "MeetingTypeDesc":
+                    meetings = meetings.OrderByDescending(s => s.TypeOfMeeting);
                     break;
 
                 default:
