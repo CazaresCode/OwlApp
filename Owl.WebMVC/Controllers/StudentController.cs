@@ -28,15 +28,13 @@ namespace Owl.WebMVC.Controllers
             ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
             ViewBag.HasPaidParam = sortOrder == "HasPaidTuition" ? "HasNotPaidTuition" : "HasPaidTuition";
             ViewBag.HasFoodAllergyParam = sortOrder == "HasFoodAllergySort" ? "HasNoFoodAllergySort" : "HasFoodAllergySort";
+            ViewBag.ProgramTypeSortParam = sortOrder == "ProgramTypeAscend" ? "ProgramTypeDesc" : "ProgramTypeAscend";
 
             if (searchString != null)
-            {
                 currentFilter = null;
-            }
             else
-            {
                 searchString = currentFilter;
-            }
+            
             ViewBag.CurrentFilter = searchString;
 
             // Search Name or Program
@@ -112,6 +110,14 @@ namespace Owl.WebMVC.Controllers
 
                 case "HasNoFoodAllergySort":
                     students = students.OrderByDescending(s => s.HasFoodAllergy);
+                    break;
+
+                case "ProgramTypeAscend":
+                    students = students.OrderBy(s => s.TypeOfProgram);
+                    break;
+
+                case "ProgramTypeDesc":
+                    students = students.OrderByDescending(s => s.TypeOfProgram);
                     break;
 
                 default:

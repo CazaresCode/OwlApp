@@ -53,7 +53,7 @@ namespace Owl.Services
                                 {
                                     Id = e.Id,
                                     NameOfMeeting = e.NameOfMeeting,
-                                    TypeOfMeeting = e.TypeOfMeeting, 
+                                    TypeOfMeeting = e.TypeOfMeeting,
                                     StartTime = e.StartTime,
                                     EndTime = e.EndTime
                                 });
