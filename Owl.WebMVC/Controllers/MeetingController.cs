@@ -15,8 +15,7 @@ namespace Owl.WebMVC.Controllers
         // GET: Meeting
         public ActionResult Index()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new MeetingService(userId);
+            var service = CreateMeetingService();
             var model = service.GetMeetings();
 
             return View(model);
