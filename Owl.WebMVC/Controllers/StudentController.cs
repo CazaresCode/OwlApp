@@ -17,6 +17,10 @@ namespace Owl.WebMVC.Controllers
         public ActionResult Index(string sortOrder, string searchString, string currentFilter, string searchBy)
         {
             var service = CreateStudentService();
+            var rawData = (from s in service.GetStudents()
+                           select s).ToList();
+            var students = from s in rawData
+                           select s;
 
             ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
             ViewBag.FirstNameSortParam = sortOrder == "FirstNameAscend" ? "FirstNameDesc" : "FirstNameAscend";
@@ -25,12 +29,6 @@ namespace Owl.WebMVC.Controllers
             ViewBag.HasPaidParam = sortOrder == "HasPaidTuition" ? "HasNotPaidTuition" : "HasPaidTuition";
             ViewBag.HasFoodAllergyParam = sortOrder == "HasFoodAllergySort" ? "HasNoFoodAllergySort" : "HasFoodAllergySort";
             ViewBag.ProgramTypeSortParam = sortOrder == "ProgramTypeAscend" ? "ProgramTypeDesc" : "ProgramTypeAscend";
-
-            var rawData = (from s in service.GetStudents()
-                           select s).ToList();
-
-            var students = from s in rawData
-                           select s;
 
             if (searchString != null)
                 currentFilter = null;
@@ -148,7 +146,7 @@ namespace Owl.WebMVC.Controllers
 
             if (model.StartTime > model.EndTime)
             {
-                ModelState.AddModelError("", "Start Date CANNOT be after End Date!!!");
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!");
                 return View(model);
             }
 
@@ -207,8 +205,13 @@ namespace Owl.WebMVC.Controllers
                 return View(model);
             }
 
-            var service = CreateStudentService();
+            if (model.StartTime > model.EndTime)
+            {
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!");
+                return View(model);
+            }
 
+            var service = CreateStudentService();
             if (service.UpdateStudent(model))
             {
                 TempData["Save Result"] = "Your Student was updated.";
@@ -222,8 +225,7 @@ namespace Owl.WebMVC.Controllers
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var service
-                = CreateStudentService();
+            var service= CreateStudentService();
             var model = service.GetStudentById(id);
 
             return View(model);

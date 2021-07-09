@@ -126,6 +126,12 @@ namespace Owl.WebMVC.Controllers
 
             var service = CreateFacultyService();
 
+            if (model.StartTime > model.EndTime)
+            {
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!");
+                return View(model);
+            }
+
             if (service.CreateFaculty(model))
             {
                 TempData["SaveResult"] = "Your Faculty was created.";
