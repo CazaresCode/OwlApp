@@ -13,9 +13,13 @@ namespace Owl.WebMVC.Controllers
     public class MeetingController : Controller
     {
         // GET: Meeting
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, string searchBy)
         {
             var service = CreateMeetingService();
+
+            
+
+
             var model = service.GetMeetings();
 
             return View(model);
