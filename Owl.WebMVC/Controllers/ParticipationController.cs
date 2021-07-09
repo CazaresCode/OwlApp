@@ -22,7 +22,7 @@ namespace Owl.WebMVC.Controllers
             var rawData = (from p in service.GetParticipations()
                            select p).ToList();
             var participations = from p in rawData
-                           select p;
+                                 select p;
 
             //Sorting ViewBags
             ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "DateDescStart" : "DateStart";
@@ -106,7 +106,6 @@ namespace Owl.WebMVC.Controllers
                     break;
             }
 
-
             return View(participations);
         }
 
@@ -123,7 +122,7 @@ namespace Owl.WebMVC.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
 
             List<MeetingListItem> meetings = new MeetingService(userId).GetMeetings().ToList();
-            ViewBag.MeetingId = meetings.Select(m=> new SelectListItem()
+            ViewBag.MeetingId = meetings.Select(m => new SelectListItem()
             {
                 Value = m.Id.ToString(),
                 Text = m.NameOfMeeting,
@@ -141,6 +140,11 @@ namespace Owl.WebMVC.Controllers
                 return View(model);
 
             var service = CreateParticipationService();
+
+            //if (model.Meeting.StartTime && model.Meeting.EndTime)
+            //{
+
+            //}
 
             if (service.CreateParticipation(model))
             {
@@ -194,7 +198,7 @@ namespace Owl.WebMVC.Controllers
 
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, [Bind(Include ="Id, MeetingId, PersonId")] ParticipationEdit model)
+        public ActionResult Edit(int id, [Bind(Include = "Id, MeetingId, PersonId")] ParticipationEdit model)
         {
             if (!ModelState.IsValid)
                 return View(model);
