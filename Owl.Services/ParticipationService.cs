@@ -45,7 +45,8 @@ namespace Owl.Services
                     ctx
                         .Participations
                         // Checking to see if the person's time span can attend the meeting.
-                        .Where(e => e.OwnerId == _userId && e.Meeting.StartTime <= e.Person.StartTime && e.Meeting.EndTime <= e.Person.StartTime || e.Meeting.StartTime >= e.Person.EndTime && e.Meeting.EndTime >= e.Person.EndTime)
+                        .Where(e => e.OwnerId == _userId)
+                        //&& e.Meeting.StartTime <= e.Person.StartTime && e.Meeting.EndTime <= e.Person.StartTime && e.Meeting.StartTime >= e.Person.EndTime && e.Meeting.EndTime >= e.Person.EndTime)
                         .Select(
                             e =>
                                 new ParticipationListItem
