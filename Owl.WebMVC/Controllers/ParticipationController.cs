@@ -16,8 +16,7 @@ namespace Owl.WebMVC.Controllers
         // GET: Participation
         public ActionResult Index()
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new ParticipationService(userId);
+            var service = CreateParticipationService();
             var model = service.GetParticipations();
 
             return View(model);
