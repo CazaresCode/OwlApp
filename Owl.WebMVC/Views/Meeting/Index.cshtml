@@ -10,6 +10,19 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+@using (Html.BeginForm())
+{
+    <p>
+        <b>Search By: </b>
+        @Html.RadioButton("searchBy", "Name", true) <text>Name</text>
+        @Html.RadioButton("searchBy", "TypeOfMeeting") <text>Meeting</text>
+        <br />
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" /> |
+        @Html.ActionLink("Back to Full List", "Index")
+    </p>
+}
+
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success fade in" role="alert">
@@ -21,16 +34,57 @@
     </div>
 }
 
+@using (Html.BeginForm())
+{
+<p>
+    <b># of Meetings Today: </b>
+    @Html.ViewBag.TotalNumToday
+</p>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NameOfMeeting)
+            @Html.ActionLink("Meeting Name", "Index",
+              new
+              {
+                  sortOrder = ViewBag.NameSortParam,
+                  currentFilter = ViewBag.CurrentFilter
+              })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TypeOfMeeting)
+            @Html.ActionLink("Type of Meeting", "Index",
+              new
+              {
+                  sortOrder = ViewBag.MeetingTypeSortParam,
+                  currentFilter = ViewBag.CurrentFilter
+              })
+        </th>
+        <th>
+            @Html.ActionLink("First Day", "Index",
+            new
+            {
+                sortOrder = ViewBag.DateSortStartParam,
+                currentFilter = ViewBag.CurrentFilter
+            })
+        </th>
+        <th>
+            @Html.ActionLink("Last Day", "Index",
+           new
+           {
+               sortOrder = ViewBag.DateSortEndParam,
+               currentFilter = ViewBag.CurrentFilter
+           })
         </th>
         <th></th>
     </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4">No rows match search criteria </td>
+        </tr>
+    }
 
     @foreach (var item in Model)
     {
@@ -40,6 +94,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TypeOfMeeting)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
             </td>
             <td>
                 @Html.ActionLink("Change", "Edit", new { id = item.Id }) |

@@ -17,5 +17,15 @@ namespace Owl.Models.MeetingModels
 
         [Display(Name = "Meeting Type")]
         public MeetingType TypeOfMeeting { get; set; }
+
+        [Display(Name = "First Day")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
+        public DateTime StartTime { get; set; }
+
+        [Display(Name = "Last Day")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
+        public DateTime EndTime { get; set; }
     }
 }
