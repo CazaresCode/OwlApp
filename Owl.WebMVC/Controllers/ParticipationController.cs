@@ -14,12 +14,100 @@ namespace Owl.WebMVC.Controllers
     public class ParticipationController : Controller
     {
         // GET: Participation
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, string searchBy)
         {
             var service = CreateParticipationService();
             var model = service.GetParticipations();
 
-            return View(model);
+            var rawData = (from p in service.GetParticipations()
+                           select p).ToList();
+            var participations = from p in rawData
+                           select p;
+
+            //Sorting ViewBags
+            ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "DateDescStart" : "DateStart";
+            ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
+            ViewBag.FirstNameSortParam = sortOrder == "FirstNameAscend" ? "FirstNameDesc" : "FirstNameAscend";
+            ViewBag.LastNameSortParam = sortOrder == "LastNameAscend" ? "LastNameDesc" : "LastNameAscend";
+            ViewBag.MeetingTypeSortParam = sortOrder == "MeetingTypeAscend" ? "MeetingTypeDesc" : "MeetingTypeAscend";
+            ViewBag.MeetingNameSortParam = sortOrder == "MeetingNameAscend" ? "MeetingNameDesc" : "MeetingNameAscend";
+
+            //Cuurent Filter
+            if (searchString != null)
+                currentFilter = null;
+            else
+                searchString = currentFilter;
+
+            ViewBag.CurrentFilter = searchString;
+
+            // Search Title or Type of Meeting
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                if (searchBy == "Meeting")
+                    participations = participations
+                                .Where(s => s.Meeting.TypeOfMeeting.ToString().ToLower().Contains(searchString.ToLower()) || s.Meeting.NameOfMeeting.ToLower().Contains(searchString.ToLower()) || searchString == null).ToList();
+
+                //else if (searchBy == "SearchDate")
+                //    students = students
+                //             .Where(s => s.EndTime >= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture) || s.StartTime <= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture)).ToList();
+
+                //Title of Meeting
+                else
+                    participations = participations
+                             .Where(s => s.Person.LastName.ToLower().Contains(searchString.ToLower()) || s.Person.FirstName.ToLower().Contains(searchString.ToLower()));
+            }
+
+            ViewBag.SearchString = searchString;
+
+            switch (sortOrder)
+            {
+
+                case "DateEnd":
+                    participations = participations.OrderBy(s => s.Meeting.EndTime);
+                    break;
+                case "DateDescEnd":
+                    participations = participations.OrderByDescending(s => s.Meeting.EndTime);
+                    break;
+
+                case "MeetingNameAscend":
+                    participations = participations.OrderBy(s => s.Meeting.NameOfMeeting);
+                    break;
+                case "MeetingNameDesc":
+                    participations = participations.OrderByDescending(s => s.Meeting.NameOfMeeting);
+                    break;
+
+                case "MeetingTypeAscend":
+                    participations = participations.OrderBy(s => s.Meeting.TypeOfMeeting);
+                    break;
+                case "MeetingTypeDesc":
+                    participations = participations.OrderByDescending(s => s.Meeting.TypeOfMeeting);
+                    break;
+
+                case "FirstNameAscend":
+                    participations = participations.OrderBy(s => s.Person.FirstName);
+                    break;
+                case "FirstNameDesc":
+                    participations = participations.OrderByDescending(s => s.Person.FirstName);
+                    break;
+
+                case "LastNameAscend":
+                    participations = participations.OrderBy(s => s.Person.LastName);
+                    break;
+                case "LastNameDesc":
+                    participations = participations.OrderByDescending(s => s.Person.LastName);
+                    break;
+
+                case "DateDescStart":
+                    participations = participations.OrderByDescending(s => s.Meeting.StartTime);
+                    break;
+                //StartTime Default
+                default:
+                    participations = participations.OrderBy(s => s.Meeting.StartTime);
+                    break;
+            }
+
+
+            return View(participations);
         }
 
         // GET: Create

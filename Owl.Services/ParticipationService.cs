@@ -62,7 +62,9 @@ namespace Owl.Services
                                     {
                                         Id = e.Id,
                                         NameOfMeeting = e.Meeting.NameOfMeeting,
-                                        TypeOfMeeting = e.Meeting.TypeOfMeeting
+                                        TypeOfMeeting = e.Meeting.TypeOfMeeting,
+                                        StartTime = e.Meeting.StartTime,
+                                        EndTime = e.Meeting.EndTime
                                     }
                                 });
 
@@ -93,7 +95,9 @@ namespace Owl.Services
                         {
                             Id = entity.Id,
                             NameOfMeeting = entity.Meeting.NameOfMeeting,
-                            TypeOfMeeting = entity.Meeting.TypeOfMeeting
+                            TypeOfMeeting = entity.Meeting.TypeOfMeeting,
+                            StartTime = entity.Meeting.StartTime,
+                            EndTime = entity.Meeting.EndTime
                         }
                     };
             }
