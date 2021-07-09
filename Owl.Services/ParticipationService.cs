@@ -54,7 +54,8 @@ namespace Owl.Services
                                     Person = new PersonListItem
                                     {
                                         Id = e.Id,
-                                        FullName = e.Person.FullName
+                                        FirstName = e.Person.FirstName,
+                                        LastName = e.Person.LastName
                                     },
                                     MeetingId = e.MeetingId,
                                     Meeting = new MeetingListItem

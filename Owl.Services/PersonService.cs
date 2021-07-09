@@ -23,7 +23,8 @@ namespace Owl.Services
                                 new PersonListItem
                                 {
                                     Id = e.Id,
-                                    FullName = e.FullName
+                                    FirstName = e.FirstName,
+                                    LastName = e.LastName
                                 });
 
                 return query.ToArray();
