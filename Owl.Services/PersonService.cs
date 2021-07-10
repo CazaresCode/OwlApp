@@ -11,6 +11,13 @@ namespace Owl.Services
 {
     public class PersonService
     {
+        private readonly Guid _userId;
+
+        public PersonService(Guid userId)
+        {
+            _userId = userId;
+        }
+
         public IEnumerable<PersonListItem> GetPeopleList()
         {
             using (var ctx = new ApplicationDbContext())
@@ -18,25 +25,30 @@ namespace Owl.Services
                 var query =
                     ctx
                         .Persons
+                        //Add this line...
+                        .Where(e => e.OwnerId == _userId)
                         .Select(
                             e =>
                                 new PersonListItem
                                 {
                                     Id = e.Id,
+                                    FullName = e.FullName,
                                     FirstName = e.FirstName,
-                                    LastName = e.LastName
+                                    LastName = e.LastName, 
+                                    StartTime = e.StartTime,
+                                    EndTime = e.EndTime
                                 });
 
                 return query.ToArray();
             }
         }
 
-        public IEnumerable<Person> GetPeople()
-        {
-            using(var ctx = new ApplicationDbContext())
-            {
-                return ctx.Persons.ToList();
-            }
-        }
+        //public IEnumerable<Person> GetPeople()
+        //{
+        //    using(var ctx = new ApplicationDbContext())
+        //    {
+        //        return ctx.Persons.ToList();
+        //    }
+        //}
     }
 }

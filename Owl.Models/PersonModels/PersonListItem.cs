@@ -11,6 +11,7 @@ namespace Owl.Models.PersonModels
     public class PersonListItem
     {
         public int Id { get; set; }
+
         public Guid OwnerId { get; set; }
 
         [Display(Name = "Full Name")]

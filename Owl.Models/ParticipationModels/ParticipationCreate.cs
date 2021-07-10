@@ -12,9 +12,11 @@ namespace Owl.Models.ParticipationModels
     public class ParticipationCreate
     {
         [Required]
+        [Display(Name ="Person")]
         public int PersonId { get; set; }
 
         [Required]
+        [Display(Name ="Meeting")]
         public int MeetingId { get; set; }
 
         public virtual PersonListItem Person { get; set; }

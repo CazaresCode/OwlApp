@@ -30,6 +30,15 @@ namespace Owl.Services
                     MeetingId = model.MeetingId
                 };
 
+            //model.Person.StartTime
+
+
+            // Checking to make sure they can attend the meeting.
+            //if(model.Meeting.StartTime <= model.Person.StartTime && model.Meeting.EndTime <= model.Person.StartTime && model.Meeting.StartTime >= model.Person.EndTime && model.Meeting.EndTime >= model.Person.EndTime)
+            //{
+            //    return false;
+            //}
+
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Participations.Add(entity);

@@ -113,20 +113,20 @@ namespace Owl.WebMVC.Controllers
         // GET: Create
         public ActionResult Create()
         {
-            // Do I need to pass in an userId for security reasons?
-            List<Person> people = new PersonService().GetPeople().ToList();
-            ViewBag.PersonId = people.Select(p => new SelectListItem()
+            var userId = Guid.Parse(User.Identity.GetUserId());
+
+            var peopleService = new PersonService(userId);
+            var peopleList = peopleService.GetPeopleList();
+
+            ViewBag.PersonId = peopleList.Select(p => new SelectListItem()
             {
                 Value = p.Id.ToString(),
                 Text = p.FullName,
             });
 
-            var userId = Guid.Parse(User.Identity.GetUserId());
-
-            List<MeetingListItem> meetings = new MeetingService(userId).GetMeetings().ToList();
-            ViewBag.MeetingId = meetings
-                //.Where(m => m.StartTime <= m.PersonDetails.StartTime && m.PersonDetails.EndTime <= m.PersonDetails.StartTime && m.PersonDetails.StartTime >= m.PersonDetails.EndTime && m.PersonDetails.EndTime >= m.PersonDetails.EndTime)
-                .Select(m => new SelectListItem()
+            var meetingService = new MeetingService(userId);
+            var meetingList = meetingService.GetMeetings();
+            ViewBag.MeetingId = meetingList.Select(m => new SelectListItem()
                 {
                     Value = m.Id.ToString(),
                     Text = m.NameOfMeeting,
@@ -145,10 +145,37 @@ namespace Owl.WebMVC.Controllers
 
             var service = CreateParticipationService();
 
-            //if (model.Meeting.StartTime && model.Meeting.EndTime)
+            //if (model.Meeting.StartTime <= model.Person.StartTime && model.Meeting.EndTime <= model.Person.StartTime && model.Meeting.StartTime >= model.Person.EndTime && model.Meeting.EndTime >= model.Person.EndTime)
             //{
-
+            //    ModelState.AddModelError("", "Meeting is not within the Person's Date range.");
+            //    return View(model);
             //}
+
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            
+            //PersonService
+            var personService = new PersonService(userId);
+            var personList = personService.GetPeopleList();
+            var pStartTime = personList.Select(p => p.StartTime);
+            var pEndTime = personList.Select(p => p.EndTime);
+
+            //MeetingService
+            var meetingService = new MeetingService(userId);
+            var meetingList = meetingService.GetMeetings();
+            var mStartTime = meetingList.Select(m => m.StartTime);
+            var mEndTime = meetingList.Select(m => m.EndTime);
+
+
+
+
+            //if (mStartTime = pStartTime && mEndTime <= pStartTime && mStartTime >= pEndTime && mEndTime >= pEndTime)
+            //{
+            //    ModelState.AddModelError("", "Meeting is not within the Person's Date range.");
+            //    return View(model);
+            //}
+
+
+
 
             if (service.CreateParticipation(model))
             {
@@ -175,18 +202,20 @@ namespace Owl.WebMVC.Controllers
 
             var userId = Guid.Parse(User.Identity.GetUserId());
 
+            var peopleService = new PersonService(userId);
+            var peopleList = peopleService.GetPeopleList();
+
+            ViewBag.PersonId = peopleList.Select(p => new SelectListItem()
+            {
+                Value = p.Id.ToString(),
+                Text = p.FullName,
+            });
+
             List<MeetingListItem> meetings = new MeetingService(userId).GetMeetings().ToList();
             ViewBag.MeetingId = meetings.Select(m => new SelectListItem()
             {
                 Value = m.Id.ToString(),
                 Text = m.NameOfMeeting,
-            });
-
-            List<Person> people = new PersonService().GetPeople().ToList();
-            ViewBag.PersonId = people.Select(p => new SelectListItem()
-            {
-                Value = p.Id.ToString(),
-                Text = p.FullName,
             });
 
             var model =
