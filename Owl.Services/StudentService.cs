@@ -1,5 +1,7 @@
 ﻿using Owl.Data;
 using Owl.Data.EntityModels;
+using Owl.Models.MeetingModels;
+using Owl.Models.ParticipationModels;
 using Owl.Models.StudentModels;
 using System;
 using System.Collections.Generic;
@@ -93,7 +95,19 @@ namespace Owl.Services
                         HasFoodAllergy = entity.HasFoodAllergy,
                         FoodAllergy = entity.FoodAllergy,
                         TypeOfProgram = entity.TypeOfProgram,
-                        HasPaidTuition = entity.HasPaidTuition
+                        HasPaidTuition = entity.HasPaidTuition,
+                        //Participations = entity.Participations.Select(p=>
+                        //new ParticipationDetail
+                        //{
+                        //    Id = entity.Id,
+                        //    MeetingId = entity.MeetingId,
+                        //    Meeting = new MeetingListItem
+                        //    {
+                        //        Id = entity.Id,
+                          
+                        //    }
+                        //})
+                     
                     };
             }
         }
