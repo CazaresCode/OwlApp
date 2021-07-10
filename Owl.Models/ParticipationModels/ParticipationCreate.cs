@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Owl.Models.MeetingModels;
+using Owl.Models.PersonModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,5 +16,8 @@ namespace Owl.Models.ParticipationModels
 
         [Required]
         public int MeetingId { get; set; }
+
+        public virtual PersonListItem Person { get; set; }
+        public virtual MeetingListItem Meeting { get; set; }
     }
 }

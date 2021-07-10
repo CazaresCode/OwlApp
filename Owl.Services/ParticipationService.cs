@@ -44,6 +44,7 @@ namespace Owl.Services
                 var query =
                     ctx
                         .Participations
+                        // Checking to see if the person's time span can attend the meeting.
                         .Where(e => e.OwnerId == _userId)
                         .Select(
                             e =>
@@ -54,14 +55,17 @@ namespace Owl.Services
                                     Person = new PersonListItem
                                     {
                                         Id = e.Id,
-                                        FullName = e.Person.FullName
+                                        FirstName = e.Person.FirstName,
+                                        LastName = e.Person.LastName
                                     },
                                     MeetingId = e.MeetingId,
                                     Meeting = new MeetingListItem
                                     {
                                         Id = e.Id,
                                         NameOfMeeting = e.Meeting.NameOfMeeting,
-                                        TypeOfMeeting = e.Meeting.TypeOfMeeting
+                                        TypeOfMeeting = e.Meeting.TypeOfMeeting,
+                                        StartTime = e.Meeting.StartTime,
+                                        EndTime = e.Meeting.EndTime
                                     }
                                 });
 
@@ -92,7 +96,9 @@ namespace Owl.Services
                         {
                             Id = entity.Id,
                             NameOfMeeting = entity.Meeting.NameOfMeeting,
-                            TypeOfMeeting = entity.Meeting.TypeOfMeeting
+                            TypeOfMeeting = entity.Meeting.TypeOfMeeting,
+                            StartTime = entity.Meeting.StartTime,
+                            EndTime = entity.Meeting.EndTime
                         }
                     };
             }

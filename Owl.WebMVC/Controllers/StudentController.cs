@@ -53,7 +53,7 @@ namespace Owl.WebMVC.Controllers
                 else
                     students = students
                              .Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) ||
-                                         s.LastName.ToLower().Contains(searchString.ToLower()));
+                                         s.LastName.ToLower().Contains(searchString.ToLower())).ToList();
             }
 
             var totalCount = students.Count();

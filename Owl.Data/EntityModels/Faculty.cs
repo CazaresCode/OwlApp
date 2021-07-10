@@ -16,7 +16,5 @@ namespace Owl.Data.EntityModels
         [Required]
         [Display(Name = "Is Performing")]
         public bool IsPerforming { get; set; }
-
-        public virtual ICollection<Participation> Participations { get; set; }
     }
 }
