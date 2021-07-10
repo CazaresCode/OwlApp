@@ -63,7 +63,9 @@ namespace Owl.Services
                                     {
                                         Id = e.Id,
                                         FirstName = e.Person.FirstName,
-                                        LastName = e.Person.LastName
+                                        LastName = e.Person.LastName,
+                                        StartTime = e.Person.StartTime,
+                                        EndTime = e.Person.EndTime
                                     },
                                     MeetingId = e.MeetingId,
                                     Meeting = new MeetingListItem
@@ -96,7 +98,9 @@ namespace Owl.Services
                         Person = new PersonListItem
                         {
                             Id = entity.Id,
-                            FullName = entity.Person.FullName
+                            FullName = entity.Person.FullName,
+                            StartTime = entity.Person.StartTime,
+                            EndTime = entity.Person.EndTime
                         },
                         MeetingId = entity.MeetingId,
                         Meeting = new MeetingListItem

@@ -144,7 +144,7 @@ namespace Owl.WebMVC.Controllers
 
             var service = CreateStudentService();
 
-            if (model.StartTime > model.EndTime)
+            if (model.StartTime >= model.EndTime)
             {
                 ModelState.AddModelError("", "Start Date CANNOT be after End Date!");
                 return View(model);

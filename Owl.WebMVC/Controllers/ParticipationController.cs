@@ -162,13 +162,12 @@ namespace Owl.WebMVC.Controllers
             var mStartTime = meetingDetails.StartTime;
             var mEndTime = meetingDetails.EndTime;
 
+            //How to retrieve the data but give the error? Something with the dropdown in the create...
             if (mStartTime <= pStartTime && mEndTime <= pStartTime && mStartTime >= pEndTime && mEndTime >= pEndTime)
             {
                 ModelState.AddModelError("", "Meeting is not within the Person's Date range.");
                 return View(model);
             }
-
-          
 
             var service = CreateParticipationService();
             if (service.CreateParticipation(model))
