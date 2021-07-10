@@ -1,4 +1,4 @@
-namespace Owl.Data.Migrations
+﻿namespace Owl.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -15,6 +15,7 @@ namespace Owl.Data.Migrations
                         OwnerId = c.Guid(nullable: false),
                         FirstName = c.String(nullable: false),
                         LastName = c.String(nullable: false),
+                        FullName = c.String(),
                         Email = c.String(nullable: false),
                         PhoneNumber = c.String(nullable: false),
                         TypeOfInstrument = c.Int(nullable: false),
@@ -35,20 +36,15 @@ namespace Owl.Data.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        OwnerId = c.Guid(nullable: false),
                         PersonId = c.Int(nullable: false),
                         MeetingId = c.Int(nullable: false),
-                        Student_Id = c.Int(),
-                        Faculty_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Meeting", t => t.MeetingId, cascadeDelete: true)
-                .ForeignKey("dbo.Person", t => t.Student_Id)
                 .ForeignKey("dbo.Person", t => t.PersonId, cascadeDelete: true)
-                .ForeignKey("dbo.Person", t => t.Faculty_Id)
                 .Index(t => t.PersonId)
-                .Index(t => t.MeetingId)
-                .Index(t => t.Student_Id)
-                .Index(t => t.Faculty_Id);
+                .Index(t => t.MeetingId);
             
             CreateTable(
                 "dbo.Meeting",
@@ -143,16 +139,12 @@ namespace Owl.Data.Migrations
             DropForeignKey("dbo.IdentityUserLogin", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserClaim", "ApplicationUser_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.IdentityUserRole", "IdentityRole_Id", "dbo.IdentityRole");
-            DropForeignKey("dbo.Participation", "Faculty_Id", "dbo.Person");
             DropForeignKey("dbo.Participation", "PersonId", "dbo.Person");
-            DropForeignKey("dbo.Participation", "Student_Id", "dbo.Person");
             DropForeignKey("dbo.Participation", "MeetingId", "dbo.Meeting");
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
-            DropIndex("dbo.Participation", new[] { "Faculty_Id" });
-            DropIndex("dbo.Participation", new[] { "Student_Id" });
             DropIndex("dbo.Participation", new[] { "MeetingId" });
             DropIndex("dbo.Participation", new[] { "PersonId" });
             DropTable("dbo.IdentityUserLogin");

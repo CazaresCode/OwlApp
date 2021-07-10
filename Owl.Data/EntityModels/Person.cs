@@ -58,6 +58,6 @@ namespace Owl.Data.EntityModels
         [Required]
         public string FoodAllergy { get; set; }
 
-        public virtual List<Meeting> Meeting { get; set; }
+        public virtual ICollection<Participation> Participations { get; set; }
     }
 }
