@@ -13,7 +13,8 @@
 @using (Html.BeginForm())
 {
     <p>
-        Find by Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <b><i class="fas fa-search"></i> Find by Name: </b>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" /> |
         @Html.ActionLink("Back to Full List", "Index")
     </p>
