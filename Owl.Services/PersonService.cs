@@ -43,12 +43,25 @@ namespace Owl.Services
             }
         }
 
-        //public IEnumerable<Person> GetPeople()
-        //{
-        //    using(var ctx = new ApplicationDbContext())
-        //    {
-        //        return ctx.Persons.ToList();
-        //    }
-        //}
+        public PersonListItem GetPersonById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                    ctx
+                        .Persons
+                        .Single(e => e.Id == id && e.OwnerId == _userId);
+                return
+                    new PersonListItem
+                    {
+                        Id = entity.Id,
+                        FullName = entity.FullName,
+                        FirstName = entity.FirstName,
+                        LastName = entity.LastName,
+                        StartTime = entity.StartTime,
+                        EndTime = entity.EndTime
+                    };
+            }
+        }
     }
 }

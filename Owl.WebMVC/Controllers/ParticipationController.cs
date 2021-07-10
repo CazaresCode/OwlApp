@@ -115,10 +115,10 @@ namespace Owl.WebMVC.Controllers
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
 
-            var peopleService = new PersonService(userId);
-            var peopleList = peopleService.GetPeopleList();
+            var personService = new PersonService(userId);
+            var personList = personService.GetPeopleList();
 
-            ViewBag.PersonId = peopleList.Select(p => new SelectListItem()
+            ViewBag.PersonId = personList.Select(p => new SelectListItem()
             {
                 Value = p.Id.ToString(),
                 Text = p.FullName,
@@ -126,6 +126,7 @@ namespace Owl.WebMVC.Controllers
 
             var meetingService = new MeetingService(userId);
             var meetingList = meetingService.GetMeetings();
+
             ViewBag.MeetingId = meetingList.Select(m => new SelectListItem()
                 {
                     Value = m.Id.ToString(),
@@ -143,40 +144,33 @@ namespace Owl.WebMVC.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var service = CreateParticipationService();
-
-            //if (model.Meeting.StartTime <= model.Person.StartTime && model.Meeting.EndTime <= model.Person.StartTime && model.Meeting.StartTime >= model.Person.EndTime && model.Meeting.EndTime >= model.Person.EndTime)
-            //{
-            //    ModelState.AddModelError("", "Meeting is not within the Person's Date range.");
-            //    return View(model);
-            //}
 
             var userId = Guid.Parse(User.Identity.GetUserId());
-            
+
+            var meetingId = model.MeetingId;
+            var personId = model.PersonId;
+
             //PersonService
             var personService = new PersonService(userId);
-            var personList = personService.GetPeopleList();
-            var pStartTime = personList.Select(p => p.StartTime);
-            var pEndTime = personList.Select(p => p.EndTime);
+            var personDetails = personService.GetPersonById(personId);
+            var pStartTime = personDetails.StartTime;
+            var pEndTime = personDetails.EndTime;
 
             //MeetingService
             var meetingService = new MeetingService(userId);
-            var meetingList = meetingService.GetMeetings();
-            var mStartTime = meetingList.Select(m => m.StartTime);
-            var mEndTime = meetingList.Select(m => m.EndTime);
+            var meetingDetails = meetingService.GetMeetingById(meetingId);
+            var mStartTime = meetingDetails.StartTime;
+            var mEndTime = meetingDetails.EndTime;
 
+            if (mStartTime <= pStartTime && mEndTime <= pStartTime && mStartTime >= pEndTime && mEndTime >= pEndTime)
+            {
+                ModelState.AddModelError("", "Meeting is not within the Person's Date range.");
+                return View(model);
+            }
 
+          
 
-
-            //if (mStartTime = pStartTime && mEndTime <= pStartTime && mStartTime >= pEndTime && mEndTime >= pEndTime)
-            //{
-            //    ModelState.AddModelError("", "Meeting is not within the Person's Date range.");
-            //    return View(model);
-            //}
-
-
-
-
+            var service = CreateParticipationService();
             if (service.CreateParticipation(model))
             {
                 TempData["SaveResult"] = "Your Participation was created.";
