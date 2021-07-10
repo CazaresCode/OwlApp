@@ -2,6 +2,7 @@
 using Owl.Data.EntityModels;
 using Owl.Models.MeetingModels;
 using Owl.Models.ParticipationModels;
+using Owl.Models.PersonModels;
 using Owl.Services;
 using System;
 using System.Collections.Generic;
@@ -112,6 +113,7 @@ namespace Owl.WebMVC.Controllers
         // GET: Create
         public ActionResult Create()
         {
+            // Do I need to pass in an userId for security reasons?
             List<Person> people = new PersonService().GetPeople().ToList();
             ViewBag.PersonId = people.Select(p => new SelectListItem()
             {
@@ -122,11 +124,13 @@ namespace Owl.WebMVC.Controllers
             var userId = Guid.Parse(User.Identity.GetUserId());
 
             List<MeetingListItem> meetings = new MeetingService(userId).GetMeetings().ToList();
-            ViewBag.MeetingId = meetings.Select(m => new SelectListItem()
-            {
-                Value = m.Id.ToString(),
-                Text = m.NameOfMeeting,
-            });
+            ViewBag.MeetingId = meetings
+                //.Where(m => m.StartTime <= m.PersonDetails.StartTime && m.PersonDetails.EndTime <= m.PersonDetails.StartTime && m.PersonDetails.StartTime >= m.PersonDetails.EndTime && m.PersonDetails.EndTime >= m.PersonDetails.EndTime)
+                .Select(m => new SelectListItem()
+                {
+                    Value = m.Id.ToString(),
+                    Text = m.NameOfMeeting,
+                });
 
             return View();
         }

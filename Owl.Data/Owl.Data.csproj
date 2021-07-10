@@ -78,6 +78,10 @@
     <Compile Include="Migrations\202107010233453_AddFullName.Designer.cs">
       <DependentUpon>202107010233453_AddFullName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107100149196_DeletedPersonAndMeetingConnection.cs" />
+    <Compile Include="Migrations\202107100149196_DeletedPersonAndMeetingConnection.designer.cs">
+      <DependentUpon>202107100149196_DeletedPersonAndMeetingConnection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -100,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107010233453_AddFullName.resx">
       <DependentUpon>202107010233453_AddFullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107100149196_DeletedPersonAndMeetingConnection.resx">
+      <DependentUpon>202107100149196_DeletedPersonAndMeetingConnection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

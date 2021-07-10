@@ -15,8 +15,5 @@ namespace Owl.Data.EntityModels
 
         [Required]
         public bool HasPaidTuition { get; set; }
-
-
-        public virtual ICollection<Participation> Participations { get; set; }
     }
 }

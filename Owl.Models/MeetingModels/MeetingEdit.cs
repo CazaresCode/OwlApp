@@ -31,6 +31,5 @@ namespace Owl.Models.MeetingModels
 
         [Display(Name = "Meeting Type")]
         public MeetingType TypeOfMeeting { get; set; }
-
     }
 }
