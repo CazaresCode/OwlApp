@@ -4,14 +4,14 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create New Student</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>StudentCreate</h4>
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -119,6 +119,7 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
@@ -144,83 +145,4 @@
             });
         });
     </script>
-    @*<script>
-            //this._unselectableClass = "ui-datepicker-unselectable";
-            $(function () {
-                $('#from, #to').datepicker({
-                    showOn: "both",
-                    dateFormat: "dd M yy",
-                });
-            });
-
-            $(function () {
-                $('#to').datepicker({
-                    beforeShow: customRange
-                });
-
-            $(function customRange(input) {
-                if (input.id == 'to') {
-                    var minDate = new Date($('#from').val());
-                    minDate.setDate(minDate.getDate() + 1)
-                    $("#from>#to").addClass("ui-datepicker-unselectable");
-
-                    return {
-                        minDate: minDate
-                    };
-                }
-
-                return {}
-            });
-        </script>*@
-}
-
-@*<script>
-        //$(document).ready(function () {
-        //    $("#dt1").datepicker({
-        //        onSelect: function (selected) {
-        //            $("#dt1").datepicker("option", "minDate", selected)
-        //        }
-        //    });
-        //    $("#dt2").datepicker({
-        //        onSelect: function (selected) {
-        //            $("#dt2").datepicker("option", "maxDate", selected)
-        //        }
-        //    });
-        //});
-
-        $(document).ready(function () {
-            $("#dt1").datepicker({
-                //dateFormat: "dd-M-yy",
-                //clearBtn: true,
-                onSelect: function (selected) {
-                    console.log("Test");
-                    var dt2 = $("#dt1");
-                    var minDate = $(this).datepicker('getDate');
-                    dt2.datepicker('option', 'minDate', minDate);
-                }
-            })
-                .on('clearDate', function (e) {
-                    console.log("Test1");
-                    dt1.datepicker('option', 'maxDate', 0);
-                    dt2.datepicker('option', 'minDate', 0);
-                });
-
-            $("#dt2").datepicker({
-                //dateFormat: "dd-M-yy",
-                //clearBtn: true,
-                onSelect: function (selected) {
-                    var dt1 = $("#dt2");
-                    var maxDate = $(this).datepicker('getDate');
-                    dt1.datepicker('option', 'maxDate', maxDate);
-                }
-            })
-                .on('clearDate', function (e) {
-                    dt1.datepicker('option', 'maxDate');
-                    dt2.datepicker('option', 'minDate');
-                })
-        })
-
-    </script>*@
-
-
-
+    }
