@@ -2,30 +2,70 @@
     ViewBag.Title = "Home Page";
 }
 
+<div id="slides" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+        <li data-target="#slides" data-slide-to="0" class="active"></li>
+        <li data-target="#slides" data-slide-to="1"></li>
+        <li data-target="#slides" data-slide-to="2"></li>
+    </ul>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/assests/Owl be there logo.png" alt="Owl Logo" />
+            <div class="carousel-caption">
+                <h1 class="display-2">Learn More</h1>
+                <h3>Hoot.Hoot.</h3>
+                <button type="button" class="btn btn-outline-light btn-lg">Register</button>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="~/assests/FullOrch.jpg" alt="Full Orch." />
+        </div>
+        <div class="carousel-item">
+            <img src="~/assests/piano.jpg" alt="Piano." />
+        </div>
+    </div>
+</div>
+
+<br />
+
+ <!--Welcome Section-->
 <div class="jumbotron">
-    <h1>Owl</h1>
-    <p class="lead">be there.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <div class="row welcome text-center">
+        <div class="col-12">
+            <h1 class="display-4">Continuously crafting and refining...</h1>
+            <hr />
+            <p>Owl is here for all of your database needs so that you can focus more on your festival.</p>
+        </div>
+    </div>
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 col-xs-12 col-sm-6">
         <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <p>Owl is being continuously crafted and refined to solve your festival management needs.</p>
+        <p><a class="btn btn-info" href="~/Account/Register">REGISTER &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <h2>View Demo</h2>
+        <p>Track all your participants and create a schedule for them, too.</p>
+        <p><a class="btn btn-info" href="#">VIEW DEMO &raquo;</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <h2>Why Owl?</h2>
+        <p>Wouldn't it be a hoot if we can make you more efficent?</p>
+        <p><a class="btn btn-info" href="#">DISCOVER OWL &raquo;</a></p>
     </div>
 </div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-12 col-lg-6">
+        <h2>Mission Statement</h2>
+        <p>Owl enables you to organize your summer music festival needs all in one app so that you can focus more on the artists.</p>
+    </div>
+    <div class="col-lg-6">
+        <img src="~/assests/FullOrch.jpg" alt="Full Orchestra" class="img-fluid" />
+    </div>
+</div>
+

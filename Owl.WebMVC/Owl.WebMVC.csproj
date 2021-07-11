@@ -184,6 +184,9 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assests\FullOrch.jpg" />
+    <Content Include="assests\Owl be there logo.png" />
+    <Content Include="assests\piano.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrapOG.css" />
     <Content Include="Content\fontawesome.css" />
