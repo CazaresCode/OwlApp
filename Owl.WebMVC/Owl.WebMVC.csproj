@@ -186,7 +186,9 @@
   <ItemGroup>
     <Content Include="assests\FullOrch.jpg" />
     <Content Include="assests\Owl be there logo.png" />
+    <Content Include="assests\Owl white%404x.png" />
     <Content Include="assests\piano.jpg" />
+    <Content Include="assests\waving owl.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrapOG.css" />
     <Content Include="Content\fontawesome.css" />

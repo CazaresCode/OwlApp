@@ -2,42 +2,14 @@
     ViewBag.Title = "Home Page";
 }
 
-<div id="slides" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#slides" data-slide-to="0" class="active"></li>
-        <li data-target="#slides" data-slide-to="1"></li>
-        <li data-target="#slides" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner">
-        <div class="item active">
-            <img src="~/assests/Owl be there logo.png" alt="Owl Logo" />
-            <div class="carousel-caption">
-                <h1 class="display-2 themeColor">Hoot.Hoot.</h1>
-                <button type="button" class="btn btn-info btn-lg">Register</button>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/assests/FullOrch.jpg" alt="Full Orch." />
-            <div class="carousel-caption">
-                <h1 class="display-1">Spend more time with your people.</h1>
-            </div>
-        </div>
-        <div class="item">
-            <div class="carousel-caption">
-                <h1 class="display-1">Track your progress with Owl.</h1>
-            </div>
-            <img src="~/assests/piano.jpg" alt="Piano." />
-        </div>
-    </div>
-</div>
-
-<br />
-
 <!--Welcome Section-->
 <div class="jumbotron">
     <div class="row welcome text-center">
         <div class="col-12">
-            <h1 class="display-4">Continuously crafting and refining...</h1>
+            <div class="OwlDiv">
+                <img src="~/assests/waving owl.png" id="WavingOwl" alt="Waving Owl" />
+                <h1 class="display-4">Continuously crafting and refining...</h1>
+            </div>
             <hr />
             <p>Owl is here for all of your database needs so that you can focus more on your festival.</p>
         </div>
@@ -63,14 +35,22 @@
 </div>
 
 <hr />
+<div class="container-fluid padding">
+    <div class="row padding">
+        <div class="col-lg-6">
+            <h2>Mission Statement</h2>
+            <p>Owl enables you to organize your summer music festival needs all in one app so that you can focus more on the artists.</p>
+        </div>
+        <div class="col-lg-6">
+            <img src="~/assests/FullOrch.jpg" alt="Full Orchestra" class="FullOrchDiv" />
 
-<div class="row">
-    <div class="col-md-12 col-lg-6">
-        <h2>Mission Statement</h2>
-        <p>Owl enables you to organize your summer music festival needs all in one app so that you can focus more on the artists.</p>
+        </div>
     </div>
-    <div class="col-lg-6">
-        <img src="~/assests/FullOrch.jpg" alt="Full Orchestra" class="img-responsive" />
+    <div class="col-md-6 col-md-offset-3">
+        <img src="~/assests/Owl be there logo.png" alt="Owl Logo" class="OwlBeThere" />
     </div>
 </div>
+
+
+
 
