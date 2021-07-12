@@ -188,9 +188,6 @@ namespace Owl.WebMVC.Controllers
                     FoodAllergy = detail.FoodAllergy,
                     TypeOfProgram = detail.TypeOfProgram,
                     HasPaidTuition = detail.HasPaidTuition
-                    //,Participations = detail.Participations
-                    //                        .Where(m => m.MeetingId == id)
-                    //                        .Select(m => m.Meeting).ToList()
                 };
 
             return View(model);

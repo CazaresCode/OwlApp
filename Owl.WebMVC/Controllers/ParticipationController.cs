@@ -272,23 +272,6 @@ namespace Owl.WebMVC.Controllers
             return RedirectToAction("Index");
         }
 
-
-
-        // Helper Methods
-
-        // Future helper method for the viewbag stuff
-        //private void PopulateMeetingDropDownList(object selectedMeeting = null)
-        //{
-        //    var service = CreateParticipationService();
-        //    var meetingsQuery = from m in service.GetParticipations()
-        //                           orderby m.Meeting.NameOfMeeting
-        //                           select m;
-        //    ViewBag.MeetingId = new SelectList(meetingsQuery, "MeetingId", "NameOfMeeting", selectedMeeting);
-        //}
-
-
-
-
         private ParticipationService CreateParticipationService()
         {
             var userId = Guid.Parse(User.Identity.GetUserId());
