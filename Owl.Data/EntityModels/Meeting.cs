@@ -29,19 +29,19 @@ namespace Owl.Data.EntityModels
         [Required]
         [Display(Name = "Start Time")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; }
 
         [Required]
         [Display(Name = "End Time")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime EndTime { get; set; }
 
         [Display(Name = "Meeting Type")]
         [Required]
         public MeetingType TypeOfMeeting { get; set; }
 
-        public virtual ICollection<Participation> Participations { get; set; }
+        public virtual List<Participation> Participations { get; set; }
     }
 }

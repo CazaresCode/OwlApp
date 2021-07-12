@@ -1,5 +1,7 @@
 ﻿using Owl.Data;
 using Owl.Data.EntityModels;
+using Owl.Models.MeetingModels;
+using Owl.Models.ParticipationModels;
 using Owl.Models.StudentModels;
 using System;
 using System.Collections.Generic;
@@ -57,10 +59,13 @@ namespace Owl.Services
                                 new StudentListItem
                                 {
                                     Id = e.Id,
-                                    FullName = e.FullName,
+                                    FirstName = e.FirstName,
+                                    LastName = e.LastName,
                                     TypeOfProgram = e.TypeOfProgram,
                                     StartTime = e.StartTime,
-                                    EndTime = e.EndTime
+                                    EndTime = e.EndTime,
+                                    HasPaidTuition = e.HasPaidTuition,
+                                    HasFoodAllergy = e.HasFoodAllergy
                                 });
 
                 return query.ToArray();
@@ -74,7 +79,7 @@ namespace Owl.Services
                 var entity =
                     ctx
                         .Students
-                        .Single(e => e.Id == id && e.OwnerId == _userId);
+                        .SingleOrDefault(e => e.Id == id && e.OwnerId == _userId);
                 return
                     new StudentDetail
                     {
@@ -90,7 +95,18 @@ namespace Owl.Services
                         HasFoodAllergy = entity.HasFoodAllergy,
                         FoodAllergy = entity.FoodAllergy,
                         TypeOfProgram = entity.TypeOfProgram,
-                        HasPaidTuition = entity.HasPaidTuition
+                        HasPaidTuition = entity.HasPaidTuition,
+                        // Meetings that are tied to this studentS
+                        Meetings = (List<MeetingListItem>)entity.Participations
+                                        .Select(m =>
+                                        new MeetingListItem
+                                        {
+                                            Id = m.Id,
+                                            NameOfMeeting = m.Meeting.NameOfMeeting,
+                                            TypeOfMeeting = m.Meeting.TypeOfMeeting,
+                                            StartTime = m.Meeting.StartTime,
+                                            EndTime = m.Meeting.EndTime
+                                        }).ToList()
                     };
             }
         }

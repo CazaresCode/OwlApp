@@ -11,6 +11,13 @@ namespace Owl.Services
 {
     public class PersonService
     {
+        private readonly Guid _userId;
+
+        public PersonService(Guid userId)
+        {
+            _userId = userId;
+        }
+
         public IEnumerable<PersonListItem> GetPeopleList()
         {
             using (var ctx = new ApplicationDbContext())
@@ -18,23 +25,42 @@ namespace Owl.Services
                 var query =
                     ctx
                         .Persons
+                        //Add this line...
+                        .Where(e => e.OwnerId == _userId)
                         .Select(
                             e =>
                                 new PersonListItem
                                 {
                                     Id = e.Id,
-                                    FullName = e.FullName
+                                    FullName = e.FullName,
+                                    FirstName = e.FirstName,
+                                    LastName = e.LastName, 
+                                    StartTime = e.StartTime,
+                                    EndTime = e.EndTime
                                 });
 
                 return query.ToArray();
             }
         }
 
-        public IEnumerable<Person> GetPeople()
+        public PersonListItem GetPersonById(int id)
         {
-            using(var ctx = new ApplicationDbContext())
+            using (var ctx = new ApplicationDbContext())
             {
-                return ctx.Persons.ToList();
+                var entity =
+                    ctx
+                        .Persons
+                        .Single(e => e.Id == id && e.OwnerId == _userId);
+                return
+                    new PersonListItem
+                    {
+                        Id = entity.Id,
+                        FullName = entity.FullName,
+                        FirstName = entity.FirstName,
+                        LastName = entity.LastName,
+                        StartTime = entity.StartTime,
+                        EndTime = entity.EndTime
+                    };
             }
         }
     }

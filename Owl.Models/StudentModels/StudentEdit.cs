@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Owl.Models.MeetingModels;
+using Owl.Models.ParticipationModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -34,9 +36,7 @@ namespace Owl.Models.StudentModels
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; }
 
-        [Display(Name = "Last Day")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Last Day"), DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EndTime { get; set; }
 
         [Display(Name = "Has Food Allergy")]
@@ -50,5 +50,7 @@ namespace Owl.Models.StudentModels
 
         [Display(Name = "Has Paid Tuition")]
         public bool HasPaidTuition { get; set; }
+
+        public ParticipationListItem Participations { get; set; }
     }
 }

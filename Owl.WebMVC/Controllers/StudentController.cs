@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNet.Identity;
+using Owl.Models.MeetingModels;
 using Owl.Models.StudentModels;
 using Owl.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,13 +15,118 @@ namespace Owl.WebMVC.Controllers
     public class StudentController : Controller
     {
         // GET: Student
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter, string searchBy)
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new StudentService(userId);
-            var model = service.GetStudents().OrderBy(s=>s.FullName).ToList();
+            var service = CreateStudentService();
+            var rawData = (from s in service.GetStudents()
+                           select s).ToList();
+            var students = from s in rawData
+                           select s;
 
-            return View(model);
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
+            ViewBag.FirstNameSortParam = sortOrder == "FirstNameAscend" ? "FirstNameDesc" : "FirstNameAscend";
+            ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "DateDescStart" : "DateStart";
+            ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
+            ViewBag.HasPaidParam = sortOrder == "HasPaidTuition" ? "HasNotPaidTuition" : "HasPaidTuition";
+            ViewBag.HasFoodAllergyParam = sortOrder == "HasFoodAllergySort" ? "HasNoFoodAllergySort" : "HasFoodAllergySort";
+            ViewBag.ProgramTypeSortParam = sortOrder == "ProgramTypeAscend" ? "ProgramTypeDesc" : "ProgramTypeAscend";
+
+            if (searchString != null)
+                currentFilter = null;
+            else
+                searchString = currentFilter;
+            
+            ViewBag.CurrentFilter = searchString;
+
+            // Search Name or Program
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                if (searchBy == "TypeOfProgram")
+                    students = students
+                            .Where(s => s.TypeOfProgram.ToString().ToLower().Contains(searchString.ToLower()) || searchString == null).ToList();
+
+                //
+                //else if (searchBy == "SearchDate")
+                //    students = students
+                //             .Where(s => s.EndTime >= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture) || s.StartTime <= DateTime.ParseExact(searchString, "MM/dd/yyyy", CultureInfo.InvariantCulture)).ToList();
+
+                //Name
+                else
+                    students = students
+                             .Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) ||
+                                         s.LastName.ToLower().Contains(searchString.ToLower())).ToList();
+            }
+
+            var totalCount = students.Count();
+            ViewBag.TotalCountSearch = totalCount;
+
+            ViewBag.TotalNumToday = students.Where(s => s.StartTime >= DateTime.Now && s.EndTime <= DateTime.Now).ToList().Count();
+
+            ViewBag.TotalCountHasNotPaid = students.Where(s => s.HasPaidTuition == false).ToList().Count();
+
+
+            ViewBag.SearchString = searchString;
+
+            switch (sortOrder)
+            {
+                case "NameDesc":
+                    students = students.OrderByDescending(s => s.LastName);
+                    break;
+
+                case "FirstNameDesc":
+                    students = students.OrderByDescending(s => s.FirstName);
+                    break;
+
+                case "FirstNameAscend":
+                    students = students.OrderBy(s => s.FirstName);
+                    break;
+
+                case "DateStart":
+                    students = students.OrderBy(s => s.StartTime);
+                    break;
+
+                case "DateDescStart":
+                    students = students.OrderByDescending(s => s.StartTime);
+                    break;
+
+                case "DateEnd":
+                    students = students.OrderBy(s => s.EndTime);
+                    break;
+
+                case "DateDescEnd":
+                    students = students.OrderByDescending(s => s.EndTime);
+                    break;
+
+                case "HasPaidTuition":
+                    students = students.OrderBy(s => s.HasPaidTuition);
+                    break;
+
+                case "HasNotPaidTuition":
+                    students = students.OrderByDescending(s => s.HasPaidTuition);
+                    break;
+
+                case "HasFoodAllergySort":
+                    students = students.OrderBy(s => s.HasFoodAllergy);
+                    break;
+
+                case "HasNoFoodAllergySort":
+                    students = students.OrderByDescending(s => s.HasFoodAllergy);
+                    break;
+
+                case "ProgramTypeAscend":
+                    students = students.OrderBy(s => s.TypeOfProgram);
+                    break;
+
+                case "ProgramTypeDesc":
+                    students = students.OrderByDescending(s => s.TypeOfProgram);
+                    break;
+
+                default:
+                    students = students.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            return View(students.ToList());
         }
 
         // GET: Create
@@ -37,6 +144,12 @@ namespace Owl.WebMVC.Controllers
                 return View(model);
 
             var service = CreateStudentService();
+
+            if (model.StartTime > model.EndTime)
+            {
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!");
+                return View(model);
+            }
 
             if (service.CreateStudent(model))
             {
@@ -93,8 +206,13 @@ namespace Owl.WebMVC.Controllers
                 return View(model);
             }
 
-            var service = CreateStudentService();
+            if (model.StartTime > model.EndTime)
+            {
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!");
+                return View(model);
+            }
 
+            var service = CreateStudentService();
             if (service.UpdateStudent(model))
             {
                 TempData["Save Result"] = "Your Student was updated.";
@@ -102,14 +220,13 @@ namespace Owl.WebMVC.Controllers
             }
 
             ModelState.AddModelError("", "Your Student could not be updated.");
-                return View(model);
+            return View(model);
         }
 
         [ActionName("Delete")]
         public ActionResult Delete(int id)
         {
-            var service
-                = CreateStudentService();
+            var service= CreateStudentService();
             var model = service.GetStudentById(id);
 
             return View(model);

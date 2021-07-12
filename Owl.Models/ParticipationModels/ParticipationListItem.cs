@@ -12,8 +12,8 @@ namespace Owl.Models.ParticipationModels
     {
         public int Id { get; set; }
         public int PersonId { get; set; }
-        public virtual PersonListItem Person { get; set; }
+        public PersonListItem Person { get; set; }
         public int MeetingId { get; set; }
-        public virtual MeetingListItem Meeting { get; set; }
+        public MeetingListItem Meeting { get; set; }
     }
 }

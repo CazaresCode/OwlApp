@@ -3,31 +3,30 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Owl</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
+                <a href="/Home/Index" class="navbar-brand"><img src="~/assests/Owl white@4x.png" alt="Owl logo" class="HeaderLogo"></a>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                    <li>@Html.ActionLink("Student", "Index", "Student")</li>
-                    <li>@Html.ActionLink("Faculty", "Index", "Faculty")</li>
-                    <li>@Html.ActionLink("Meeting", "Index", "Meeting")</li>
-                    <li>@Html.ActionLink("Participation", "Index", "Participation")</li>
+                        <li>@Html.ActionLink("Student", "Index", "Student")</li>
+                        <li>@Html.ActionLink("Faculty", "Index", "Faculty")</li>
+                        <li>@Html.ActionLink("Meeting", "Index", "Meeting")</li>
+                        <li>@Html.ActionLink("Participation", "Index", "Participation")</li>
                     }
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -38,9 +37,36 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Owl</p>
+        <footer class="footer">
+            <div class="container-fluid padding">
+                <div class="row text-center col-md-offset-3">
+                    <div class="col-md-4">
+                        <hr />
+                        <p class="FooterGoldText">Contact Info.</p>
+                        <hr />
+                        <p>317-OWL-HOOT</p>
+                        <p>HootHoot@Owl.com</p>
+                        <p>123 Hoot Street</p>
+                        <p>Indianapolis, Indiana 46220</p>
+                    </div>
+                    <div class="col-md-2">
+                        <hr />
+                        <p class="FooterGoldText">Our Hours</p>
+                        <hr />
+                        <p>Monday: CLOSED</p>
+                        <p>Tuesday - Sunday: 6pm-4:30am</p>
+                    </div>
+                    <div class="col-md-2">
+                        <hr />
+                        <p class="FooterGoldText">Help & Support</p>
+                        <hr />
+                        <p>Support</p>
+                        <p>Policies</p>
+                        <p>Cookies</p>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center FooterGoldText">&copy; @DateTime.Now.Year - Owl</p>
         </footer>
     </div>
 

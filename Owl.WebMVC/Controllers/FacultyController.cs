@@ -13,13 +13,101 @@ namespace Owl.WebMVC.Controllers
     {
         [Authorize]
         // GET: Faculty
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, string currentFilter)
         {
-            var userId = Guid.Parse(User.Identity.GetUserId());
-            var service = new FacultyService(userId);
-            var model = service.GetFaculty();
+            var service = CreateFacultyService();
+            ViewBag.NameSortParam = String.IsNullOrEmpty(sortOrder) ? "NameDesc" : "";
+            ViewBag.FirstNameSortParam = sortOrder == "FirstNameAscend" ? "FirstNameDesc" : "FirstNameAscend";
+            ViewBag.DateSortStartParam = sortOrder == "DateStart" ? "DateDescStart" : "DateStart";
+            ViewBag.DateSortEndParam = sortOrder == "DateEnd" ? "DateDescEnd" : "DateEnd";
+            ViewBag.IsStaffParam = sortOrder == "IsStaffSort" ? "IsNotStaffSort" : "IsStaffSort";
+            ViewBag.HasFoodAllergyParam = sortOrder == "HasFoodAllergySort" ? "HasNoFoodAllergySort" : "HasFoodAllergySort";
 
-            return View(model);
+
+            var rawData = (from s in service.GetFaculty()
+                           select s).ToList();
+
+            var faculties = from s in rawData
+                           select s;
+
+            if (searchString != null)
+            {
+                currentFilter = null;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            // Search First or Last name
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                faculties = faculties.Where(s =>
+                                        s.FirstName.ToLower().Contains(searchString.ToLower()) ||
+                                        s.LastName.ToLower().Contains(searchString.ToLower()));
+            }
+
+            var totalCount = faculties.Count();
+            ViewBag.TotalCountSearch = totalCount;
+
+            ViewBag.TotalNumToday = faculties.Where(s => s.StartTime >= DateTime.Now && s.EndTime <= DateTime.Now).ToList().Count();
+
+            ViewBag.SearchString = searchString;
+
+            switch (sortOrder)
+            {
+                case "NameDesc":
+                    faculties = faculties.OrderByDescending(s => s.LastName);
+                    break;
+
+                case "FirstNameDesc":
+                    faculties = faculties.OrderByDescending(s => s.FirstName);
+                    break;
+
+                case "FirstNameAscend":
+                    faculties = faculties.OrderBy(s => s.FirstName);
+                    break;
+
+                case "DateStart":
+                    faculties = faculties.OrderBy(s => s.StartTime);
+                    break;
+
+                case "DateDescStart":
+                    faculties = faculties.OrderByDescending(s => s.StartTime);
+                    break;
+
+                case "DateEnd":
+                    faculties = faculties.OrderBy(s => s.EndTime);
+                    break;
+
+                case "DateDescEnd":
+                    faculties = faculties.OrderByDescending(s => s.EndTime);
+                    break;
+
+                case "IsStaffSort":
+                    faculties = faculties.OrderBy(s => s.IsStaff);
+                    break;
+
+                case "IsNotStaffSort":
+                    faculties = faculties.OrderByDescending(s => s.IsStaff);
+                    break;
+
+                case "HasFoodAllergySort":
+                    faculties = faculties.OrderBy(s => s.HasFoodAllergy);
+                    break;
+
+                case "HasNoFoodAllergySort":
+                    faculties = faculties.OrderByDescending(s => s.HasFoodAllergy);
+                    break;
+
+                default:
+                    faculties = faculties.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            return View(faculties.ToList());
         }
 
         // GET: Create
@@ -37,6 +125,12 @@ namespace Owl.WebMVC.Controllers
                 return View(model);
 
             var service = CreateFacultyService();
+
+            if (model.StartTime > model.EndTime)
+            {
+                ModelState.AddModelError("", "Start Date CANNOT be after End Date!");
+                return View(model);
+            }
 
             if (service.CreateFaculty(model))
             {

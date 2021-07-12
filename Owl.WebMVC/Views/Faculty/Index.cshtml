@@ -4,16 +4,25 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Faculty</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 
+@using (Html.BeginForm())
+{
+    <p>
+        <b><i class="fas fa-search"></i> Find by Name: </b>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" /> |
+        @Html.ActionLink("Back to Full List", "Index")
+    </p>
+}
+
 @if (TempData.ContainsKey("SaveResult"))
 {
     <div class="alert alert-success fade in" role="alert">
-
         <button type="button" class="close" data-dismiss="alert">
             <span>&times;</span>
         </button>
@@ -21,19 +30,42 @@
     </div>
 }
 
-<table class="table">
+@using (Html.BeginForm())
+{
+    <p>
+        <b>Total Count: </b>
+        @Html.ViewBag.TotalCountSearch
+        |
+        <b>Total Present Today: </b>
+        @Html.ViewBag.TotalNumToday
+    </p>
+}
+
+<table class="table table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FullName)
+            @Html.ActionLink("Last Name", "Index",
+           new
+           {
+               sortOrder = ViewBag.NameSortParam,
+               selectedLastName = ViewBag.SelectedLastName,
+               currentFilter = ViewBag.CurrentFilter
+           })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IsStaff)
+            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartTime)
+            @Html.ActionLink("Is Staff", "Index", new { sortOrder = ViewBag.IsStaffParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EndTime)
+            @Html.ActionLink("Has Food Allergy", "Index", new { sortOrder = ViewBag.HasFoodAllergyParam, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("First Day", "Index", new { sortOrder = ViewBag.DateSortStartParam, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Last Day", "Index", new { sortOrder = ViewBag.DateSortEndParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th></th>
     </tr>
@@ -42,10 +74,16 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FullName)
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsStaff)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasFoodAllergy)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartTime)
