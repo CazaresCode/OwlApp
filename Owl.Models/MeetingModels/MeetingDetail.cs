@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Owl.Models.PersonModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -31,5 +32,12 @@ namespace Owl.Models.MeetingModels
 
         [Display(Name = "Meeting Type")]
         public MeetingType TypeOfMeeting { get; set; }
+
+        public List<PersonListItem> Persons { get; set; }
+        public int PersonId { get; set; }
+
+
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
     }
 }
