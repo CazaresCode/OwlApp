@@ -49,7 +49,7 @@ namespace Owl.WebMVC.Controllers
                 //Title of Meeting
                 else
                     meetings = meetings
-                             .Where(s => s.NameOfMeeting.ToLower().Contains(searchString.ToLower()));
+                             .Where(s => s.NameOfMeeting.ToLower().Contains(searchString.ToLower())).ToList();
             }
 
             // Num of Meetings Today

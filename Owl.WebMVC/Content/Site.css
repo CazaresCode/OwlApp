@@ -16,9 +16,53 @@
     white-space: normal;
 }
 
+
+.FooterLogo {
+    height: 1em;
+    width: auto;
+}
+
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.HeaderLogo {
+    width: 2em; 
+/*    height: auto;*/
+}
+
+#WavingOwl {
+    width: 150px ;
+    height: auto;
+}
+
+.OwlDiv {
+    display: flex;
+}
+
+.FullOrchDiv{
+    width: 500px;
+    height: auto;
+}
+
+.OwlBeThere{
+    width: 500px;
+}
+
+.footer{
+    background-color:black !important;
+    color: aqua;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    position: absolute;
+}
+
+
+.FooterGoldText{
+    color: gold;
 }

@@ -42,6 +42,6 @@ namespace Owl.Data.EntityModels
         [Required]
         public MeetingType TypeOfMeeting { get; set; }
 
-        public virtual ICollection<Participation> Participations { get; set; }
+        public virtual List<Participation> Participations { get; set; }
     }
 }

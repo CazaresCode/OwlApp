@@ -30,6 +30,13 @@ namespace Owl.Services
                     MeetingId = model.MeetingId
                 };
 
+
+            // Checking to make sure they can attend the meeting.
+            //if(model.Meeting.StartTime <= model.Person.StartTime && model.Meeting.EndTime <= model.Person.StartTime && model.Meeting.StartTime >= model.Person.EndTime && model.Meeting.EndTime >= model.Person.EndTime)
+            //{
+            //    return false;
+            //}
+
             using (var ctx = new ApplicationDbContext())
             {
                 ctx.Participations.Add(entity);
@@ -44,6 +51,7 @@ namespace Owl.Services
                 var query =
                     ctx
                         .Participations
+                        // Checking to see if the person's time span can attend the meeting.
                         .Where(e => e.OwnerId == _userId)
                         .Select(
                             e =>
@@ -54,14 +62,19 @@ namespace Owl.Services
                                     Person = new PersonListItem
                                     {
                                         Id = e.Id,
-                                        FullName = e.Person.FullName
+                                        FirstName = e.Person.FirstName,
+                                        LastName = e.Person.LastName,
+                                        StartTime = e.Person.StartTime,
+                                        EndTime = e.Person.EndTime
                                     },
                                     MeetingId = e.MeetingId,
                                     Meeting = new MeetingListItem
                                     {
                                         Id = e.Id,
                                         NameOfMeeting = e.Meeting.NameOfMeeting,
-                                        TypeOfMeeting = e.Meeting.TypeOfMeeting
+                                        TypeOfMeeting = e.Meeting.TypeOfMeeting,
+                                        StartTime = e.Meeting.StartTime,
+                                        EndTime = e.Meeting.EndTime
                                     }
                                 });
 
@@ -85,14 +98,18 @@ namespace Owl.Services
                         Person = new PersonListItem
                         {
                             Id = entity.Id,
-                            FullName = entity.Person.FullName
+                            FullName = entity.Person.FullName,
+                            StartTime = entity.Person.StartTime,
+                            EndTime = entity.Person.EndTime
                         },
                         MeetingId = entity.MeetingId,
                         Meeting = new MeetingListItem
                         {
                             Id = entity.Id,
                             NameOfMeeting = entity.Meeting.NameOfMeeting,
-                            TypeOfMeeting = entity.Meeting.TypeOfMeeting
+                            TypeOfMeeting = entity.Meeting.TypeOfMeeting,
+                            StartTime = entity.Meeting.StartTime,
+                            EndTime = entity.Meeting.EndTime
                         }
                     };
             }

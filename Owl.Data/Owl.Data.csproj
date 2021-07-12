@@ -66,17 +66,9 @@
     <Compile Include="EntityModels\Person.cs" />
     <Compile Include="EntityModels\Student.cs" />
     <Compile Include="IdentityModels.cs" />
-    <Compile Include="Migrations\202106291551161_InitialMigration.cs" />
-    <Compile Include="Migrations\202106291551161_InitialMigration.Designer.cs">
-      <DependentUpon>202106291551161_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202106301717235_AddOwnerIdToParticipation.cs" />
-    <Compile Include="Migrations\202106301717235_AddOwnerIdToParticipation.Designer.cs">
-      <DependentUpon>202106301717235_AddOwnerIdToParticipation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202107010233453_AddFullName.cs" />
-    <Compile Include="Migrations\202107010233453_AddFullName.Designer.cs">
-      <DependentUpon>202107010233453_AddFullName.cs</DependentUpon>
+    <Compile Include="Migrations\202107100201021_InitialMigration.cs" />
+    <Compile Include="Migrations\202107100201021_InitialMigration.designer.cs">
+      <DependentUpon>202107100201021_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -92,14 +84,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202106291551161_InitialMigration.resx">
-      <DependentUpon>202106291551161_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106301717235_AddOwnerIdToParticipation.resx">
-      <DependentUpon>202106301717235_AddOwnerIdToParticipation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202107010233453_AddFullName.resx">
-      <DependentUpon>202107010233453_AddFullName.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202107100201021_InitialMigration.resx">
+      <DependentUpon>202107100201021_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

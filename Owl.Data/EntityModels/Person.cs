@@ -57,5 +57,7 @@ namespace Owl.Data.EntityModels
 
         [Required]
         public string FoodAllergy { get; set; }
+
+        public virtual List<Participation> Participations { get; set; } = new List<Participation>();
     }
 }

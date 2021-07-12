@@ -4,10 +4,9 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Meeting Details</h2>
 
 <div>
-    <h4>MeetingDetail</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -59,6 +58,27 @@
         </dd>
     </dl>
 </div>
+
+
+<p>Attendees</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+       
+    </tr>
+
+    @foreach (var item in Model.Persons)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+        </tr>
+    }
+
+</table>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

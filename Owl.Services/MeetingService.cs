@@ -1,6 +1,7 @@
 ﻿using Owl.Data;
 using Owl.Data.EntityModels;
 using Owl.Models.MeetingModels;
+using Owl.Models.PersonModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,7 +80,15 @@ namespace Owl.Services
                         Location = entity.Location,
                         StartTime = entity.StartTime,
                         EndTime = entity.EndTime,
-                        TypeOfMeeting = entity.TypeOfMeeting
+                        TypeOfMeeting = entity.TypeOfMeeting,
+                        //List of People attending the meeting
+                        Persons = entity.Participations
+                                        .Select(p =>
+                                        new PersonListItem
+                                        {
+                                            Id = p.Id,
+                                            FullName = p.Person.FullName
+                                        }).ToList()
                     };
             }
         }

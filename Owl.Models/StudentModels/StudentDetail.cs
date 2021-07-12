@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Owl.Models.MeetingModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static EnumCommonLayer.InstrumentTypeEnum;
+using static EnumCommonLayer.MeetingTypeEnum;
 using static EnumCommonLayer.ProgramTypeEnum;
 
 namespace Owl.Models.StudentModels
@@ -50,5 +52,25 @@ namespace Owl.Models.StudentModels
 
         [Display(Name = "Has Paid Tuition")]
         public bool HasPaidTuition { get; set; }
+
+        public List<MeetingListItem> Meetings { get; set; }
+
+        public int MeetingId { get; set; }
+
+        [Display(Name = "Name of Meeting")]
+        public string NameOfMeeting { get; set; }
+
+        [Display(Name = "Meeting Type")]
+        public MeetingType TypeOfMeeting { get; set; }
+
+        [Display(Name = "Start Time")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
+        public DateTime MeetingStartTime { get; set; }
+
+        [Display(Name = "End Time")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
+        public DateTime MeetingEndTime { get; set; }
     }
 }

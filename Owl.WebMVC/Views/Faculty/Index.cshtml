@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Faculty</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,7 +13,8 @@
 @using (Html.BeginForm())
 {
     <p>
-        Find by Name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <b><i class="fas fa-search"></i> Find by Name: </b>
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" /> |
         @Html.ActionLink("Back to Full List", "Index")
     </p>
@@ -40,7 +41,7 @@
     </p>
 }
 
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             @Html.ActionLink("Last Name", "Index",
