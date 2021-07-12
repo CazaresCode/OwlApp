@@ -1,6 +1,7 @@
 ﻿using Owl.Data;
 using Owl.Data.EntityModels;
 using Owl.Models.FacultyModels;
+using Owl.Models.MeetingModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,7 +93,18 @@ namespace Owl.Services
                         HasFoodAllergy = entity.HasFoodAllergy,
                         FoodAllergy = entity.FoodAllergy,
                         IsPerforming = entity.IsPerforming,
-                        IsStaff = entity.IsStaff
+                        IsStaff = entity.IsStaff,
+                        // Meetings that are tied to this studentS
+                        Meetings = (List<MeetingListItem>)entity.Participations
+                                        .Select(m =>
+                                        new MeetingListItem
+                                        {
+                                            Id = m.Id,
+                                            NameOfMeeting = m.Meeting.NameOfMeeting,
+                                            TypeOfMeeting = m.Meeting.TypeOfMeeting,
+                                            StartTime = m.Meeting.StartTime,
+                                            EndTime = m.Meeting.EndTime
+                                        }).ToList()
                     };
             }
         }
