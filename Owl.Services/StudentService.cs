@@ -96,9 +96,9 @@ namespace Owl.Services
                         FoodAllergy = entity.FoodAllergy,
                         TypeOfProgram = entity.TypeOfProgram,
                         HasPaidTuition = entity.HasPaidTuition,
-                       // Meetings that are tied to this studentS
+                        // Meetings that are tied to this studentS
                         Meetings = (List<MeetingListItem>)entity.Participations
-                                        .Select(m=>
+                                        .Select(m =>
                                         new MeetingListItem
                                         {
                                             Id = m.Id,
@@ -106,7 +106,7 @@ namespace Owl.Services
                                             TypeOfMeeting = m.Meeting.TypeOfMeeting,
                                             StartTime = m.Meeting.StartTime,
                                             EndTime = m.Meeting.EndTime
-                                        })
+                                        }).ToList()
                     };
             }
         }
