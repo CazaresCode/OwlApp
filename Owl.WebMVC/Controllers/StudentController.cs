@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Owl.Models.MeetingModels;
 using Owl.Models.StudentModels;
 using Owl.Services;
 using System;
@@ -187,6 +188,9 @@ namespace Owl.WebMVC.Controllers
                     FoodAllergy = detail.FoodAllergy,
                     TypeOfProgram = detail.TypeOfProgram,
                     HasPaidTuition = detail.HasPaidTuition
+                    //,Participations = detail.Participations
+                    //                        .Where(m => m.MeetingId == id)
+                    //                        .Select(m => m.Meeting).ToList()
                 };
 
             return View(model);

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Owl.Models.MeetingModels;
+using Owl.Models.ParticipationModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -48,5 +50,7 @@ namespace Owl.Models.StudentModels
 
         [Display(Name = "Has Paid Tuition")]
         public bool HasPaidTuition { get; set; }
+
+        public ParticipationListItem Participations { get; set; }
     }
 }

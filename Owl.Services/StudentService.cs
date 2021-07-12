@@ -79,7 +79,7 @@ namespace Owl.Services
                 var entity =
                     ctx
                         .Students
-                        .Single(e => e.Id == id && e.OwnerId == _userId);
+                        .SingleOrDefault(e => e.Id == id && e.OwnerId == _userId);
                 return
                     new StudentDetail
                     {
@@ -96,18 +96,17 @@ namespace Owl.Services
                         FoodAllergy = entity.FoodAllergy,
                         TypeOfProgram = entity.TypeOfProgram,
                         HasPaidTuition = entity.HasPaidTuition,
-                        //Participations = entity.Participations.Select(p=>
-                        //new ParticipationDetail
-                        //{
-                        //    Id = entity.Id,
-                        //    MeetingId = entity.MeetingId,
-                        //    Meeting = new MeetingListItem
-                        //    {
-                        //        Id = entity.Id,
-                          
-                        //    }
-                        //})
-                     
+                       // Meetings that are tied to this studentS
+                        Meetings = (List<MeetingListItem>)entity.Participations
+                                        .Select(m=>
+                                        new MeetingListItem
+                                        {
+                                            Id = m.Id,
+                                            NameOfMeeting = m.Meeting.NameOfMeeting,
+                                            TypeOfMeeting = m.Meeting.TypeOfMeeting,
+                                            StartTime = m.Meeting.StartTime,
+                                            EndTime = m.Meeting.EndTime
+                                        })
                     };
             }
         }
